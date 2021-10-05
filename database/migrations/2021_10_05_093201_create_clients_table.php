@@ -17,13 +17,11 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->index();
             $table->string('name');
-            $table->integer('company_identifier');
-            $table->integer('tin');
+            $table->string('company_identifier');
+            $table->string('email');
+            $table->integer('vat_in');
             $table->text('address_line1');
             $table->text('address_line2')->nullable();
-            $table->string('city');
-            $table->string('zip_code');
-            $table->string('country');
             $table->string('contact_number');
             $table->timestamps();
         });
