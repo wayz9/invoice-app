@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@supports(font-variation-settings: normal) {
+    html {
+        font-feature-settings: "cv09" , "cv11", "cv01", "cv02", "cv03", "cv04";
+    }
+ }

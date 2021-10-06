@@ -24,5 +24,7 @@ Route::middleware(['auth', 'active_user'])->group(function () {
     Route::get('/invoice/{invoice}' , [InvoiceController::class, 'show'])->name('invoice.show');
     Route::put('/invoice/{invoice}' , [InvoiceController::class, 'update'])->name('invoice.update');
 
-    Route::post('/invoice/{invoice}' , [InvoiceItemController::class, 'store'])->name('invoice.item.store');
+    Route::put('/invoice/{invoice}' , [InvoiceItemController::class, 'update'])->name('invoice.item.update');
+    Route::view('/client/1', 'dashboard');
 });
+
