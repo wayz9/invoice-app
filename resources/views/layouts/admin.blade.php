@@ -8,9 +8,10 @@
     <title>Aquire Dashboard</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @livewireStyles
 </head>
 
 <body class="antialiased font-sans bg-gray-50">
@@ -41,7 +42,7 @@
                         </x-slot>
                         Dashboard
                     </x-nav-link>
-                    <x-nav-link href="#">
+                    <x-nav-link :href="route('client.index')">
                         <x-slot name="icon">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +51,7 @@
                                 </path>
                             </svg>
                         </x-slot>
-                        Actors
+                        Clients
                     </x-nav-link>
                     <x-nav-link href="#">
                         <x-slot name="icon">
@@ -169,6 +170,9 @@
                                 </path>
                             </svg>
                         </x-slot>
+                        <x-nav-list-item href="#">
+                            Placeholder
+                        </x-nav-list-item>
                     </x-nav-list>
                     <x-nav-list name="TV Show Genres">
                         <x-slot name="icon">
@@ -179,6 +183,9 @@
                                 </path>
                             </svg>
                         </x-slot>
+                        <x-nav-list-item href="#">
+                            Placeholder 2
+                        </x-nav-list-item>
                     </x-nav-list>
                 </ul>
             </div>
@@ -213,9 +220,9 @@
                 </ul>
             </div>
         </nav>
-        <main class="flex-grow">
+        <main class="flex-grow overflow-hidden">
             <div class="p-4 lg:px-6 py-5 xl:px-8 xl:py-7 max-w-[85rem] mx-auto">
-                <div class="mb-6">
+                <div class="mb-10">
                     <div class="flex flex-wrap items-center justify-between gap-2.5 md:gap-4">
                         <div
                             class="flex flex-grow sm:flex-grow-0 sm:flex-row-reverse items-center justify-between sm:justify-start sm:gap-4">
@@ -390,6 +397,8 @@
             </div>
         </main>
     </div>
+
+    @livewireScripts
 </body>
 
 </html>

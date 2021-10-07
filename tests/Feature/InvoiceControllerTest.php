@@ -32,13 +32,14 @@ class InvoiceControllerTest extends TestCase
         $client = Client::factory()->for($user)->create();
         $invoice = Invoice::factory()->for($client)->create();
 
-        $response = $this->put("/invoice/{$invoice->id}", [
+        $response = $this->put("/invoice/{$invoice->id}", array_merge([
             'name' => 'Invoice name is now updated',
-        ]);
-
-        $this->assertEquals('Invoice name is now updated', Invoice::find($invoice->id)->name);
+            Arr::except(Invoice::factory()->for($client)->raw(), 'name')
+        ]));
 
         $response->assertOk();
+
+        $this->assertEquals('Invoice name is now updated', Invoice::find($invoice->id)->name);
     }
 
     public function test_if_invoice_items_are_returned_along_with_invoice()

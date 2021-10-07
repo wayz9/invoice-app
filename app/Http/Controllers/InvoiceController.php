@@ -20,8 +20,7 @@ class InvoiceController extends Controller
         $data = $request->validate([
             'client_id' => ['required', 'integer'],
             'issue_date' => ['required', 'date'],
-            'due_date' => ['nullable', 'date'],
-            'name' => ['nullable', 'string'],
+            'name' => ['required', 'string'],
         ]);
 
         Invoice::create($data);
@@ -31,9 +30,9 @@ class InvoiceController extends Controller
     {
         $data = $request->validate([
             'client_id' => [Rule::when(!$invoice->exists, ['required', 'integer']) ],
-            'issue_date' => ['nullable', 'date'],
-            'due_date' => ['nullable', 'date'],
-            'name' => ['nullable', 'string'],
+            'issue_date' => ['required', 'date'],
+            'due_date' => ['required', 'date'],
+            'name' => ['required', 'string'],
         ]);
 
         $invoice->update($data);

@@ -9,12 +9,12 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $client = Client::query()
-            ->with('invoices')
+        $clients = Client::query()
+            ->with('invoices', 'invoices.items')
             ->where('user_id', auth()->user()->id)
             ->get();
 
-        return $client;
+        return view('client.index', compact('clients'));
     }
 
     public function store(ClientRequest $request)
