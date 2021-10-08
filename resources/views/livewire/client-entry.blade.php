@@ -1,6 +1,6 @@
 <div x-data="{open : false}">
     <div
-        class="mb-0.5 py-3.5 px-6 flex items-center justify-between bg-white ring-1 ring-inset ring-gray-200 rounded-xl">
+        class="mb-0.5 py-3.5 px-6 flex items-center justify-between bg-white ring-1 ring-inset ring-gray-200" :class="{'rounded-t-xl' : open, 'rounded-xl' : !open}">
         <div class="flex items-center gap-5">
             <span class="inline-flex text-gray-500">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -10,7 +10,7 @@
                 </svg>
             </span>
             <div>
-                <a href="#" class="text-base font-medium text-gray-900">{{ $client->name }}</a>
+                <a href="{{ route('client.show', ['client' => $client]) }}" class="text-base font-medium text-gray-900">{{ $client->name }}</a>
                 <p class="text-sm text-gray-600">{{ $client->address_line1 }}</p>
             </div>
         </div>
@@ -37,7 +37,7 @@
                     x-transition:leave-end="transform opacity-0 scale-95" aria-orientation="vertical"
                     aria-labelledby="menu-button" tabindex="-1">
                     <div class="py-1" role="none">
-                        <a href="#" class="text-gray-700 hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm"
+                        <a href="{{ route('client.show', ['client' => $client]) }}" class="text-gray-700 hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">View Client</a>
                         <a href="#" class="text-gray-700 hover:bg-gray-100 hover:text-gray-900 block px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">Create Invoice</a>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <button type="button" @click="open = !open" class="p-1.5">
-                <span class="inline-flex text-gray-500">
+                <span class="inline-flex text-gray-500 transition-transform" :class="{'rotate-180' : open}">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M19 9l-7 7-7-7">

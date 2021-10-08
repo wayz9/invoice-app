@@ -8,13 +8,6 @@ use Illuminate\Validation\Rule;
 
 class InvoiceController extends Controller
 {
-    public function show(Invoice $invoice)
-    {
-        $invoice->load('client', 'items');
-
-        return $invoice;
-    }
-
     public function store(Request $request)
     {
         $data = $request->validate([

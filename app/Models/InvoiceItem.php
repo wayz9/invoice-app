@@ -14,4 +14,14 @@ class InvoiceItem extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
+
+    public function getConvertedPriceAttribute()
+    {
+        return $this->price / 100;
+    }
+
+    public function getTotalAttribute()
+    {
+        return ($this->qty * $this->price) / 100;
+    }
 }

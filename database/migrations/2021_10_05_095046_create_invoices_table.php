@@ -17,6 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->foreignId('client_id')->index();
             $table->text('name');
+            $table->string('invoice_number')->nullable();
             $table->date('issue_date');
             $table->date('due_date')->nullable();
             $table->tinyInteger('status')->default(1);

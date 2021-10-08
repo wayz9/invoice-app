@@ -27,7 +27,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Model::unguard();
-
-        Request::macro('validatedExcept', fn($keys = []) => Arr::except($this->validated(), $keys));
     }
 }
