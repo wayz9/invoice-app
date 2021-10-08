@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::factory()->create();
+        $user = User::factory(['email' => 'ventusblade1@gmail.com'])->create();
         $clients = Client::factory(5)->for($user)->create();
         $invoices = Invoice::factory(2)->for($clients->first())->create();
         InvoiceItem::factory(5)->for($invoices->first())->create();

@@ -9,7 +9,7 @@
     x-transition:leave="ease-in duration-200"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    class="fixed z-40 inset-0 overflow-y-auto"
+    class="fixed z-50 inset-0 overflow-y-auto"
     aria-labelledby="modal-title"
     role="dialog"
     aria-modal="true"
@@ -28,7 +28,7 @@
             x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            {{ $attributes->merge(['class' => 'inline-block bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 align-middle sm:max-w-xl sm:w-full']) }}
+            {{ $attributes->merge(['class' => 'inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full']) }}
         >
             {{ $slot }}
         </div>

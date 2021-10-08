@@ -8,14 +8,28 @@ use Livewire\Component;
 class ClientEntry extends Component
 {
     public Client $client;
+    public string $name;
+    public string $issueDate;
+    public bool $modalStatus = false;
 
     public function delete()
     {
         $this->client->invoices()->delete();
-
         $this->client->delete();
 
+        $this->closeModal();
+
         $this->emitUp('deleted');
+    }
+
+    public function showModal()
+    {
+        $this->modalStatus = true;
+    }
+
+    public function closeModal()
+    {
+        $this->modalStatus = false;
     }
 
     public function render()
