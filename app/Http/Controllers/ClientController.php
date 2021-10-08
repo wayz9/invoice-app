@@ -17,6 +17,13 @@ class ClientController extends Controller
         return view('client.index', compact('clients'));
     }
 
+    public function show(Client $client)
+    {
+        $client->load('invoices', 'invoices.items');
+
+        return view('client.show', compact('client'));
+    }
+
     public function store(ClientRequest $request)
     {
         auth()->user()->clients()->create($request->validated());

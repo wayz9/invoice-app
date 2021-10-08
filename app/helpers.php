@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Collection;
-use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 
 if(! function_exists('calculateSubtotal')){
     function calculateSubtotal(Collection $items)
@@ -22,16 +21,18 @@ if(! function_exists('calculateSubtotal')){
 
 
 if(! function_exists('calculateTotal')){
-    function calculateTotal(Collection $invoices)
+    function calculateTotal(Collection $invoices, int $status = 1)
     {
         $total = [];
+
+        $invoices = $invoices->where('status', $status);
 
         foreach($invoices as $invoice) {
             $total[] = calculateSubtotal($invoice->items);
         }
 
         if(!$total){
-            return 0;
+            return '0.00';
         }
 
         return collect($total)->sum();

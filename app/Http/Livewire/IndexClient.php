@@ -2,11 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Client;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 
-class ShowClient extends Component
+class IndexClient extends Component
 {
     public Collection $clients;
 
@@ -14,6 +13,6 @@ class ShowClient extends Component
 
     public function render()
     {
-        return view('livewire.show-client');
+        return view('livewire.index-client');
     }
 }

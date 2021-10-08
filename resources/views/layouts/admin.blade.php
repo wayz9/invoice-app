@@ -14,7 +14,7 @@
     @livewireStyles
 </head>
 
-<body class="antialiased font-sans bg-gray-50">
+<body class="antialiased font-sans bg-gray-50 scrollbar scrollbar-track-white scrollbar-thumb-gray-300">
     <div x-data="{nav : false}" class="relative flex">
         <nav x-cloak
             class="z-30 fixed xl:sticky top-0 pb-5 flex-shrink-0 h-screen max-w-xs w-full flex flex-col bg-dark-800 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-dark-600 overscroll-contain transform xl:transform-none xl:opacity-100 duration-200"
