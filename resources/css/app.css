@@ -9,6 +9,10 @@
 }
 
 @layer base {
+    [x-cloak] {
+        display: none;
+    }
+
     [type="checkbox"],
     [type="radio"], {
         -webkit-appearance: none;

@@ -10,7 +10,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::query()
-            ->with('invoices', 'invoices.items')
+            ->withCount('invoices')
             ->where('user_id', auth()->user()->id)
             ->get();
 
