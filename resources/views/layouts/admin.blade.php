@@ -27,7 +27,7 @@
             </div>
             <div class="px-4 mb-10">
                 <div class="px-3 mb-4">
-                    <div class="text-xs uppercase font-semibold text-cyan-400 tracking-little">General</div>
+                    <div class="text-xs uppercase font-semibold text-indigo-400 tracking-little">General</div>
                     <div class="text-xs leading-tiny text-gray-300">Browse movies and tv shows</div>
                 </div>
                 <ul class="flex flex-col gap-y-1">
@@ -79,7 +79,7 @@
             </div>
             <div class="px-4 mb-10">
                 <div class="px-3 mb-4">
-                    <div class="text-xs uppercase font-semibold text-cyan-400 tracking-little">Features</div>
+                    <div class="text-xs uppercase font-semibold text-indigo-400 tracking-little">Features</div>
                     <div class="text-xs leading-tiny text-gray-300">Available features of Aquire</div>
                 </div>
                 <ul class="flex flex-col gap-y-1">
@@ -117,7 +117,7 @@
                         Challenges
                         <x-slot name="extra">
                             <span
-                                class="px-1.5 h-5 inline-flex items-center justify-center text-xs font-semibold text-cyan-400 rounded bg-dark-600">12</span>
+                                class="px-1.5 h-5 inline-flex items-center justify-center text-xs font-semibold text-indigo-400 rounded bg-dark-600">12</span>
                         </x-slot>
                     </x-nav-link>
                     <x-nav-link href="#">
@@ -157,7 +157,7 @@
             </div>
             <div class="px-4 mb-10">
                 <div class="px-3 mb-4">
-                    <div class="text-xs uppercase font-semibold text-cyan-400 tracking-little">Genres</div>
+                    <div class="text-xs uppercase font-semibold text-indigo-400 tracking-little">Genres</div>
                     <div class="text-xs leading-tiny text-gray-300">Jump to specific genre</div>
                 </div>
                 <ul class="flex flex-col gap-y-1">
@@ -191,7 +191,7 @@
             </div>
             <div class="px-4">
                 <div class="px-3 mb-4">
-                    <div class="text-xs uppercase font-semibold text-cyan-400 tracking-little">Documentation</div>
+                    <div class="text-xs uppercase font-semibold text-indigo-400 tracking-little">Documentation</div>
                     <div class="text-xs leading-tiny text-gray-300">Usage and recent changes to the website</div>
                 </div>
                 <ul class="flex flex-col gap-y-1">
@@ -322,10 +322,10 @@
                                                     <input type="checkbox" id="theme" x-model="theme"
                                                         class="sr-only peer">
                                                     <div
-                                                        class="h-3.5 w-9 bg-gray-200 peer-checked:bg-cyan-100 rounded-full">
+                                                        class="h-3.5 w-9 bg-gray-200 peer-checked:bg-indigo-100 rounded-full">
                                                     </div>
                                                     <div
-                                                        class="absolute -left-px bottom-[-3px] w-5 h-5 rounded-full shadow-none bg-gray-500 peer-checked:bg-cyan-500 peer-checked:translate-x-[18px] peer-checked:shadow-cyan-md transition">
+                                                        class="absolute -left-px bottom-[-3px] w-5 h-5 rounded-full shadow-none bg-gray-500 peer-checked:bg-indigo-500 peer-checked:translate-x-[18px] peer-checked:shadow-indigo-md transition">
                                                     </div>
                                                 </div>
                                             </label>
@@ -397,7 +397,6 @@
             </div>
         </main>
     </div>
-
     @livewireScripts
 </body>
 

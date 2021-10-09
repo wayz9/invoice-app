@@ -8,6 +8,10 @@
     }
 }
 
+@layer components {
+    @import url('toastr');
+}
+
 @layer base {
     [x-cloak] {
         display: none;
@@ -82,4 +86,8 @@
         -webkit-print-color-adjust: exact;
         color-adjust: exact;
     }
+}
+
+.toast-message {
+    @apply !text-sm !font-medium;
 }

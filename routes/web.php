@@ -3,6 +3,8 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceItemController;
+use App\Mail\InvoicePDF;
+use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'active_user'])->group(function () {
@@ -16,11 +18,4 @@ Route::middleware(['auth', 'active_user'])->group(function () {
     Route::put('/invoice/{invoice}' , [InvoiceController::class, 'update'])->name('invoice.update');
 
     Route::put('/invoice/{invoice}' , [InvoiceItemController::class, 'update'])->name('invoice.item.update');
-});
-
-Route::get('/pdf', function(){
-    $pdf = PDF::loadView('templates.invoice');
-    return $pdf->download('invoice.pdf');
-
-    return view('templates.invoice');
 });

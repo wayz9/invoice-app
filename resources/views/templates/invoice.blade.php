@@ -253,23 +253,22 @@
 <body>
     <div class="max-w-[595px] mx-auto bg-white min-h-screen relative">
         <div class="py-10 px-8">
-            <div class="mb-6 text-2xl font-bold text-gray-900">Invoice #54</div>
+            <div class="mb-6 text-2xl font-bold text-gray-900">Invoice #{{ $invoice->invoice_number }}</div>
             <div class="mb-12 text-sm text-gray-600">
-                <div class="mb-1">Date: 03.08.2021</div>
-                <div>Due Date: 17.03.2021</div>
+                <div class="mb-1">Date: {{ $invoice->issue_date->format('d.m.Y') }}</div>
+                <div>Due Date: {{ $invoice->due_date->format('d.m.Y') }}</div>
             </div>
             <hr class="mb-12 block border-none h-px bg-gray-200">
             <div>
                 <div class="text-sm float-left w-1/2">
-                    <div class="mb-1 text-gray-800 font-bold">Philip Baier</div>
-                    <div class="text-gray-600 leading-5">437 Lucy Lane,</div>
-                    <div class="text-gray-600 leading-5">Georgetown, IN 47122</div>
-                    <div class="text-gray-600 leading-5">VAT ID: <span class="text-gray-800">2529105102</span></div>
-                    <div class="text-gray-600 leading-5">MB: <span class="text-gray-800">68291060</span></div>
+                    <div class="mb-1 text-gray-800 font-bold">{{ $client->name }}</div>
+                    <div class="text-gray-600 leading-5">{{ $client->address_line1 }}</div>
+                    <div class="text-gray-600 leading-5">VAT ID: <span class="text-gray-800">{{ $client->vat_in }}</span></div>
+                    <div class="text-gray-600 leading-5">MB: <span class="text-gray-800">{{ $client->company_identifier }}</span></div>
                 </div>
                 <div class="text-sm float-right w-1/2">
-                    <div class="mb-1 text-gray-800 font-bold">Vukasin Vitorovic</div>
-                    <div class="text-gray-600 leading-5">ventusblade1@gmail.com</div>
+                    <div class="mb-1 text-gray-800 font-bold">{{ auth()->user()->name }}</div>
+                    <div class="text-gray-600 leading-5">{{ auth()->user()->email }}</div>
                 </div>
                 <div class="clear-both"></div>
             </div>
@@ -284,33 +283,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($invoice->items as $item)
                         <tr>
-                            <td class="pt-4 px-4 text-gray-900 text-left text-sm">Round Metal Sunglasess</td>
-                            <td class="pt-4 px-4 text-gray-900 text-right text-sm">1</td>
+                            <td class="pt-4 px-4 text-gray-900 text-left text-sm">{{ $item->title }}</td>
+                            <td class="pt-4 px-4 text-gray-900 text-right text-sm">{{ $item->qty }}</td>
                             <td class="pt-4 px-4 text-gray-900 text-left text-sm">
-                                $161,00
+                                ${{ $item->converted_price }}
                             </td>
                             <td class="pt-4 px-4 text-gray-900 text-right text-sm">
-                                $161,00
+                                ${{ $item->total }}
                             </td>
                         </tr>
-                        <tr>
-                            <td class="pt-4 px-4 text-gray-900 text-left text-sm">Cool crazy items</td>
-                            <td class="pt-4 px-4 text-gray-900 text-right text-sm">4</td>
-                            <td class="pt-4 px-4 text-gray-900 text-left text-sm">
-                                $125,00
-                            </td>
-                            <td class="pt-4 px-4 text-gray-900 text-right text-sm">
-                                $500,00
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
             <div class="mb-4 mt-9 pt-4 border-t border-gray-200 px-4">
                 <div class="mb-4 text-sm text-gray-600">
                     <div class="float-left w-1/2">Subtotal</div>
-                    <div class="float-right w-1/2">$260,00</div>
+                    <div class="float-right w-1/2">${{ calculateSubtotal($invoice->items) }}</div>
                     <div class="clear-both"></div>
                 </div>
                 <div class="text-sm text-gray-600">
@@ -321,7 +312,7 @@
             </div>
             <div class="py-10px px-4 text-sm bg-gray-100">
                 <div class="text-gray-700 float-left w-1/2">Amount</div>
-                <div class="font-bold float-right w-1/2 text-gray-900">$5140,00</div>
+                <div class="font-bold float-right w-1/2 text-gray-900">${{ calculateSubtotal($invoice->items) }}</div>
                 <div class="clear-both"></div>
             </div>
             <div class="absolute bottom-10 left-8 text-sm text-gray-400 italic">
