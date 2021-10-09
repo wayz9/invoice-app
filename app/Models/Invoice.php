@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,11 @@ class Invoice extends Model
     const INVOICE_DRAFT = 0;
     const INVOICE_ACTIVE = 1;
     const INVOICE_PAID = 2;
+
+    protected $casts = [
+        'issue_date' => 'date',
+        'due_date' => 'date'
+    ];
 
     public function items(): HasMany
     {
@@ -29,5 +35,10 @@ class Invoice extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function getFileNameAttribute()
+    {
+        return Str::snake('invoice', $this->invoice_number, now()->year) . '.pdf';
     }
 }
