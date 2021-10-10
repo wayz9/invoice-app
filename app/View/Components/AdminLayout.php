@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class AdminLayout extends Component
 {
-    public function __construct(public $page, public $desc) {}
+    public function __construct(public string $pageName, public string $desc) {}
 
     public function render()
     {

@@ -14,7 +14,7 @@
     @livewireStyles
 </head>
 
-<body class="antialiased font-sans bg-gray-50 scrollbar scrollbar-track-white scrollbar-thumb-gray-300">
+<body class="antialiased font-sans bg-gray-50">
     <div x-data="{nav : false}" class="relative flex">
         <nav x-cloak
             class="z-30 fixed xl:sticky top-0 pb-5 flex-shrink-0 h-screen max-w-xs w-full flex flex-col bg-dark-800 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-dark-600 overscroll-contain transform xl:transform-none xl:opacity-100 duration-200"
@@ -192,7 +192,7 @@
             <div class="px-4">
                 <div class="px-3 mb-4">
                     <div class="text-xs uppercase font-semibold text-indigo-400 tracking-little">Documentation</div>
-                    <div class="text-xs leading-tiny text-gray-300">Usage and recent changes to the website</div>
+                    <div class="text-xs leading-tiny text-gray-300">Recent changes to the website</div>
                 </div>
                 <ul class="flex flex-col gap-y-1">
                     <x-nav-link href="#">
@@ -227,7 +227,8 @@
                         <div
                             class="flex flex-grow sm:flex-grow-0 sm:flex-row-reverse items-center justify-between sm:justify-start sm:gap-4">
                             <div>
-                                <h1 class="text-lg lg:text-xl xl:text-2xl font-semibold text-gray-900">{{ $page }}</h1>
+                                <h1 class="text-lg lg:text-xl xl:text-2xl font-semibold text-gray-900">{{ $pageName }}
+                                </h1>
                                 <p class="text-sm text-gray-600">{{ $desc }}</p>
                             </div>
                             <button type="button" @click="nav = !nav"
@@ -267,7 +268,8 @@
                                 </span>
                             </button>
                             <div x-data="{open : false}" class="relative inline-flex">
-                                <button @click="open = !open" type="button" class="w-10 h-10 rounded-xl focus:outline-none">
+                                <button @click="open = !open" type="button"
+                                    class="w-10 h-10 rounded-xl focus:outline-none">
                                     <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                         alt="Profile Picture" class="rounded-xl">
                                 </button>
@@ -372,20 +374,23 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li>
-                                            <a href="#"
-                                                class="py-2 px-4 flex items-center gap-2.5 text-gray-600 bg-transparent hover:bg-gray-100/50 focus:outline-none focus:bg-gray-100/50">
-                                                <span class="inline-flex">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="1.5"
-                                                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                                <span class="text-sm font-medium">Sign Out</span>
-                                            </a>
+                                        <li x-data="{signOutForm : null}">
+                                            <form x-ref="signOutForm" action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                                <a href="#" @click.prevent="$refs.signOutForm.submit()"
+                                                    class="py-2 px-4 flex items-center gap-2.5 text-gray-600 bg-transparent hover:bg-gray-100/50 focus:outline-none focus:bg-gray-100/50">
+                                                    <span class="inline-flex">
+                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="1.5"
+                                                                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                    <span class="text-sm font-medium">Sign Out</span>
+                                                </a>
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>

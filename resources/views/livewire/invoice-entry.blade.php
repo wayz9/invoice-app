@@ -1,4 +1,5 @@
-<div x-data="{open : false, edit: false}" @toast="Toastr.error(event.detail.message);">
+<div x-data="{open : false, edit: @entangle('editModalStatus')}" @toast-error="Toastr.error(event.detail.message);"
+    @toast-success="Toastr.success(event.detail.message);">
     <div class="mb-0.5 py-3.5 px-6 flex items-center justify-between bg-white ring-1 ring-inset ring-gray-200 transition-all"
         :class="{'rounded-t-xl' : open, 'rounded-xl' : !open}">
         <div class="flex items-center gap-5">
@@ -44,10 +45,15 @@
                             role="menuitem" tabindex="-1">
                             <span>Edit Invoice</span>
                         </button>
-                        <button type="button" wire:click="emailPDFToRecipient()"
+                        <button type="button" @click="show = false" wire:click="download()"
+                            class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
+                            role="menuitem" tabindex="-1">
+                            <span>Download as PDF</span>
+                        </button>
+                        <button type="button" wire:click="emailPDFToRecipient()" @click="open = false"
                             class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">1-click email</button>
-                        <button type="button"
+                        <button type="button" wire:click="showDeleteModal()" @click="open = false"
                             class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>
@@ -69,7 +75,7 @@
         </div>
     </div>
     <div x-show="open" class="flex flex-col divide-y divide-gray-100" x-collapse>
-        <div class="pb-6 px-[4.75rem] bg-white">
+        <div class="px-[4.75rem] bg-white">
             <table class="min-w-full">
                 <thead>
                     <tr>
@@ -110,7 +116,8 @@
             </table>
         </div>
         <div class="px-[4.75rem] py-3 flex items-center justify-between bg-white ">
-            <a href="#" class="inline-flex items-center gap-1 text-sm font-medium text-indigo-500">
+            <button type="button" wire:click="download()"
+                class="inline-flex items-center gap-1 text-sm font-medium text-indigo-500">
                 <span>Download as PDF</span>
                 <span class="inline-flex">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -119,10 +126,49 @@
                             d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
                 </span>
-            </a>
+            </button>
             <div class="text-xl font-bold text-gray-800">${{ calculateSubtotal($invoice->items) }}</div>
         </div>
     </div>
 
     @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
+
+    <div x-data="{deleteModal : @entangle('modalStatus')}">
+        <x-modal name="deleteModal">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div
+                        class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <!-- Heroicon name: outline/exclamation -->
+                        <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Delete Invoice
+                        </h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">
+                                Are you sure you want to delete this invoice? All items with this invoice will be
+                                deleted too.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button wire:click="delete()" type="button"
+                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Delete
+                </button>
+                <button @click="deleteModal = false" type="button"
+                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </x-modal>
+    </div>
 </div>

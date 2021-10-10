@@ -22,12 +22,12 @@ class ClientEntry extends Component
         $this->emitUp('deleted');
     }
 
-    public function showModal()
+    public function showModal(): void
     {
         $this->modalStatus = true;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
         $this->modalStatus = false;
     }
