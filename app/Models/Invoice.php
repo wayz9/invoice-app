@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +38,10 @@ class Invoice extends Model
 
     public function getFileNameAttribute()
     {
-        return Str::snake('invoice', $this->invoice_number, now()->year) . '.pdf';
+        $invoiceNumber = Str::replace('#', '', $this->invoice_number);
+
+        $invoiceNumber == '' ?? $invoiceNumber = 'unknown';
+
+        return "invoice_{$invoiceNumber}.pdf";
     }
 }
