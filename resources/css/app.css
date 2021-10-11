@@ -11,6 +11,7 @@
 @layer components {
     @import url("toastr");
     @import url("flatpickr/dist/themes/airbnb.css");
+    @import url('tippy.js/dist/tippy.css');
 }
 
 @layer base {
@@ -94,36 +95,42 @@
 }
 
 .flatpickr-current-month .flatpickr-monthDropdown-months,
-    .flatpickr-current-month input.cur-year {
-        @apply text-base;
-    }
+.flatpickr-current-month input.cur-year {
+    @apply text-base;
+}
 
-    span.flatpickr-day.today:not(.selected),
-    span.flatpickr-day.prevMonthDay.today:not(.selected),
-    span.flatpickr-day.nextMonthDay.today:not(.selected) {
-        border-bottom-color: #818CF8;
-    }
+span.flatpickr-day.today:not(.selected),
+span.flatpickr-day.prevMonthDay.today:not(.selected),
+span.flatpickr-day.nextMonthDay.today:not(.selected) {
+    border-bottom-color: #818cf8;
+}
 
-    span.flatpickr-day.today:not(.selected):hover,
-    span.flatpickr-day.prevMonthDay.today:not(.selected):hover,
-    span.flatpickr-day.nextMonthDay.today:not(.selected):hover {
-        @apply border border-solid border-indigo-500;
-    }
+span.flatpickr-day.today:not(.selected):hover,
+span.flatpickr-day.prevMonthDay.today:not(.selected):hover,
+span.flatpickr-day.nextMonthDay.today:not(.selected):hover {
+    @apply border border-solid border-indigo-500;
+}
 
-    .flatpickr-day.today {
-        @apply border-indigo-500;
-    }
+.flatpickr-day.today {
+    @apply border-indigo-500;
+}
 
-    .flatpickr-day.today:hover,
-    .flatpickr-day.today:focus {
-        @apply border-indigo-500 bg-indigo-500;
-    }
+.flatpickr-day.today:hover,
+.flatpickr-day.today:focus {
+    @apply border-indigo-500 bg-indigo-500;
+}
 
-    .flatpickr-months .flatpickr-prev-month:hover,
-    .flatpickr-months .flatpickr-next-month:hover {
-        @apply text-indigo-400;
-    }
-    .flatpickr-months .flatpickr-prev-month:hover svg,
-    .flatpickr-months .flatpickr-next-month:hover svg {
-        fill: rgba(129, 140, 248, 1);
-    }
+.flatpickr-months .flatpickr-prev-month:hover,
+.flatpickr-months .flatpickr-next-month:hover {
+    @apply text-indigo-400;
+}
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+    fill: rgba(129, 140, 248, 1);
+}
+
+.tippy-box {
+    font-size: 11px !important;
+    font-family: "Inter var";
+    line-height: 13px !important;
+}

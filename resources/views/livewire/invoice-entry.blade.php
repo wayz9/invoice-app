@@ -12,7 +12,10 @@
                 </svg>
             </span>
             <div>
-                <div class="text-base font-medium text-gray-900">{{ $invoice->name }}</div>
+                <div class="flex items-center gap-1.5">
+                    <div class="text-base font-medium text-gray-900">{{ $invoice->name }}</div>
+                    <x-badge status="{{ $invoice->status }}" />
+                </div>
                 <p class="text-sm text-gray-600">{{ $invoice->invoice_number }}</p>
             </div>
         </div>
@@ -50,6 +53,13 @@
                             role="menuitem" tabindex="-1">
                             <span>Download as PDF</span>
                         </button>
+                        @if (!$invoice->is_paid)
+                        <button type="button" @click="show = false" wire:click="markAsPaid()"
+                            class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
+                            role="menuitem" tabindex="-1">
+                            <span>Mark as PAID</span>
+                        </button>
+                        @endif
                         <button type="button" wire:click="emailPDFToRecipient()" @click="open = false"
                             class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">1-click email</button>
@@ -131,7 +141,9 @@
         </div>
     </div>
 
-    @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
+    @if ($invoice->is_paid)
+        @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
+    @endif
 
     <div x-data="{deleteModal : @entangle('modalStatus')}">
         <x-modal name="deleteModal">
@@ -139,7 +151,6 @@
                 <div class="sm:flex sm:items-start">
                     <div
                         class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                        <!-- Heroicon name: outline/exclamation -->
                         <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

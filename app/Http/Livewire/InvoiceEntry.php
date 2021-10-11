@@ -19,8 +19,19 @@ class InvoiceEntry extends Component
     public function emailPDFToRecipient()
     {
         if (!$this->invoice->items()->exists()) {
-            return $this->dispatchBrowserEvent('toast-error',
+            return $this->dispatchBrowserEvent(
+                'toast-error',
                 ['message' => 'Invoice should contain at least one item!']
+            );
+        }
+
+        if (
+            $this->invoice->status == Invoice::INVOICE_PAID
+            || $this->invoice->status == Invoice::INVOICE_DRAFT
+        ) {
+            return $this->dispatchBrowserEvent(
+                'toast-error',
+                ['message' => 'Only active invoices can be emailed!']
             );
         }
 
@@ -48,6 +59,23 @@ class InvoiceEntry extends Component
         $this->closeModal();
 
         $this->emitUp('deleted');
+
+        return $this->dispatchBrowserEvent(
+            'toast-success',
+            ['message' => 'Invoice deleted successfully!']
+        );
+    }
+
+    public function markAsPaid()
+    {
+        $this->invoice->update(['status' => Invoice::INVOICE_PAID]);
+
+        $this->emitUp('updated');
+
+        return $this->dispatchBrowserEvent(
+            'toast-success',
+            ['message' => 'Invoice marked as PAID successfully!']
+        );
     }
 
     public function download()
@@ -55,7 +83,7 @@ class InvoiceEntry extends Component
         $pdf = PDF::loadView('templates.invoice', ['invoice' => $this->invoice, 'client' => $this->invoice->client])
             ->output();
 
-        return response()->streamDownload(fn() => print($pdf), $this->invoice->file_name, ['mime' => 'application/pdf']);
+        return response()->streamDownload(fn () => print($pdf), $this->invoice->file_name, ['mime' => 'application/pdf']);
     }
 
     public function render()

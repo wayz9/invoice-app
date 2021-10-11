@@ -243,19 +243,7 @@
                             </button>
                         </div>
                         <div class="flex flex-grow md:flex-grow-0 items-center gap-4">
-                            <div class="w-full lg:max-w-[256px] relative">
-                                <input type="text" name="search" autocomplete="off" id="search"
-                                    class="py-2.5 px-[2.875rem] block w-full text-sm font-medium rounded-xl bg-gray-200/50 focus:outline-none focus:bg-gray-200 placeholder-gray-600"
-                                    placeholder="Search">
-
-                                <span class="absolute inset-y-0 left-3 flex items-center justify-center text-gray-600">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
-                                </span>
-                            </div>
+                            @livewire('search')
                             <button type="button"
                                 class="p-2 flex items-center justify-center rounded-xl bg-gray-200/50 text-gray-600 focus:outline-none focus:bg-gray-200">
                                 <span class="inline-flex">

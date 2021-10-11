@@ -18,7 +18,7 @@ class ShowClient extends Component
     public string $pageName;
     public string $desc;
 
-    protected $listeners = ['deleted' => '$refresh'];
+    protected $listeners = ['deleted' => '$refresh', 'updated' => '$refresh'];
 
     public function mount()
     {
@@ -30,9 +30,10 @@ class ShowClient extends Component
     {
         $invoices = $this->client
             ->invoices()
-            ->when($this->filterBy == 'active', fn(Builder $builder) => $builder->where('status', Invoice::INVOICE_ACTIVE))
-            ->when($this->filterBy == 'draft', fn(Builder $builder) => $builder->where('status', Invoice::INVOICE_DRAFT))
-            ->when($this->filterBy == 'overdue', fn(Builder $builder) => $builder->where('due_date', '<', now()->format('Y-m-d')))
+            ->when($this->filterBy == 'active', fn(Builder $query) => $query->where('status', Invoice::INVOICE_ACTIVE))
+            ->when($this->filterBy == 'paid', fn(Builder $query) => $query->where('status', Invoice::INVOICE_PAID))
+            ->when($this->filterBy == 'draft', fn(Builder $query) => $query->where('status', Invoice::INVOICE_DRAFT))
+            ->when($this->filterBy == 'overdue', fn(Builder $query) => $query->where('due_date', '<', now()->format('Y-m-d')))
             ->search('name', $this->search)
             ->paginate(10);
 
