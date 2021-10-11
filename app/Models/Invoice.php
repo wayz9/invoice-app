@@ -44,4 +44,9 @@ class Invoice extends Model
 
         return "invoice_{$invoiceNumber}.pdf";
     }
+
+    public function getIsPaidAttribute()
+    {
+        return $this->status == Invoice::INVOICE_PAID ? true : false;
+    }
 }

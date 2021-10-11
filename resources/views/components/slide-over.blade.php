@@ -16,7 +16,7 @@
                 x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
                 {{ $attributes->merge(['class' => 'relative w-screen max-w-lg']) }}>
                 <div
-                    class="min-h-screen py-4 sm:py-5 px-4 sm:px-6 flex flex-col bg-white border-l border-gray-100 overflow-y-auto">
+                    class="h-screen py-4 sm:py-5 px-4 sm:px-6 flex flex-col bg-white border-l border-gray-100 overflow-y-auto">
                     {{ $slot }}
                 </div>
             </div>
