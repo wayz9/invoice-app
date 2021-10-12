@@ -27,11 +27,14 @@ class AddClientForm extends Component
     public function create()
     {
         $this->validate();
-
         auth()->user()->clients()->create($this->validate());
+
         $this->emitUp('closeModal');
 
-        return $this->dispatchBrowserEvent('toast-success', ['message' => 'Client has been added successfully.']);
+        return $this->dispatchBrowserEvent(
+            'toast-success',
+            ['message' => 'Client has been added successfully.']
+        );
     }
 
 

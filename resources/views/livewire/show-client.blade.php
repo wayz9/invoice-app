@@ -1,4 +1,5 @@
-<div>
+<div x-data="{createNewInvoice : @entangle('createInvoiceModal')}" @toast-error="Toastr.error(event.detail.message);"
+@toast-success="Toastr.success(event.detail.message);">
     <div class="mb-16 flex flex-wrap gap-6 justify-between">
         <div class="py-5 px-6 inline-flex gap-x-12 bg-white rounded-xl">
             <div>
@@ -28,7 +29,7 @@
             </ul>
         </div>
         <div>
-            <button type="button" class="inline-flex py-2.5 px-5 text-sm font-medium text-white rounded-md bg-indigo-500 focus:outline-none focus:ring-indigo-500 focus:ring-2 focus:ring-offset-2">
+            <button type="button" @click="createNewInvoice = true" class="inline-flex py-2.5 px-5 text-sm font-medium text-white rounded-md bg-indigo-500 focus:outline-none focus:ring-indigo-500 focus:ring-2 focus:ring-offset-2">
                 Create Invoice
             </button>
         </div>
@@ -89,4 +90,6 @@
     <div>
         {{ $invoices->links() }}
     </div>
+
+    @livewire('create-invoice', ['client' => $client])
 </div>

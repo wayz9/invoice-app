@@ -11,7 +11,7 @@ class InvoiceEntry extends Component
 {
     public Invoice $invoice;
     public string $email;
-    public bool $modalStatus = false;
+    public bool $deleteModalStatus = false;
     public bool $editModalStatus = false;
 
     protected $listeners = ['closeModal' => 'closeEditModal'];
@@ -43,25 +43,10 @@ class InvoiceEntry extends Component
         );
     }
 
-    public function showDeleteModal(): void
-    {
-        $this->modalStatus = true;
-    }
-
-    public function closeEditModal()
-    {
-        $this->editModalStatus = false;
-    }
-
-    public function closeModal(): void
-    {
-        $this->modalStatus = false;
-    }
-
     public function delete()
     {
         $this->invoice->delete();
-        $this->closeModal();
+        $this->closeDeleteModal();
 
         $this->emitUp('deleted');
 
@@ -89,6 +74,21 @@ class InvoiceEntry extends Component
             ->output();
 
         return response()->streamDownload(fn () => print($pdf), $this->invoice->file_name, ['mime' => 'application/pdf']);
+    }
+
+    public function showDeleteModal(): void
+    {
+        $this->deleteModalStatus = true;
+    }
+
+    public function closeEditModal()
+    {
+        $this->editModalStatus = false;
+    }
+
+    public function closeDeleteModal(): void
+    {
+        $this->deleteModalStatus = false;
     }
 
     public function render()
