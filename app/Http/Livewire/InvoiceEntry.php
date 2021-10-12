@@ -36,6 +36,11 @@ class InvoiceEntry extends Component
         }
 
         EmailPdfToClient::send($this->invoice, $this->email);
+
+        return $this->dispatchBrowserEvent(
+            'toast-success',
+            ['message' => 'Invoice has been emailed successfully!']
+        );
     }
 
     public function showDeleteModal(): void

@@ -41,7 +41,7 @@
         <div class="flex items-center gap-4">
             <div class="lg:max-w-xs">
                 <div class="w-full relative">
-                    <input type="text" wire:model="search" autocomplete="off" id="search"
+                    <input type="text" wire:model.debounce.500ms="search" autocomplete="off" id="search"
                         class="py-2.5 px-[2.875rem] block w-full text-sm font-medium rounded-lg bg-gray-200/50 focus:outline-none focus:bg-gray-200 placeholder-gray-600"
                         placeholder="Search">
 
