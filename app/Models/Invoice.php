@@ -40,7 +40,6 @@ class Invoice extends Model
     {
         $invoiceNumber = Str::replace('#', '', $this->invoice_number);
 
-        $invoiceNumber == '' ?? $invoiceNumber = 'unknown';
 
         return "invoice_{$invoiceNumber}.pdf";
     }

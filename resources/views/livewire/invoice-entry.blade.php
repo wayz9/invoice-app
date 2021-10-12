@@ -1,5 +1,4 @@
-<div x-data="{open : false, edit: @entangle('editModalStatus')}" @toast-error="Toastr.error(event.detail.message);"
-    @toast-success="Toastr.success(event.detail.message);">
+<div x-data="{open : false, edit: @entangle('editModalStatus')}">
     <div class="mb-0.5 py-3.5 px-6 flex items-center justify-between bg-white ring-1 ring-inset ring-gray-200 transition-all"
         :class="{'rounded-t-xl' : open, 'rounded-xl' : !open}">
         <div class="flex items-center gap-5">
@@ -142,10 +141,10 @@
     </div>
 
     @if (!$invoice->is_paid)
-        @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
+    @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
     @endif
 
-    <div x-data="{deleteModal : @entangle('modalStatus')}">
+    <div x-data="{deleteModal : @entangle('deleteModalStatus')}">
         <x-modal name="deleteModal">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
