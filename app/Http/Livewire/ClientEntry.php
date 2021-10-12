@@ -8,28 +8,33 @@ use Livewire\Component;
 class ClientEntry extends Component
 {
     public Client $client;
-    public string $name;
-    public string $issueDate;
-    public bool $modalStatus = false;
+    public bool $deleteModal = false;
+    public bool $editModal = false;
+
+    protected $listeners = [
+        'closeEditModal' => 'closeEditModal',
+        'updated' => '$refresh'
+    ];
 
     public function delete()
     {
         $this->client->invoices()->delete();
         $this->client->delete();
 
-        $this->closeModal();
-
+        $this->closeDeleteModal();
         $this->emitUp('deleted');
+
+        return $this->dispatchBrowserEvent('toast-success', ['message' => 'Client has been deleted successfully.']);
     }
 
-    public function showModal(): void
+    public function closeDeleteModal(): void
     {
-        $this->modalStatus = true;
+        $this->deleteModal = false;
     }
 
-    public function closeModal(): void
+    public function closeEditModal(): void
     {
-        $this->modalStatus = false;
+        $this->editModal = false;
     }
 
     public function render()

@@ -9,8 +9,15 @@ use Livewire\Component;
 class IndexClient extends Component
 {
     public Collection $clients;
-    public string $pageName = 'Clients';
-    public string $desc = 'List all of your clients';
+    public $pageName = 'Clients';
+    public $desc = 'List all of your clients';
+    public bool $addClientModal = false;
+
+    protected $listeners = [
+        'deleted' => '$refresh',
+        'created' => '$refresh',
+        'closeModal' => 'closeAddClientModal',
+    ];
 
     public function mount()
     {
@@ -20,7 +27,10 @@ class IndexClient extends Component
             ->get();
     }
 
-    protected $listeners = ['deleted' => '$refresh'];
+    public function closeAddClientModal()
+    {
+        $this->addClientModal = false;
+    }
 
     public function render()
     {

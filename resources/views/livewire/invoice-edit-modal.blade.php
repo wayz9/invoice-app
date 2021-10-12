@@ -82,7 +82,7 @@
                                     <input type="text" wire:model.defer="items.{{ $index }}.price" class="block w-full max-w-[5rem] @error("items.{$index}.price") bg-red-200 @enderror py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 focus:bg-gray-200 focus:outline-none placeholder-gray-500">
                                 </td>
                                 <td class="px-1.5 pt-2">
-                                    <div class="text-sm text-gray-800" x-text="'$' + qty * (price / 100)"></div>
+                                    <div class="text-sm text-gray-800" x-text="'$' + Number(qty * (price / 100)).toFixed(2)"></div>
                                 </td>
                                 <td class="pl-1.5 pt-2">
                                     <button type="button" wire:click="removeInvoiceItem({{ $index }})" wire:loading.attr="disabled" class="focus:outline-none text-gray-600">

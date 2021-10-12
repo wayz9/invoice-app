@@ -19,10 +19,10 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('company_identifier');
             $table->string('email');
-            $table->integer('vat_in');
+            $table->string('vat_in');
             $table->text('address_line1');
             $table->text('address_line2')->nullable();
-            $table->string('contact_number');
+            $table->string('contact_number')->nullable();
             $table->timestamps();
         });
     }

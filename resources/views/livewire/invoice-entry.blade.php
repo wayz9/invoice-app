@@ -43,7 +43,7 @@
                     x-transition:leave-end="transform opacity-0 scale-95" aria-orientation="vertical"
                     aria-labelledby="menu-button" tabindex="-1">
                     <div class="py-1" role="none">
-                        <button type="button" @click="edit = !edit"
+                        <button type="button" @click="edit = !edit" @click="show = false"
                             class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>Edit Invoice</span>
@@ -60,10 +60,10 @@
                             <span>Mark as PAID</span>
                         </button>
                         @endif
-                        <button type="button" wire:click="emailPDFToRecipient()" @click="open = false"
+                        <button type="button" wire:click="emailPDFToRecipient()" @click="show = false"
                             class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">1-click email</button>
-                        <button type="button" wire:click="showDeleteModal()" @click="open = false"
+                        <button type="button" wire:click="showDeleteModal()" @click="show = false"
                             class="text-gray-700 w-full hover:bg-gray-100 hover:text-gray-900 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>
@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    @if ($invoice->is_paid)
+    @if (!$invoice->is_paid)
         @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
     @endif
 

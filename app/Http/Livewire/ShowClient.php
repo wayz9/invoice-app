@@ -5,12 +5,14 @@ namespace App\Http\Livewire;
 use App\Models\Client;
 use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ShowClient extends Component
 {
     use WithPagination;
+    use AuthorizesRequests;
 
     public Client $client;
     public string $search = '';
@@ -22,6 +24,7 @@ class ShowClient extends Component
 
     public function mount()
     {
+        $this->authorize('view', $this->client);
         $this->pageName = $this->client->name;
         $this->desc = 'Show invoices and details about client';
     }
