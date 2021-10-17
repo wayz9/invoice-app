@@ -15,12 +15,9 @@
             $watch('value', value => instance.setDate(value, true));
             instance = flatpickr($refs.input, {{ json_encode((object)$options) }});
         }" x-ref="input" x-bind:value="value"
-        class="text-sm text-gray-900 block w-full py-2.5 px-3.5 rounded-lg bg-gray-200/50 focus:bg-gray-200 focus:outline-none placeholder-gray-500"
+        class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900"
         placeholder="{{ $placeholder }}">
-    <span class="absolute inset-y-0 right-0 mr-3 flex items-center justify-center text-gray-500">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-        </svg>
+    <span class="absolute inset-y-0 right-0 mr-3 flex items-center justify-center text-zinc-500">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18" height="18" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/></svg>
     </span>
 </div>

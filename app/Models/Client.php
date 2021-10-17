@@ -11,6 +11,8 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $withCount = ['invoices'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -19,5 +21,10 @@ class Client extends Model
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    public function getTotalIncomeAttribute()
+    {
+        return $this->invoices->where('status', Invoice::INVOICE_PAID)->sum(fn($invoice) => $invoice->subtotal());
     }
 }

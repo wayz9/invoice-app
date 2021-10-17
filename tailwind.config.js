@@ -9,16 +9,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+                sans: ['Raleway-v4020', ...defaultTheme.fontFamily.sans]
             },
-            colors: {
-                dark: {
-                    900: '#0c0d12',
-                    800: '#12141c',
-                    700: '#171923',
-                    600: '#252a37',
-                }
-            }
         },
     },
     plugins: [require('tailwind-scrollbar'), require('@tailwindcss/line-clamp')],

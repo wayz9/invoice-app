@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,10 +16,7 @@ class Invoice extends Model
     const INVOICE_ACTIVE = 1;
     const INVOICE_PAID = 2;
 
-    protected $casts = [
-        'issue_date' => 'date',
-        'due_date' => 'date'
-    ];
+    protected $dates = ['issue_date', 'due_date'];
 
     public function items(): HasMany
     {
@@ -31,21 +28,38 @@ class Invoice extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function client()
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function getFileNameAttribute()
+    public function getFileNameAttribute(): string
     {
-        $invoiceNumber = Str::replace('#', '', $this->invoice_number);
-
-
-        return "invoice_{$invoiceNumber}.pdf";
+        return "invoice_{$this->invoice_number}.pdf";
     }
 
-    public function getIsPaidAttribute()
+    public function getIsPaidAttribute(): bool
     {
         return $this->status == Invoice::INVOICE_PAID ? true : false;
+    }
+
+    public function getIsDraftAttribute(): bool
+    {
+        return $this->status == Invoice::INVOICE_DRAFT ? true : false;
+    }
+
+    public function getIsOverdueAttribute(): bool
+    {
+        return ($this->due_date->isPast() && $this->status != self::INVOICE_PAID) ? true : false;
+    }
+
+    public function subtotal(): string
+    {
+        return $this->items->sum(fn($item) => $item->total);
+    }
+
+    public function scopeActiveInvoice(Builder $builder): Builder
+    {
+        return $builder->whereRaw('"'.now()->format('Y-m-d').'" between `issue_date` and `due_date`')->where('status', '!=', self::INVOICE_PAID);
     }
 }
