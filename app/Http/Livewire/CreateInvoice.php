@@ -3,10 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Traits\ToastResponse;
 use Livewire\Component;
 
 class CreateInvoice extends Component
 {
+    use ToastResponse;
+
     public Client $client;
 
     public $name;
@@ -30,7 +33,7 @@ class CreateInvoice extends Component
         $this->emitTo('show-client', 'created');
         $this->emitTo('show-client', 'closeModal');
 
-        $this->dispatchBrowserEvent('toast-success', ['message' => 'Invoice has been successfully created!']);
+        $this->toast('success', 'Invoice has been successfully created');
     }
 
     public function render()
