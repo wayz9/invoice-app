@@ -124,7 +124,7 @@
                         <td x-data="{warning : 'Delete'}" class="pt-4 pl-[7px]">
                             <button x-tooltip="warning" type="button" wire:click="removeInvoiceItem({{ $index }})"
                                 wire:loading.attr="disabled"
-                                class="text-zinc-600 hover:text-red-600 transition-colors focus:outline-none">
+                                class="text-zinc-600 hover:text-red-600 transition-colors pt-1 focus:outline-none">
                                 <span>
                                     <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                         viewBox="0 0 16 16">
