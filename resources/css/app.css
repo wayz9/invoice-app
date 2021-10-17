@@ -4,17 +4,19 @@
 
 @supports (font-variation-settings: normal) {
     html {
-        font-feature-settings: "cv09", "cv11", "cv01", "cv02", "cv03", "cv04";
+        font-feature-settings: "pnum", "lnum", "ss02", "ss09", "ss03";
     }
 }
 
 @layer components {
     @import url("toastr");
     @import url("flatpickr/dist/themes/airbnb.css");
-    @import url('tippy.js/dist/tippy.css');
+    @import url("tippy.js/dist/tippy.css");
 }
 
 @layer base {
+    @import url("fonts.css");
+
     [x-cloak] {
         display: none;
     }
@@ -40,6 +42,15 @@
         color: #2563eb;
         background-color: #fff;
         border: none;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
     }
 
     [type="checkbox"] {
@@ -130,7 +141,7 @@ span.flatpickr-day.nextMonthDay.today:not(.selected):hover {
 }
 
 .tippy-box {
-    font-size: 11px !important;
-    font-family: "Inter var";
-    line-height: 13px !important;
+    font-size: 12px !important;
+    font-family: inherit;
+    line-height: 14px !important;
 }

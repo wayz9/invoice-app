@@ -17,8 +17,7 @@ class ShowClient extends Component
     public Client $client;
     public string $search = '';
     public string $filterBy = '';
-    public string $pageName;
-    public string $desc = "Show invoices and details about client";
+    public string $heading;
     public bool $createInvoiceModal = false;
 
     protected $listeners = [
@@ -31,7 +30,7 @@ class ShowClient extends Component
     public function mount()
     {
         $this->authorize('view', $this->client);
-        $this->pageName = $this->client->name;
+        $this->heading = $this->client->name;
     }
 
     public function closeCreateInvoiceModal()
@@ -43,14 +42,14 @@ class ShowClient extends Component
     {
         $invoices = $this->client
             ->invoices()
-            ->when($this->filterBy == 'active', fn (Builder $query) => $query->where('status', Invoice::INVOICE_ACTIVE))
+            ->when($this->filterBy == 'active', fn (Builder $query) => $query->activeInvoice())
             ->when($this->filterBy == 'paid', fn (Builder $query) => $query->where('status', Invoice::INVOICE_PAID))
             ->when($this->filterBy == 'draft', fn (Builder $query) => $query->where('status', Invoice::INVOICE_DRAFT))
-            ->when($this->filterBy == 'overdue', fn (Builder $query) => $query->where('due_date', '<', now()->format('Y-m-d')))
+            ->when($this->filterBy == 'overdue', fn (Builder $query) => $query->whereDate('due_date', '<', now()->format('Y-m-d')))
             ->search('name', $this->search)
             ->paginate(10);
 
         return view('livewire.show-client', compact('invoices'))
-            ->layout('layouts.admin', ['pageName' => $this->pageName, 'desc' => $this->desc]);
+            ->layout('layouts.admin', ['heading' => $this->heading]);
     }
 }

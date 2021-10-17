@@ -2,13 +2,18 @@
 
 namespace App\Http\Livewire;
 
+use App\Jobs\EmailPdfToClient;
 use App\Models\Invoice;
-use App\Services\EmailPdfToClient;
+use App\Traits\ToastResponse;
 use Livewire\Component;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Contracts\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class InvoiceEntry extends Component
 {
+    use ToastResponse;
+
     public Invoice $invoice;
     public string $email;
     public bool $deleteModalStatus = false;
@@ -19,59 +24,47 @@ class InvoiceEntry extends Component
     public function emailPDFToRecipient()
     {
         if (!$this->invoice->items()->exists()) {
-            return $this->dispatchBrowserEvent(
-                'toast-error',
-                ['message' => 'Invoice should contain at least one item!']
-            );
+            return $this->toast('error', 'Invoice should contain at least one item!');
         }
 
-        if (
-            $this->invoice->status == Invoice::INVOICE_PAID
-            || $this->invoice->status == Invoice::INVOICE_DRAFT
-        ) {
-            return $this->dispatchBrowserEvent(
-                'toast-error',
-                ['message' => 'Only active invoices can be emailed!']
-            );
+        if ($this->invoice->is_paid || $this->invoice->is_draft) {
+            return $this->toast('error', 'Only active invoices can be emailed!');
         }
 
-        EmailPdfToClient::send($this->invoice, $this->email);
+        dispatch(new EmailPdfToClient($this->invoice, $this->email));
 
-        return $this->dispatchBrowserEvent(
-            'toast-success',
-            ['message' => 'Invoice has been emailed successfully!']
-        );
+        return $this->toast('success', 'Invoice has been emailed successfully.');
     }
 
     public function delete()
     {
         $this->invoice->delete();
-        $this->closeDeleteModal();
 
+        $this->closeDeleteModal();
         $this->emitUp('deleted');
 
-        return $this->dispatchBrowserEvent(
-            'toast-success',
-            ['message' => 'Invoice deleted successfully!']
-        );
+        return $this->toast('success', 'Invoice deleted successfully.');
     }
 
     public function markAsPaid()
     {
         $this->invoice->update(['status' => Invoice::INVOICE_PAID]);
-
         $this->emitUp('updated');
 
-        return $this->dispatchBrowserEvent(
-            'toast-success',
-            ['message' => 'Invoice marked as PAID successfully!']
-        );
+        return $this->toast('success', 'Invoice marked as PAID successfully.');
     }
 
-    public function download()
+    public function download($style = 'classic'): StreamedResponse
     {
-        $pdf = PDF::loadView('templates.invoice', ['invoice' => $this->invoice, 'client' => $this->invoice->client])
-            ->output();
+        $pdf = PDF::loadView(
+            "invoices.{$style}",
+            [
+                'invoice' => $this->invoice,
+                'client' => $this->invoice->client
+            ]
+        )
+        ->setPaper([0, 0, 720, 1440])
+        ->output();
 
         return response()->streamDownload(fn () => print($pdf), $this->invoice->file_name, ['mime' => 'application/pdf']);
     }
@@ -81,7 +74,7 @@ class InvoiceEntry extends Component
         $this->deleteModalStatus = true;
     }
 
-    public function closeEditModal()
+    public function closeEditModal(): void
     {
         $this->editModalStatus = false;
     }
@@ -91,7 +84,7 @@ class InvoiceEntry extends Component
         $this->deleteModalStatus = false;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.invoice-entry');
     }

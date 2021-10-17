@@ -3,7 +3,7 @@
         <div class="mb-8 flex items-center justify-between">
             <div>
                 <h2 class="text-lg font-semibold text-gray-800">Create Invoice</h2>
-                <p class="text-sm text-gray-600">Add a new client to start sending them invoices.</p>
+                <p class="text-sm text-gray-600">Create a new invoice for current client.</p>
             </div>
             <button type="button" @click="createNewInvoice = false" class="focus:outline-none text-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>

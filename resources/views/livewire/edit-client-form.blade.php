@@ -14,14 +14,14 @@
                 <h3 class="mb-5 text-base font-semibold text-gray-800">Client Information</h3>
                 <div class="mb-7">
                     <label for="name" class="block mb-1 text-sm text-gray-600">Client name:</label>
-                    <input type="text" wire:model.defer="name"
+                    <input type="text" wire:model.defer="client.name"
                         class="block w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 @error('name') bg-red-200 @enderror focus:bg-gray-200 focus:outline-none"
                         required>
                     <x-validation-message name="name" />
                 </div>
                 <div class="mb-7">
                     <label for="email" class="block mb-1 text-sm text-gray-600">Client email:</label>
-                    <input type="text" wire:model.defer="email"
+                    <input type="text" wire:model.defer="client.email"
                         class="block w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 @error('email') bg-red-200 @enderror focus:bg-gray-200 focus:outline-none"
                         required>
                     <span class="text-xs font-medium text-gray-500">Same email will be used when sending the invoice.</span>
@@ -29,14 +29,14 @@
                 </div>
                 <div class="mb-7">
                     <label for="vat_in" class="block mb-1 text-sm text-gray-600">VAT Number:</label>
-                    <input type="text" wire:model.defer="vat_in"
+                    <input type="text" wire:model.defer="client.vat_in"
                         class="block w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 @error('vat_in') bg-red-200 @enderror focus:bg-gray-200 focus:outline-none"
                         required>
                     <x-validation-message name="vat_in" />
                 </div>
                 <div class="mb-10">
                     <label for="company_identifier" class="block mb-1 text-sm text-gray-600">MB (Maticni broj):</label>
-                    <input type="text" wire:model.defer="company_identifier"
+                    <input type="text" wire:model.defer="client.company_identifier"
                         class="block w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 @error('company_identifier') bg-red-200 @enderror focus:bg-gray-200 focus:outline-none"
                         required>
                     <x-validation-message name="company_identifier" />
@@ -46,20 +46,20 @@
                 <h3 class="mb-5 text-base font-semibold text-gray-800">Contact Information</h3>
                 <div class="mb-7">
                     <label for="address_line1" class="block mb-1 text-sm text-gray-600">Address Line 1:</label>
-                    <input type="text" wire:model.defer="address_line1"
+                    <input type="text" wire:model.defer="client.address_line1"
                         class="block w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 @error('address_line1') bg-red-200 @enderror focus:bg-gray-200 focus:outline-none"
                         required>
                     <x-validation-message name="address_line1" />
                 </div>
                 <div class="mb-7">
                     <label for="address_line2" class="block mb-1 text-sm text-gray-600">Address Line 2 (optional):</label>
-                    <input type="text" wire:model.defer="address_line2"
+                    <input type="text" wire:model.defer="client.address_line2"
                         class="block w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 @error('address_line2') bg-red-200 @enderror focus:bg-gray-200 focus:outline-none">
                     <x-validation-message name="address_line2" />
                 </div>
                 <div class="mb-7">
                     <label for="contact_number" class="block mb-1 text-sm text-gray-600">Contact Number (optional):</label>
-                    <input type="text" wire:model.defer="contact_number"
+                    <input type="text" wire:model.defer="client.contact_number"
                         class="block w-full py-2.5 px-3.5 rounded-lg text-sm text-gray-800 bg-gray-200/50 @error('contact_number') bg-red-200 @enderror focus:bg-gray-200 focus:outline-none">
                     <x-validation-message name="contact_number" />
                 </div>

@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Client;
 use App\Models\Invoice;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class InvoiceFactory extends Factory
@@ -26,7 +25,7 @@ class InvoiceFactory extends Factory
         return [
             'client_id' => Client::factory(),
             'name' => $this->faker->sentence,
-            'invoice_number' => Str::of($this->faker->randomNumber(8))->prepend('#'),
+            'invoice_number' => $this->faker->randomNumber(8),
             'issue_date' => now()->addDay()->format('Y-m-d'),
             'due_date' => now()->addMonth()->format('Y-m-d'),
             'status' => Invoice::INVOICE_ACTIVE,

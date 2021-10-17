@@ -16,7 +16,7 @@
         </div>
         <div class="mt-4 md:mt-5 flex items-center space-x-2">
             <input type="checkbox" name="remember_me" id="remember_me" class="w-6 h-6 rounded-md bg-gray-100 focus:ring-indigo-500 focus:outline-none border-none text-indigo-500">
-            <label for="remember_me" class="text-sm">Remember me</label>
+            <label for="remember_me">Remember me</label>
         </div>
         <x-button type="submit" class="mt-4 md:mt-5 block w-full font-medium text-base leading-5 text-white bg-indigo-500 focus:ring-indigo-500">
             Sign in

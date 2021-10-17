@@ -3,10 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Traits\ToastResponse;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class ClientEntry extends Component
 {
+    use ToastResponse;
+
     public Client $client;
     public bool $deleteModal = false;
     public bool $editModal = false;
@@ -24,7 +28,7 @@ class ClientEntry extends Component
         $this->closeDeleteModal();
         $this->emitUp('deleted');
 
-        return $this->dispatchBrowserEvent('toast-success', ['message' => 'Client has been deleted successfully.']);
+        return $this->toast('success', 'Client has been deleted successfully.');
     }
 
     public function closeDeleteModal(): void
@@ -37,7 +41,7 @@ class ClientEntry extends Component
         $this->editModal = false;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.client-entry');
     }
