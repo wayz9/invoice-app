@@ -4,11 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use App\Traits\ToastResponse;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class InvoiceEditModal extends Component
 {
+    use ToastResponse;
+
     public Invoice $invoice;
     public string $email;
     public $name, $issue_date, $due_date;
@@ -74,7 +77,7 @@ class InvoiceEditModal extends Component
         $this->emitUp('closeModal');
         $this->emitTo('show-client', 'updated');
 
-        return $this->dispatchBrowserEvent('toast-success', ['message' => 'Invoice has been updated successfully.']);
+        return $this->toast('success', 'Invoice has been updated successfully.');
     }
 
     public function render()

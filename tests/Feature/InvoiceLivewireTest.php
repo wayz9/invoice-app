@@ -5,14 +5,16 @@ namespace Tests\Feature;
 use App\Http\Livewire\CreateInvoice;
 use App\Http\Livewire\InvoiceEditModal;
 use App\Http\Livewire\InvoiceEntry;
+use App\Mail\InvoicePDF;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class InvoiceLivewireTest extends TestCase
 {
@@ -119,5 +121,112 @@ class InvoiceLivewireTest extends TestCase
             ->assertDispatchedBrowserEvent('toast-success');
 
         $this->assertTrue($invoice->refresh()->is_paid);
+    }
+
+    /** @test */
+    public function email_a_classic_pdf_to_recipient()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+        $client = Client::factory()->for($user)->create();
+
+        $invoice = Invoice::factory()->for($client)->create();
+        InvoiceItem::factory(5)->for($invoice)->create();
+
+        Mail::fake();
+
+        $pdf =  PDF::loadView(
+            "invoices.classic",
+            ['invoice' => $invoice,'client' => $client]
+        )
+        ->setPaper([0, 0, 720, 1440])
+        ->output();
+
+        Mail::send(new InvoicePDF($invoice, $pdf));
+        Mail::assertSent(InvoicePDF::class);
+    }
+
+    /** @test */
+    public function a_pdf_file_can_be_downloaded()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+        $client = Client::factory()->for($user)->create();
+
+        $invoice = Invoice::factory()->for($client)->create();
+        InvoiceItem::factory(5)->for($invoice)->create();
+
+        Livewire::test(InvoiceEntry::class, ['invoice' => $invoice, 'email' => $client->email])
+            ->call('download')
+            ->assertFileDownloaded($invoice->file_name);
+    }
+
+    /** @test */
+    public function deletes_a_single_invoice_item()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+        $client = Client::factory()->for($user)->create();
+
+        $invoice = Invoice::factory()->for($client)->create();
+        InvoiceItem::factory(5)->for($invoice)->create();
+        $invoice->load('items');
+
+        Livewire::test(InvoiceEditModal::class, ['invoice' => $invoice, 'email' => $client->email])
+            ->assertSet('items', $invoice->items->toArray())
+            ->call('removeInvoiceItem', 1)
+            ->assertCount('items', 4);
+
+        $this->assertCount(4, $invoice->refresh()->items);
+    }
+
+    /** @test */
+    public function add_empty_fieldset_to_form()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+        $client = Client::factory()->for($user)->create();
+
+        $invoice = Invoice::factory()->for($client)->create();
+        InvoiceItem::factory(5)->for($invoice)->create();
+        $invoice->load('items');
+
+        Livewire::test(InvoiceEditModal::class, ['invoice' => $invoice, 'email' => $client->email])
+            ->assertSet('items', $invoice->items->toArray())
+            ->call('addInvoiceItem')
+            ->assertCount('items', 6);
+
+        $this->assertCount(5, $invoice->refresh()->items);
+    }
+
+    /** @test */
+    public function add_a_new_item_to_invoice()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+        $client = Client::factory()->for($user)->create();
+
+        $invoice = Invoice::factory()->for($client)->create();
+        InvoiceItem::factory(5)->for($invoice)->create();
+        $invoice->load('items');
+
+        Livewire::test(InvoiceEditModal::class, ['invoice' => $invoice, 'email' => $client->email])
+            ->assertSet('items', $invoice->items->toArray())
+            ->set('items.5.id', null)
+            ->set('items.5.title', 'New cool title added')
+            ->set('items.5.qty', 6)
+            ->set('items.5.price', 1000)
+            ->call('update')
+            ->assertHasNoErrors()
+            ->assertEmitted('closeModal')
+            ->assertEmitted('updated')
+            ->assertDispatchedBrowserEvent('toast-success');
+
+        $this->assertCount(6, $invoice->refresh()->items);
     }
 }

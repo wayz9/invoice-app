@@ -42,6 +42,7 @@ class ShowClient extends Component
     {
         $invoices = $this->client
             ->invoices()
+            ->with('items')
             ->when($this->filterBy == 'active', fn (Builder $query) => $query->activeInvoice())
             ->when($this->filterBy == 'paid', fn (Builder $query) => $query->where('status', Invoice::INVOICE_PAID))
             ->when($this->filterBy == 'draft', fn (Builder $query) => $query->where('status', Invoice::INVOICE_DRAFT))
