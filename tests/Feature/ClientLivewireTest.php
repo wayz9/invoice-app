@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\AddClientForm;
+use App\Http\Livewire\ClientEntry;
 use App\Http\Livewire\IndexClient;
 use App\Http\Livewire\ShowClient;
 use App\Models\Client;
@@ -72,5 +73,23 @@ class ClientLivewireTest extends TestCase
         Livewire::test(ShowClient::class, ['client' => $client])
             ->assertSet('client', $client)
             ->assertSet('client.invoices', $client->invoices);
+    }
+
+    /** @test */
+    public function delete_client_and_it_invoices()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $client = Client::factory()->for($user)->create();
+        Invoice::factory(5)->for($client)->create();
+
+        Livewire::test(ClientEntry::class, ['client' => $client])
+            ->call('delete')
+            ->assertEmitted('deleted')
+            ->assertDispatchedBrowserEvent('toast-success');
+
+        $this->assertEmpty($client->fresh());
     }
 }
