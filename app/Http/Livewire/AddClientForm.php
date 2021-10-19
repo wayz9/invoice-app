@@ -2,26 +2,33 @@
 
 namespace App\Http\Livewire;
 
+use App\Traits\ToastResponse;
 use Livewire\Component;
 
 class AddClientForm extends Component
 {
+    use ToastResponse;
+
     public $name;
     public $email;
-    public $address_line1;
+    public $street_address;
+    public $city;
+    public $zip_code;
+    public $country;
     public $contact_number;
-    public $address_line2;
     public $vat_in;
     public $company_identifier;
 
     protected $rules = [
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'email'],
-        'address_line1' => ['required', 'string'],
-        'address_line2' => ['nullable', 'string'],
+        'street_address' => ['required', 'string'],
+        'city' => ['required', 'string'],
+        'zip_code' => ['required', 'string'],
+        'country' => ['required', 'string'],
         'contact_number' => ['nullable', 'string'],
-        'vat_in' => ['required', 'string', 'max:9'],
-        'company_identifier' => ['required', 'string'],
+        'vat_in' => ['nullable', 'string', 'max:9'],
+        'company_identifier' => ['nullable', 'string'],
     ];
 
     public function create()
@@ -31,10 +38,7 @@ class AddClientForm extends Component
 
         $this->emitUp('closeModal');
 
-        return $this->dispatchBrowserEvent(
-            'toast-success',
-            ['message' => 'Client has been added successfully.']
-        );
+        return $this->toast('success', 'Client has been added successfully.');
     }
 
 

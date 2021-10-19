@@ -2,15 +2,15 @@
     <div class="mb-6 flex items-center justify-between">
         <div class="flex items-center gap-2">
             <span class="inline-flex">
-                <svg class="w-6 h-6 text-zinc-800" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                <svg class="w-6 h-6 text-zinc-800 dark:text-zinc-200" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
                 </svg>
             </span>
-            <h2 class="text-xl font-bold text-zinc-900">Edit Invoice</h2>
+            <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Edit Invoice</h2>
         </div>
-        <button x-on:click="edit = false" type="button" class="inline-flex text-zinc-800 focus:outline-none">
+        <button x-on:click="edit = false" type="button" class="inline-flex text-zinc-800 dark:text-zinc-200 focus:outline-none">
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                 <path fill="currentColor" fill-rule="evenodd"
                     d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
@@ -22,9 +22,9 @@
         </button>
     </div>
     <div class="mb-6 flex items-center justify-between">
-        <span class="text-xl font-semibold text-zinc-700">#{{ $invoice->invoice_number }}</span>
+        <span class="text-xl font-semibold text-zinc-700 dark:text-zinc-200">#{{ $invoice->invoice_number }}</span>
         <button type="button"
-            class="inline-flex items-center justify-center gap-2.5 text-xs font-medium uppercase text-lime-700 focus:outline-none">
+            class="inline-flex items-center justify-center gap-2.5 text-xs font-medium uppercase text-lime-700 dark:text-lime-400 focus:outline-none">
             <span class="inline-flex">
                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                     <path
@@ -43,17 +43,19 @@
                     d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
             </svg>
         </span>
-        <span class="text-base font-semibold text-zinc-800">
+        <span class="text-base font-semibold text-zinc-800 dark:text-zinc-100">
             <span class="text-zinc-400">quickpay.me/</span>vukasin
         </span>
     </div>
-    <div class="mb-6 py-3 px-3.5 rounded bg-lime-50/50">
-        <p class="mb-1.5 text-sm font-medium text-zinc-600">QuickPay is currently offline!</p>
-        <a href="#" class="text-xs font-semibold uppercase text-lime-600">Learn More</a>
+    <div class="mb-6 py-2.5 px-3.5 flex items-center justify-between rounded bg-lime-50/50 dark:bg-zinc-700/50 text-lime-600 dark:text-lime-400">
+        <p class="text-sm font-medium">QuickPay is enabled!</p>
+        <span>
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/><path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/></svg>
+        </span>
     </div>
     <div class="mb-6">
         <div x-data="{tooltip : 'Email that was added when registering new client.'}"
-            class="mb-1.5 flex items-center gap-1.5 text-zinc-600">
+            class="mb-1.5 flex items-center gap-1.5 text-zinc-600 dark:text-zinc-400">
             <span class="font-medium text-sm">Recipient Email</span>
             <span x-tooltip="tooltip" class="inline-flex text-zinc-400">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -63,25 +65,25 @@
                 </svg>
             </span>
         </div>
-        <div class="mb-2.5 text-base font-medium text-zinc-900">{{ $email }}</div>
-        <a href="#" class="block text-sm font-medium text-lime-700 text-right">How do I change recipient email?</a>
+        <div class="mb-2.5 text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $email }}</div>
+        <a href="#" class="block text-sm font-medium text-lime-700 dark:text-lime-400 text-right">How do I change recipient email?</a>
     </div>
     <form wire:submit.prevent="update">
         <div class="mb-7 flex flex-col gap-y-1.5">
-            <label for="name" class="text-sm font-medium text-zinc-600">Invoice Name</label>
+            <label for="name" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Invoice Name</label>
             <input type="text" wire:model.defer="name"
-                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900"
+                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 dark:ring-zinc-600/5 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 text-base font-medium text-zinc-900 dark:text-zinc-100 dark:bg-zinc-700/30"
                 required>
             <x-validation-message name="name" />
         </div>
         <div class="mb-7 grid grid-cols-2 gap-5">
             <div class="flex flex-col gap-y-1.5">
-                <label for="issue_date" class="text-sm font-medium text-zinc-600">Issue Date</label>
+                <label for="issue_date" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Issue Date</label>
                 <x-date-picker wire:model.defer="issue_date" required />
                 <x-validation-message name="issue_date" />
             </div>
             <div class="flex flex-col gap-y-1.5">
-                <label for="due_date" class="text-sm font-medium text-zinc-600">Due Date</label>
+                <label for="due_date" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Due Date</label>
                 <x-date-picker wire:model.defer="due_date" required />
                 <x-validation-message name="due_date" />
             </div>
@@ -90,10 +92,10 @@
             <table class="min-w-full">
                 <thead>
                     <tr>
-                        <th class="text-left text-sm font-medium text-zinc-600">Item / Service</th>
-                        <th class="text-right text-sm font-medium text-zinc-600 px-[7px]">Qty</th>
-                        <th class="text-left text-sm font-medium text-zinc-600 px-[7px]">Price</th>
-                        <th class="text-left text-sm font-medium text-zinc-600">Total</th>
+                        <th class="text-left text-sm font-medium text-zinc-600 dark:text-zinc-400">Item / Service</th>
+                        <th class="text-right text-sm font-medium text-zinc-600 dark:text-zinc-400 px-[7px]">Qty</th>
+                        <th class="text-left text-sm font-medium text-zinc-600 dark:text-zinc-400 px-[7px]">Price</th>
+                        <th class="text-left text-sm font-medium text-zinc-600 dark:text-zinc-400">Total</th>
                         <th class="sr-only pl-[7px]">Delete</th>
                     </tr>
                 </thead>
@@ -102,29 +104,29 @@
                     <tr x-data="{qty: @entangle("items.{$index}.qty").defer, price: @entangle("items.{$index}.price").defer}">
                         <td class="pt-4">
                             <input type="text" wire:model.defer="items.{{ $index }}.title"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900"
+                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900 dark:text-zinc-100 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30"
                                 required>
                         </td>
                         <td class="pt-4 px-[7px]">
                             <div class="flex items-end justify-end">
                                 <input type="number" wire:model.defer="items.{{ $index }}.qty" x-model="qty"
-                                    class="block max-w-[51px] w-full py-2 px-4 rounded-md text-center ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900"
+                                    class="block max-w-[51px] w-full py-2 px-4 rounded-md text-center ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900 dark:text-zinc-100 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30"
                                     required>
                             </div>
                         </td>
                         <td class="pt-4 px-[7px]">
                             <input type="number" wire:model.defer="items.{{ $index }}.price" x-model="price"
-                                class="block max-w-[4.85rem] w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900"
+                                class="block max-w-[4.85rem] w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900 dark:text-zinc-100 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30"
                                 required>
                         </td>
-                        <td class="pt-4 text-base font-medium text-zinc-900"
+                        <td class="pt-4 text-base font-medium text-zinc-900 dark:text-zinc-100"
                             x-text="'$' + Number(qty * price / 100).toFixed(2);">
                             $0
                         </td>
                         <td x-data="{warning : 'Delete'}" class="pt-4 pl-[7px]">
                             <button x-tooltip="warning" type="button" wire:click="removeInvoiceItem({{ $index }})"
                                 wire:loading.attr="disabled"
-                                class="text-zinc-600 hover:text-red-600 transition-colors pt-1 focus:outline-none">
+                                class="text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 transition-colors pt-1 focus:outline-none">
                                 <span>
                                     <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                         viewBox="0 0 16 16">
@@ -139,7 +141,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td class="pt-4 text-sm font-medium text-zinc-900 italic" colspan="5">No items found.</td>
+                        <td class="pt-4 text-sm font-medium text-zinc-900 dark:text-zinc-100 italic" colspan="5">No items found.</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -151,7 +153,7 @@
             </div>
         </div>
         <div class="mb-8 flex items-center justify-between">
-            <button wire:click="addInvoiceItem()" type="button" class="inline-flex gap-1 items-center text-lime-600">
+            <button wire:click="addInvoiceItem()" type="button" class="inline-flex gap-1 items-center text-lime-600 dark:text-lime-400">
                 <span class="inline-flex">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 16 16">
                         <path fill="currentColor" fill-rule="evenodd"
@@ -162,30 +164,28 @@
                 <span class="text-xs font-semibold uppercase">Add Item</span>
             </button>
             <div class="flex items-center gap-3.5">
-                <span class="text-sm font-medium text-zinc-600">Total</span>
-                <span class="text-base font-semibold text-zinc-900">${{ to_money($invoice->subtotal()) }}</span>
+                <span class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Total</span>
+                <span class="text-base font-semibold text-zinc-900 dark:text-zinc-100">${{ to_money($invoice->subtotal()) }}</span>
             </div>
         </div>
-        <div class="mb-16 flex flex-col gap-y-1.5">
-            <label for="notes" class="text-sm font-medium text-zinc-600">Notes (optional)</label>
-            <textarea rows="4"
-                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900 resize-none">
-
-            </textarea>
+        <div class="mb-12 flex flex-col gap-y-1.5">
+            <label for="notes" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Notes (optional)</label>
+            <textarea rows="3"
+                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900 dark:text-zinc-100 resize-none dark:ring-zinc-600/5 dark:focus:ring-zinc-600/50 dark:bg-zinc-700/30"></textarea>
             <span class="text-xs block text-right font-medium text-zinc-500">
                 Please do not use HTML in here.
             </span>
         </div>
         <div class="flex items-center justify-between">
             <a href="#"
-                class="text-xs font-semibold text-zinc-600 uppercase focus:outline-none cursor-not-allowed">Preview</a>
+                class="text-xs font-semibold text-zinc-600 dark:text-zinc-500 uppercase focus:outline-none cursor-not-allowed">Preview</a>
             <div class="flex items-center gap-4">
-                <button type="button" class="text-sm font-medium text-zinc-600 focus:outline-none">
+                <button type="button" class="text-sm font-medium text-zinc-600 dark:text-zinc-300 focus:outline-none">
                     Save as Draft
                 </button>
                 <button type="submit"
-                    class="px-4 py-2.5 bg-lime-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-700">
-                    <span class="text-sm font-semibold text-lime-100">Save Invoice</span>
+                    class="px-4 py-2.5 bg-lime-700 dark:bg-zinc-700/60 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 focus:ring-lime-700">
+                    <span class="text-sm font-semibold text-lime-100 dark:text-lime-400">Save Invoice</span>
                 </button>
             </div>
         </div>

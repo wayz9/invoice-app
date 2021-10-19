@@ -12,13 +12,14 @@ class EditClientForm extends Component
     protected $rules = [
         'client.name' => ['required', 'string', 'max:255'],
         'client.email' => ['required', 'email'],
-        'client.address_line1' => ['required', 'string'],
-        'client.address_line2' => ['nullable', 'string'],
+        'client.street_address' => ['required', 'string'],
+        'client.city' => ['required', 'string'],
+        'client.zip_code' => ['required', 'string'],
+        'client.country' => ['required', 'string'],
         'client.contact_number' => ['nullable', 'string'],
         'client.vat_in' => ['required', 'string', 'max:9'],
         'client.company_identifier' => ['required', 'string'],
     ];
-
 
     public function update()
     {

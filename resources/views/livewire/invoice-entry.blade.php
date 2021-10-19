@@ -1,8 +1,8 @@
 <li x-data="{open : false, edit: @entangle('editModalStatus'), deleteModal : @entangle('deleteModalStatus')}">
-    <div class="py-3.5 px-6 flex items-center justify-between bg-white rounded-lg ring-1 ring-inset ring-zinc-50"
+    <div class="py-3.5 px-6 flex items-center justify-between bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800"
         :class="{'rounded-t-lg' : open, 'rounded-lg' : !open}">
         <div class="flex items-center gap-5">
-            <span class="text-zinc-500">
+            <span class="text-zinc-500 dark:text-zinc-300">
                 <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                     <path
                         d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
@@ -12,26 +12,27 @@
             </span>
             <div>
                 <div class="flex items-center gap-x-2">
-                    <div class="text-base font-semibold text-zinc-900">{{ $invoice->name }}</div>
+                    <div class="text-base font-semibold text-zinc-900 dark:text-zinc-100">{{ $invoice->name }}</div>
                     @if ($invoice->is_draft)
-                    <x-badge class="bg-zinc-100 text-zinc-700">Draft</x-badge>
+                    <x-badge class="bg-zinc-100 dark:bg-zinc-700/25 text-zinc-700 dark:text-zinc-400">Draft</x-badge>
                     @endif
 
                     @if ($invoice->is_paid)
-                    <x-badge class="bg-lime-50 text-lime-700">Paid</x-badge>
+                    <x-badge class="bg-lime-50 dark:bg-zinc-700/25 text-lime-700 dark:text-lime-400">Paid</x-badge>
                     @endif
 
                     @if ($invoice->is_overdue)
-                    <x-badge class="bg-purple-50 text-purple-700">Overdue</x-badge>
+                    <x-badge class="bg-purple-50 dark:bg-zinc-700/25 text-purple-700 dark:text-purple-400">Overdue
+                    </x-badge>
                     @endif
                 </div>
-                <div class="text-sm text-zinc-600">#{{ $invoice->invoice_number }}</div>
+                <div class="text-sm text-zinc-600 dark:text-zinc-400">#{{ $invoice->invoice_number }}</div>
             </div>
         </div>
         <div class="flex items-center gap-7">
             <div x-data="{options : false}" class="relative">
                 <button x-on:click="options = !options" type="button"
-                    class="inline-flex py-2.5 px-3.5 items-center gap-7 bg-zinc-100 focus:bg-zinc-200/50 ring-1 ring-inset ring-zinc-200/50 text-zinc-800 text-sm font-medium rounded-md">
+                    class="inline-flex py-2.5 px-3.5 items-center gap-7 bg-zinc-100 dark:bg-zinc-700/30 focus:bg-zinc-200/50 ring-1 ring-inset ring-zinc-200/50 dark:ring-zinc-600/5 text-zinc-800 dark:text-zinc-300 text-sm font-medium rounded-md dark:focus:ring-zinc-600">
                     <span>Options</span>
                     <span class="inline-flex">
                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
@@ -41,7 +42,7 @@
                     </span>
                 </button>
                 <div x-cloak
-                    class="absolute mt-1 w-44 origin-top-right right-0 bg-white z-40 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    class="absolute mt-1 w-44 origin-top-right right-0 bg-white dark:bg-zinc-800 z-40 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu" x-show="options" x-on:click.away="options = false"
                     x-transition:enter="transition ease-out duration-100"
                     x-transition:enter-start="transform opacity-0 scale-95"
@@ -53,39 +54,40 @@
                     <div class="py-1" role="none">
                         @if (!$invoice->is_paid)
                         <button type="button" x-on:click="edit = !edit" x-on:click="options = false"
-                            class="text-zinc-700 w-full font-medium hover:bg-zinc-100 hover:text-zinc-900 flex items-center px-4 py-2 text-sm"
+                            class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>Edit Invoice</span>
                         </button>
                         @endif
                         <div class="px-4 py-2 text-sm">
-                            <span>Download</span>
+                            <span class="text-zinc-700 dark:text-zinc-300">Download</span>
                         </div>
                         <ul class="flex flex-col" role="menuitem" tabindex="-1">
                             <li x-on:click="options = false" wire:click="download('modern')"
-                                class="flex items-center gap-2 text-sm py-1.5 pl-8 hover:bg-zinc-100 cursor-pointer text-zinc-700 w-full font-medium hover:text-zinc-900">
+                                class="flex items-center gap-2 text-sm py-1.5 pl-8 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
                                 <span>Modern PDF</span>
-                                <span class="px-1.5 text-xs leading-5 rounded bg-lime-50 font-semibold text-lime-700">NEW</span>
+                                <x-badge class="bg-lime-50 dark:bg-zinc-700/25 text-lime-700 dark:text-lime-400">New
+                                </x-badge>
                             </li>
                             <li x-on:click="options = false" wire:click="download('classic')"
-                                class="flex items-center gap-2 text-sm py-1.5 pl-8 hover:bg-zinc-100 cursor-pointer text-zinc-700 w-full font-medium hover:text-zinc-900">
+                                class="flex items-center gap-2 text-sm py-1.5 pl-8 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
                                 <span>Classic PDF</span>
                             </li>
                         </ul>
                         @if (!$invoice->is_paid)
                         <button type="button" x-on:click="options = false" wire:click="markAsPaid()"
-                            class="text-zinc-700 w-full font-medium hover:bg-zinc-100 hover:text-zinc-900 flex items-center px-4 py-2 text-sm"
+                            class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>Mark as PAID</span>
                         </button>
                         <button type="button" wire:click="emailPDFToRecipient()" x-on:click="options = false"
-                            class="text-zinc-700 w-full font-medium hover:bg-zinc-100 hover:text-zinc-900 flex items-center px-4 py-2 text-sm"
+                            class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>1-click email</span>
                         </button>
                         @endif
                         <button type="button" x-on:click="options = false" wire:click="showDeleteModal()"
-                            class="text-zinc-700 w-full font-medium hover:bg-zinc-100 hover:text-zinc-900 flex items-center px-4 py-2 text-sm"
+                            class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>
                                 Delete
@@ -94,7 +96,8 @@
                     </div>
                 </div>
             </div>
-            <button x-on:click="open = !open" type="button" class="inline-flex text-zinc-800 focus:outline-none">
+            <button x-on:click="open = !open" type="button"
+                class="inline-flex text-zinc-800 dark:text-zinc-100 focus:outline-none">
                 <span class="inline-flex transform transition-all" :class="{'rotate-180' : open}">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -105,7 +108,7 @@
         </div>
     </div>
     <div x-show="open" x-collapse class="flex flex-col">
-        <div class="px-[4.5rem] bg-white">
+        <div class="px-[4.5rem] bg-white dark:bg-zinc-800/60">
             <table class="min-w-full">
                 <thead>
                     <tr>
@@ -119,37 +122,41 @@
                     @forelse ($invoice->items as $item)
                     <tr>
                         <td class="pr-6 py-6">
-                            <div class="mb-1 text-sm text-zinc-600 font-normal">Product /
+                            <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400 font-normal">Product /
                                 Services:</div>
-                            <div class="text-base font-medium text-zinc-900 max-w-md w-full">{{ $item->title }}</div>
+                            <div class="text-base font-medium text-zinc-900 dark:text-zinc-200 max-w-md w-full">{{
+                                $item->title }}</div>
                         </td>
                         <td class="px-6 py-6">
-                            <div class="mb-1 text-sm text-zinc-600 font-normal">QTY:</div>
-                            <div class="text-base font-medium text-zinc-900">{{ $item->qty }}</div>
+                            <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400 font-normal">QTY:</div>
+                            <div class="text-base font-medium text-zinc-900 dark:text-zinc-200">{{ $item->qty }}</div>
                         </td>
                         <td class="px-6 py-6">
-                            <div class="mb-1 text-sm text-zinc-600 font-normal">Price:</div>
-                            <div class="text-base font-medium text-zinc-900">$ {{ to_money($item->converted_price) }}
+                            <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400 font-normal">Price:</div>
+                            <div class="text-base font-medium text-zinc-900 dark:text-zinc-200">$ {{
+                                to_money($item->converted_price) }}
                             </div>
                         </td>
                         <td class="pl-6 py-6 text-right">
-                            <div class="mb-1 text-sm text-zinc-600 font-normal">Total:</div>
-                            <div class="text-base font-medium text-zinc-900">$ {{ $item->total }}</div>
+                            <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400 font-normal">Total:</div>
+                            <div class="text-base font-medium text-zinc-900 dark:text-zinc-200">$ {{ $item->total }}
+                            </div>
                         </td>
                     </tr>
                     @empty
                     <tr>
                         <td class="py-6">
-                            <div class="text-sm text-zinc-900 font-medium">No invoice items found.</div>
+                            <div class="text-sm text-zinc-900 dark:text-zinc-100 font-medium">No invoice items found.
+                            </div>
                         </td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        <div class="px-[4.5rem] py-3 flex items-center justify-between bg-white ">
+        <div class="px-[4.5rem] py-3 flex items-center justify-between bg-white dark:bg-zinc-800/60 rounded-b-lg">
             <button type="button" wire:click="download()"
-                class="inline-flex items-center gap-1 text-sm font-medium text-lime-600">
+                class="inline-flex items-center gap-1 text-sm font-medium text-lime-600 dark:text-lime-400">
                 <span>Download as PDF</span>
                 <span class="inline-flex">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -159,7 +166,7 @@
                     </svg>
                 </span>
             </button>
-            <div class="text-xl font-bold text-zinc-800">$ {{ to_money($invoice->subtotal()) }}</div>
+            <div class="text-xl font-bold text-zinc-800 dark:text-zinc-100">$ {{ to_money($invoice->subtotal()) }}</div>
         </div>
     </div>
 
@@ -167,39 +174,47 @@
         @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
     @endif
 
-    <x-modal name="deleteModal">
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-                <div
-                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                </div>
-                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 class="text-lg leading-6 font-semibold text-zinc-900" id="modal-title">
-                        Delete Invoice
-                    </h3>
-                    <div class="mt-2">
-                        <p class="text-sm text-zinc-600 font-medium">
-                            Are you sure you want to delete this invoice? All items with this invoice will be
-                            deleted too.
-                        </p>
-                    </div>
-                </div>
+    <x-modal name="deleteModal" class="!max-w-md">
+        <div class="py-9 px-10 flex flex-col items-center relative">
+            <span class="text-red-900 dark:text-red-400 mb-7">
+                <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 60 60">
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="m5.964 22.566 3.622 30.9A4 4 0 0 0 13.559 57h24.886a3.999 3.999 0 0 0 3.972-3.531L46.2 21H14.4" />
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="m46.634 7.033-43.002 8a2 2 0 0 0-1.593 2.364l1.078 5.697 46.937-8.71-1.091-5.763a1.999 1.999 0 0 0-2.329-1.588Z" />
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="m33.87 9.408-.906-4.787a2 2 0 0 0-2.332-1.587l-12 2a1.999 1.999 0 0 0-1.593 2.363l.94 4.967" />
+                    <path fill="currentColor" d="M9 17H7v2h2v-2ZM13 16h-2v2h2v-2ZM17 15h-2v2h2v-2Z" />
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="M26 27v25M33.352 45.831l1.63-18.752M32.827 51.867l.323-3.72M18.648 45.831l-1.63-18.752M19.172 51.867l-.323-3.72M52.357 17.434l6.331-2.876M52.463 20.469 56.6 24.6" />
+                </svg>
+            </span>
+            <h1 class="mb-2.5 text-2xl font-bold text-zinc-900 dark:text-zinc-100 text-center">Are you sure?</h1>
+            <p class="mb-9 font-medium text-zinc-600 dark:text-zinc-400 text-center">This action is permanent, all
+                items<br> from this invoice will be deleted too.
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <button x-on:click="deleteModal = false"
+                    class="px-4 py-2.5 bg-transparent dark:focus:ring-offset-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-300">
+                    <span class="text-sm font-semibold text-zinc-600 dark:text-zinc-300">Cancel</span>
+                </button>
+                <button type="button" wire:click="delete()"
+                    class="px-4 py-2.5 bg-red-600 dark:bg-zinc-700/60 dark:focus:ring-offset-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700">
+                    <span class="text-sm font-semibold text-red-100 dark:text-red-400">Delete</span>
+                </button>
             </div>
-        </div>
-        <div class="bg-zinc-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button wire:click="delete()" type="button"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                Delete
-            </button>
-            <button @click="deleteModal = false" type="button"
-                class="mt-3 w-full inline-flex justify-center rounded-md border border-zinc-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-zinc-700 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                Cancel
-            </button>
+            <div class="absolute top-8 right-8">
+                <button type="button" x-on:click="deleteModal = false" class="dark:text-zinc-300 text-zinc-800">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                            clip-rule="evenodd" />
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </x-modal>
 </li>

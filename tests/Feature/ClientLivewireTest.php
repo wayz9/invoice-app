@@ -17,7 +17,7 @@ use Tests\TestCase;
 class ClientLivewireTest extends TestCase
 {
     /** @test */
-    public function can_see_a_list_clients()
+    public function user_can_see_a_list_of_clients()
     {
         $user = User::factory()->create();
         Client::factory(5)->for($user)->create();
@@ -47,10 +47,15 @@ class ClientLivewireTest extends TestCase
         $this->actingAs($user);
         $this->get(route('client.index'))->assertSeeLivewire('add-client-form');
 
+        $client = Client::factory()->raw();
+
         Livewire::test(AddClientForm::class)
-            ->set('name', 'Client Name')
-            ->set('email', 'email@email.com')
-            ->set('address_line1', 'address something 11')
+            ->set('name', $client['name'])
+            ->set('email', $client['email'])
+            ->set('street_address', $client['street_address'])
+            ->set('city', $client['city'])
+            ->set('zip_code', $client['street_address'])
+            ->set('country', $client['country'])
             ->set('vat_in', "399735006")
             ->set('company_identifier', "399735006")
             ->call('create')

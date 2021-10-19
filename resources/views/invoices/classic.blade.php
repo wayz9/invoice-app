@@ -89,8 +89,8 @@
     <div style="width: 100%;">
         <div class="inline-block" style="width: 49%; margin-top: 48px;">
             <div style="font-weight: 500; font-size: 18px; color: #18181b; margin-bottom: 2px;">{{ $client->name }}</div>
-            <div style="font-size: 16px; color: #71717A;">81358 Mauricio Parkways</div>
-            <div style="font-size: 16px; color: #71717A;">Candelariotown, NH 33648-0812</div>
+            <div style="font-size: 16px; color: #71717A;">{{ $client->street_address }},</div>
+            <div style="font-size: 16px; color: #71717A;">{{ $client->city }}, {{ $client->zip_code }} {{ $client->country }}</div>
             <div style="font-size: 16px; color: #71717A;">VAT ID: {{ $client->vat_in }}</div>
             <div style="font-size: 16px; color: #71717A;">MB: {{ $client->company_identifier }}</div>
         </div>

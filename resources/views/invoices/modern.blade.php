@@ -114,13 +114,13 @@
             </div>
             <div>
                 <div style="font-weight: 600; color: #18181b;">
-                    2 Court Square
+                    {{ $client->street_address }}
                 </div>
                 <div style="font-weight: 600; color: #18181b;">
-                    New York, NY 12210
+                    {{ $client->city }} {{ $client->zip_code }}
                 </div>
                 <div style="font-weight: 600; color: #18181b;">
-                    United States
+                    {{ $client->country }}
                 </div>
             </div>
         </div>
