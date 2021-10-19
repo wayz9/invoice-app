@@ -91,8 +91,8 @@
             <div style="font-weight: 500; font-size: 18px; color: #18181b; margin-bottom: 2px;">{{ $client->name }}</div>
             <div style="font-size: 16px; color: #71717A;">{{ $client->street_address }},</div>
             <div style="font-size: 16px; color: #71717A;">{{ $client->city }}, {{ $client->zip_code }} {{ $client->country }}</div>
-            <div style="font-size: 16px; color: #71717A;">VAT ID: {{ $client->vat_in }}</div>
-            <div style="font-size: 16px; color: #71717A;">MB: {{ $client->company_identifier }}</div>
+            <div style="font-size: 16px; color: #71717A;">VAT ID: {{ $client->vat_in ?? 'None found' }}</div>
+            <div style="font-size: 16px; color: #71717A;">MB: {{ $client->company_identifier ?? 'None found' }}</div>
         </div>
         <div class="inline-block text-right" style="width: 49%; vertical-align: top; margin-top: -31px;">
             <div style="font-weight: 500; font-size: 18px; color: #18181b; margin-bottom: 2px;">{{ auth()->user()->name }}</div>

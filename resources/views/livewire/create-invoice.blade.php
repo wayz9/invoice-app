@@ -42,7 +42,7 @@
             <div>
                 <div class="flex flex-col gap-y-1.5">
                     <x-label>Due Date</x-label>
-                    <x-date-picker wire:model.defer="issue_date" />
+                    <x-date-picker wire:model.defer="due_date" />
                 </div>
                 <x-validation-message name="due_date" />
             </div>

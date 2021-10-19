@@ -112,39 +112,47 @@
         </div>
     </div>
 
-    <x-modal name="deleteModal">
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-                <div
-                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                </div>
-                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 class="text-lg leading-6 font-medium text-zinc-900" id="modal-title">
-                        Delete Client
-                    </h3>
-                    <div class="mt-2">
-                        <p class="text-sm text-zinc-500">
-                            Are you sure you want to delete this client? All of your invoices will be permanently
-                            deleted.
-                        </p>
-                    </div>
-                </div>
+    <x-modal name="deleteModal" class="!max-w-md">
+        <div class="py-9 px-10 flex flex-col items-center relative">
+            <span class="text-red-900 dark:text-red-400 mb-7">
+                <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 60 60">
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="m5.964 22.566 3.622 30.9A4 4 0 0 0 13.559 57h24.886a3.999 3.999 0 0 0 3.972-3.531L46.2 21H14.4" />
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="m46.634 7.033-43.002 8a2 2 0 0 0-1.593 2.364l1.078 5.697 46.937-8.71-1.091-5.763a1.999 1.999 0 0 0-2.329-1.588Z" />
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="m33.87 9.408-.906-4.787a2 2 0 0 0-2.332-1.587l-12 2a1.999 1.999 0 0 0-1.593 2.363l.94 4.967" />
+                    <path fill="currentColor" d="M9 17H7v2h2v-2ZM13 16h-2v2h2v-2ZM17 15h-2v2h2v-2Z" />
+                    <path stroke="currentColor" stroke-miterlimit="10" stroke-width="2"
+                        d="M26 27v25M33.352 45.831l1.63-18.752M32.827 51.867l.323-3.72M18.648 45.831l-1.63-18.752M19.172 51.867l-.323-3.72M52.357 17.434l6.331-2.876M52.463 20.469 56.6 24.6" />
+                </svg>
+            </span>
+            <h1 class="mb-2.5 text-2xl font-bold text-zinc-900 dark:text-zinc-100 text-center">Are you sure?</h1>
+            <p class="mb-9 font-medium text-zinc-600 dark:text-zinc-400 text-center">This action is permanent, all
+                invoices<br>connected to this client will be removed.
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <button x-on:click="deleteModal = false"
+                    class="px-4 py-2.5 bg-transparent dark:focus:ring-offset-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-300">
+                    <span class="text-sm font-semibold text-zinc-600 dark:text-zinc-300">Cancel</span>
+                </button>
+                <button type="button" wire:click="delete()"
+                    class="px-4 py-2.5 bg-red-600 dark:bg-zinc-700/60 dark:focus:ring-offset-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700">
+                    <span class="text-sm font-semibold text-red-100 dark:text-red-400">Delete</span>
+                </button>
             </div>
-        </div>
-        <div class="bg-zinc-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button wire:click="delete()" type="button"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-                Delete
-            </button>
-            <button @click="deleteModal = false" type="button"
-                class="mt-3 w-full inline-flex justify-center rounded-md border border-zinc-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-zinc-700 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                Cancel
-            </button>
+            <div class="absolute top-8 right-8">
+                <button type="button" x-on:click="deleteModal = false" class="dark:text-zinc-300 text-zinc-800">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                            clip-rule="evenodd" />
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </x-modal>
 
