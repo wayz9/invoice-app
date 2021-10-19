@@ -71,9 +71,7 @@
     <form wire:submit.prevent="update">
         <div class="mb-7 flex flex-col gap-y-1.5">
             <label for="name" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Invoice Name</label>
-            <input type="text" wire:model.defer="name"
-                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 dark:ring-zinc-600/5 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 text-base font-medium text-zinc-900 dark:text-zinc-100 dark:bg-zinc-700/30"
-                required>
+            <x-input required wire:model.defer="name" />
             <x-validation-message name="name" />
         </div>
         <div class="mb-7 grid grid-cols-2 gap-5">
@@ -183,10 +181,9 @@
                 <button type="button" class="text-sm font-medium text-zinc-600 dark:text-zinc-300 focus:outline-none">
                     Save as Draft
                 </button>
-                <button type="submit"
-                    class="px-4 py-2.5 bg-lime-700 dark:bg-zinc-700/60 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 focus:ring-lime-700">
-                    <span class="text-sm font-semibold text-lime-100 dark:text-lime-400">Save Invoice</span>
-                </button>
+                <x-button type="submit">
+                    Save Invoice
+                </x-button>
             </div>
         </div>
     </form>

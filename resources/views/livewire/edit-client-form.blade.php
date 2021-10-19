@@ -23,40 +23,29 @@
                 <div class="space-y-7">
                     <div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="name" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Client
-                                name</label>
-                            <input type="text" wire:model.defer="client.name"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 text-base font-medium text-zinc-900 dark:text-zinc-100 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30"
-                                required>
+                            <x-label>Client Name</x-label>
+                            <x-input wire:model.defer="client.name" />
                         </div>
                         <x-validation-message name="client.name" />
                     </div>
                     <div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="email" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Email
-                                address</label>
-                            <input type="text" wire:model.defer="client.email"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100"
-                                required>
+                            <x-label>Email Address</x-label>
+                            <x-input wire:model.defer="client.email" />
                         </div>
                         <x-validation-message name="client.email" />
                     </div>
                     <div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="vat_in" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Tax Number
-                                (VAT)</label>
-                            <input type="text" wire:model.defer="client.vat_in"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100">
+                            <x-label>Tax Number (VAT)</x-label>
+                            <x-input wire:model.defer="client.vat_in" />
                         </div>
                         <x-validation-message name="client.vat_in" />
                     </div>
                     <div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="company_identifier"
-                                class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Matični broj
-                                (MB)</label>
-                            <input type="text" wire:model.defer="client.company_identifier"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100">
+                            <x-label>Matični broj (MB)</x-label>
+                            <x-input wire:model.defer="client.company_identifier" />
                         </div>
                         <x-validation-message name="client.company_identifier" />
                     </div>
@@ -67,46 +56,32 @@
                 <div class="space-y-7">
                     <div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="street_address"
-                                class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Street Address</label>
-                            <input type="text" wire:model.defer="client.street_address"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100"
-                                required>
+                            <x-label>Street Address</x-label>
+                            <x-input wire:model.defer="client.street_address" />
                         </div>
                         <x-validation-message name="client.street_address" />
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="city"
-                                class="text-sm font-medium text-zinc-600 dark:text-zinc-400">City</label>
-                            <input type="text" wire:model.defer="client.city"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100"
-                                required>
+                            <x-label>City</x-label>
+                            <x-input wire:model.defer="client.city" />
                         </div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="zip_code" class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Zip
-                                Code</label>
-                            <input type="text" wire:model.defer="client.zip_code"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100"
-                                required>
+                            <x-label>Zip Code</x-label>
+                            <x-input wire:model.defer="client.zip_code" />
                         </div>
                     </div>
                     <div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="country"
-                                class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Country</label>
-                            <input type="text" wire:model.defer="client.country"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100"
-                                required>
+                            <x-label>Country</x-label>
+                            <x-input wire:model.defer="client.country" />
                         </div>
                         <x-validation-message name="client.country" />
                     </div>
                     <div>
                         <div class="flex flex-col gap-y-1.5">
-                            <label for="contact_number"
-                                class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Contact phone</label>
-                            <input type="text" wire:model.defer="client.contact_number"
-                                class="block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100">
+                            <x-label>Contact phone</x-label>
+                            <x-input wire:model.defer="client.contact_number" />
                         </div>
                         <x-validation-message name="client.contact_number" />
                     </div>
@@ -114,10 +89,9 @@
             </div>
         </div>
         <div class="flex justify-end">
-            <button type="submit"
-                class="px-4 py-2.5 bg-lime-700 dark:bg-zinc-700/60 dark:focus:ring-offset-zinc-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-700">
-                <span class="text-sm font-semibold text-lime-100 dark:text-lime-400">Save Changes</span>
-            </button>
+            <x-button type="submit">
+                Save Changes
+            </x-button>
         </div>
     </form>
 </x-modal>

@@ -8,6 +8,7 @@
     <title>Invoice App - {{ $heading ?? '' }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	<link rel="icon" type="image/png" sizes="36x36" href="{{ asset('favicon.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     @livewireStyles

@@ -22,7 +22,7 @@
             <div class="text-sm font-medium text-zinc-600 dark:text-zinc-300">Clients</div>
             <div class="flex items-center gap-2.5">
                 <span class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">26</span>
-                <div class="pl-1 flex items-center bg-lime-50 dark:bg-zinc-700/25 dark:text-lime-400 rounded">
+                <div class="pl-1 flex items-center bg-lime-50 dark:bg-zinc-700/25 text-lime-600 dark:text-lime-400 rounded">
                     <span class="text-xs font-semibold leading-5">
                         15
                     </span>
