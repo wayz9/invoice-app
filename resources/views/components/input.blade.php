@@ -1,3 +1,3 @@
 @props(['type' => 'text'])
 
-<input type="{{ $type }}" {{ $attributes->merge(['class' => 'py-2.5 px-4 rounded-lg text-sm bg-gray-200/50 focus:bg-gray-200 focus:outline-none border-none focus:ring-0 placeholder-gray-600']) }}>
+<input type="{{ $type }}" {{ $attributes->merge(['class' => 'block w-full py-2 px-4 rounded-md ring-1 ring-inset ring-zinc-200 focus:outline-none focus:ring-zinc-400 dark:focus:ring-zinc-600/50 dark:ring-zinc-600/5 dark:bg-zinc-700/30 text-base font-medium text-zinc-900 dark:text-zinc-100']) }}>

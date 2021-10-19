@@ -28,7 +28,10 @@ class ClientFactory extends Factory
             'company_identifier' => $this->faker->randomNumber(8),
             'email' => $this->faker->email,
             'vat_in' => $this->faker->randomNumber(9),
-            'address_line1' => $this->faker->address,
+            'street_address' => $this->faker->streetAddress,
+            'city' => $this->faker->city,
+            'zip_code' => $this->faker->postcode,
+            'country' => $this->faker->country,
             'contact_number' => $this->faker->phoneNumber
         ];
     }

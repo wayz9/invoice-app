@@ -1,28 +1,28 @@
 <div x-data="{createNewInvoice : @entangle('createInvoiceModal')}">
     <div class="mb-12 grid grid-cols-3 gap-6">
-        <div class="py-5 px-6 flex items-start gap-x-9 bg-white rounded-lg ring-1 ring-inset ring-zinc-50">
+        <div class="py-5 px-6 flex items-start gap-x-9 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
             <div>
-                <div class="mb-2.5 text-xs font-medium uppercase text-zinc-600">Total Received</div>
+                <div class="mb-2.5 text-xs font-medium uppercase text-zinc-600 dark:text-zinc-300">Total Received</div>
                 <div class="mb-5 flex items-center gap-1.5">
-                    <span class="text-xl font-medium text-zinc-600">$</span>
-                    <span class="text-4xl font-bold text-zinc-900">{{ to_money($client->total_income) }}</span>
+                    <span class="text-xl font-medium text-zinc-600 dark:text-zinc-400">$</span>
+                    <span class="text-4xl font-bold text-zinc-900 dark:text-zinc-50">{{ to_money($client->total_income) }}</span>
                 </div>
-                <span class="whitespace-nowrap px-2 py-0.5 text-sm font-medium bg-lime-50 text-lime-700 rounded-full">
+                <span class="whitespace-nowrap px-2 py-0.5 text-sm font-medium bg-lime-50 dark:bg-zinc-700/50 text-lime-700 dark:text-lime-400 rounded-full">
                     +10% from last month
                 </span>
             </div>
             <div class="space-y-5">
                 <dl>
-                    <dd class="mb-1 text-sm font-medium leading-4 text-yellow-500">Pending</dd>
-                    <dt class="text-base font-semibold text-zinc-800">$10,059.90</dt>
+                    <dd class="mb-1 text-sm font-medium leading-4 text-yellow-500 dark:text-yellow-400">Pending</dd>
+                    <dt class="text-base font-semibold text-zinc-800 dark:text-zinc-200">$10,059.90</dt>
                 </dl>
                 <dl>
-                    <dd class="mb-1 text-sm font-medium leading-4 text-zinc-400">In Draft</dd>
-                    <dt class="text-base font-semibold text-zinc-800">$4,215.90</dt>
+                    <dd class="mb-1 text-sm font-medium leading-4 text-zinc-400 dark:text-zinc-300">In Draft</dd>
+                    <dt class="text-base font-semibold text-zinc-800 dark:text-zinc-200">$4,215.90</dt>
                 </dl>
             </div>
         </div>
-        <div class="py-5 px-6 bg-white rounded-lg ring-1 ring-inset ring-zinc-50">
+        <div class="py-5 px-6 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
             <div class="mb-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <span class="inline-flex p-1 rounded-full bg-zinc-900 text-lime-400">
@@ -31,11 +31,11 @@
                                 d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
                         </svg>
                     </span>
-                    <span class="text-base font-semibold text-zinc-800"><span
-                            class="text-zinc-400">quickpay.me/</span>vukasin</span>
+                    <span class="text-base font-semibold text-zinc-800 dark:text-zinc-50"><span
+                            class="text-zinc-400 dark:text-zinc-300">quickpay.me/</span>vukasin</span>
                 </div>
                 <div class="flex-shrink-0 flex items-center gap-5">
-                    <button type="button" class="focus:outline-none text-zinc-600">
+                    <button type="button" class="focus:outline-none text-zinc-600 dark:text-zinc-400">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                             <path
                                 d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -43,7 +43,7 @@
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                         </svg>
                     </button>
-                    <button type="button" class="focus:outline-none text-zinc-600">
+                    <button type="button" class="focus:outline-none text-zinc-600 dark:text-zinc-400">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5" viewBox="0 0 16 16">
                             <path
                                 d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
@@ -53,37 +53,37 @@
                     </button>
                 </div>
             </div>
-            <div class="bg-lime-50/50 py-1.5 px-2.5">
-                <p class="mb-3 text-zinc-500 text-sm font-medium">Quickpay let’s you receive payments on the
+            <div class="bg-lime-50/50 dark:bg-zinc-700/25 py-1.5 px-2.5 rounded">
+                <p class="mb-3 text-zinc-500 dark:text-zinc-300 text-sm font-medium">Quickpay let’s you receive payments on the
                     fly,
                     generate a link and you are good to go!</p>
-                <a href="#" class="text-xs font-semibold uppercase text-lime-600">Learn More</a>
+                <a href="#" class="text-xs font-semibold uppercase text-lime-600 dark:text-lime-400">Learn More</a>
             </div>
         </div>
     </div>
     <section>
         <div class="mb-6 flex items-center justify-between">
             <div>
-                <h2 class="text-lg font-semibold text-zinc-900">Invoices</h2>
-                <div class="text-sm font-medium text-zinc-600">List of all of your invoices </div>
+                <h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Invoices</h2>
+                <div class="text-sm font-medium text-zinc-600 dark:text-zinc-400">List of all of your invoices </div>
             </div>
             <button x-on:click="createNewInvoice = true" type="button"
-                class="px-4 py-2.5 inline-flex items-center gap-2 bg-lime-700 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-700">
+                class="px-4 py-2.5 inline-flex items-center gap-2 bg-lime-700 dark:bg-zinc-800/50 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 focus:ring-lime-700">
                 <span class="inline-flex -ml-1">
-                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
-                        <path fill="#ECFCCB"
+                    <svg class="w-4 h-4 text-lime-100 dark:text-lime-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+                        <path fill="currentColor"
                             d="M8 3a.625.625 0 0 1 .625.625v3.75h3.75a.625.625 0 1 1 0 1.25h-3.75v3.75a.625.625 0 1 1-1.25 0v-3.75h-3.75a.625.625 0 0 1 0-1.25h3.75v-3.75A.625.625 0 0 1 8 3Z" />
                     </svg>
                 </span>
-                <span class="text-sm font-semibold text-lime-100">Create Invoice</span>
+                <span class="text-sm font-semibold text-lime-100 dark:text-lime-400">Create Invoice</span>
             </button>
         </div>
         <div class="mb-8 flex items-center justify-between">
             <div class="relative max-w-xs w-full">
                 <input type="text" wire:model.debounce.500ms="search"
-                    class="w-full block py-2.5 pl-[42px] pr-3.5 text-sm font-medium placeholder-zinc-500 text-zinc-900 focus:outline-none focus:ring-zinc-200 rounded-md ring-1 ring-inset ring-zinc-50"
+                    class="w-full block py-2.5 pl-[42px] pr-3.5 text-sm font-medium placeholder-zinc-500 dark:placeholder-zinc-400 text-zinc-900 dark:text-zinc-50 focus:outline-none focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-md ring-1 ring-inset ring-zinc-50 dark:ring-zinc-700/25 dark:bg-zinc-800/50"
                     placeholder="Search an Invoice" autocomplete="off">
-                <div class="absolute inset-y-0 left-3.5 flex items-center justify-center text-zinc-600">
+                <div class="absolute inset-y-0 left-3.5 flex items-center justify-center text-zinc-600 dark:text-zinc-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                         viewBox="0 0 16 16">
                         <path
@@ -101,7 +101,7 @@
                 </div>
             </div>
             <select wire:model="filterBy"
-                class="py-2.5 pl-3.5 text-sm font-medium text-zinc-900 focus:outline-none focus:ring-zinc-200 rounded-md ring-1 ring-inset ring-zinc-50">
+                class="py-2.5 pl-3.5 text-sm font-medium text-zinc-900 dark:text-zinc-50 focus:outline-none focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-md ring-1 ring-inset ring-zinc-50 dark:ring-zinc-700/25 dark:bg-zinc-800/50">
                 <option value="">Show All</option>
                 <option value="active">Active</option>
                 <option value="paid">Paid</option>
@@ -111,16 +111,16 @@
         </div>
         <ul class="mb-8 grid gap-y-6">
             @forelse ($invoices as $invoice)
-            @livewire('invoice-entry', ['invoice' => $invoice, 'email' => $client->email], key($invoice->id))
+            @livewire('invoice-entry', ['invoice' => $invoice, 'email' => $client->email], key("invoice-key-{$invoice->id}"))
             @empty
             <div class="py-24 flex flex-col items-center justify-center text-center">
                 <div class="mb-14">
                     <img src="{{ asset('svg/undraw_email_capmpaign.svg') }}"
                         alt="Email Campaign Placeholder for Empty Search..." class="h-52">
                 </div>
-                <h3 class="mb-4 text-xl font-semibold text-zinc-800">There is nothing here</h3>
-                <p class="text-sm font-medium text-zinc-600">Create an invoice by clicking the<br><span
-                        class="font-semibold text-zinc-900">Create Invoice</span> button above
+                <h3 class="mb-4 text-xl font-semibold text-zinc-800 dark:text-zinc-100">There is nothing here</h3>
+                <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Create an invoice by clicking the<br><span
+                        class="font-semibold text-zinc-900 dark:text-zinc-100">Create Invoice</span> button above
                 </p>
             </div>
             @endforelse

@@ -16,6 +16,8 @@ use Tests\TestCase;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use function PHPUnit\Framework\isEmpty;
+
 class InvoiceLivewireTest extends TestCase
 {
     /** @test */
@@ -134,17 +136,23 @@ class InvoiceLivewireTest extends TestCase
         $invoice = Invoice::factory()->for($client)->create();
         InvoiceItem::factory(5)->for($invoice)->create();
 
-        Mail::fake();
-
         $pdf =  PDF::loadView(
             "invoices.classic",
-            ['invoice' => $invoice,'client' => $client]
+            [
+                'invoice' => $invoice,
+                'client' => $client
+            ]
         )
         ->setPaper([0, 0, 720, 1440])
         ->output();
 
+        Mail::fake();
+
         Mail::send(new InvoicePDF($invoice, $pdf));
-        Mail::assertSent(InvoicePDF::class);
+        Mail::assertSent(InvoicePDF::class, function($mail) {
+            $mail->build();
+            return count($mail->rawAttachments) == 1;
+        });
     }
 
     /** @test */
