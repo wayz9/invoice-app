@@ -27,7 +27,7 @@
             x-transition:leave="ease-in duration-200"
             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            {{ $attributes->merge(['class' => 'inline-block align-bottom text-left bg-white dark:bg-zinc-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full']) }}
+            {{ $attributes->merge(['class' => 'inline-block align-bottom text-left bg-white dark:bg-zinc-900 rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full']) }}
         >
             <div class="bg-white dark:bg-zinc-800/50">
                 {{ $slot }}
