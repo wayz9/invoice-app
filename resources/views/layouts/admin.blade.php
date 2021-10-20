@@ -146,8 +146,8 @@
                                     alt="Profile Picture" class="rounded-md w-10 h-10">
                             </div>
                             <div>
-                                <div class="text-sm font-semibold text-zinc-300">Vukasin Vitorovic</div>
-                                <div class="text-sm text-zinc-400">ventusblade1@gmail.com</div>
+                                <div class="text-sm font-semibold text-zinc-300">{{ auth()->user()->name }}</div>
+                                <div class="text-sm text-zinc-400">{{ auth()->user()->email }}</div>
                             </div>
                         </div>
                         <div x-data="{open : false}" class="relative inline-block">
