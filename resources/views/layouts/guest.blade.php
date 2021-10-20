@@ -1,32 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Aquire - {{ $pageName }}</title>
+    <title>Aquire - {{ $heading }}</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link href="favicon.png" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="icon" type="image/png" sizes="36x36" href="{{ asset('favicon.png') }}">
 
     <!-- Sripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
-<body class="relative antialiased font-sans transition-all text-gray-800 bg-gray-50">
-    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center">
-        <a href="#" class="block my-6 md:my-10 focus:outline-none">
-            <img src="{{ asset('logo-dark-text.svg') }}" alt="Logo Dark Text" class="h-10">
-        </a>
-        <div class="py-8 md:py-[2.875rem] px-6 md:px-[2.625rem] max-w-lg w-full bg-white rounded-xl drop-shadow-custom border border-gray-100">
-            {{ $slot }}
+
+<body class="antialiased">
+    <div class="flex min-h-screen">
+        <div class="w-full xl:w-1/2 flex">
+            <div class="max-w-md w-full flex flex-col mx-auto py-[52px] px-6">
+                <div class="flex-grow">
+                    {{ $slot }}
+                </div>
+                <p class="text-sm font-medium text-zinc-500">&copy;2021 Invoice App - All rights reserved</p>
+            </div>
         </div>
-        <div class="my-6 md:my-9 flex items-center justify-center gap-x-6 text-sm font-medium text-gray-600">
-            <a href="#">Privacy Policy</a>
-            <a href="#">About</a>
-            <a href="#">Terms of Service</a>
+        <div class="w-1/2 hidden xl:flex bg-zinc-900 relative">
+            <div class="absolute top-0 left-0 z-0 select-none">
+                <img src="{{ asset('svg/stairs.svg') }}" alt="Stairs SVG" class="w-60 h-60" draggable="false">
+            </div>
+            <div class="absolute bottom-0 right-0 z-0 select-none">
+                <img src="{{ asset('svg/stairs.svg') }}" alt="Stairs SVG" class="w-60 h-60 transform -rotate-180"
+                    draggable="false">
+            </div>
+            <div class="absolute top-1 right-1 z-0 select-none">
+                <img src="{{ asset('svg/dots.svg') }}" alt="Dots SVG" class="w-64 h-64" draggable="false">
+            </div>
+            <div class="absolute z-10 top-40 inset-x-0 flex items-center justify-center px-12 select-none">
+                <img src="{{ asset('images/widgets.png') }}" alt="Widgets" draggable="false" class="max-h-[332px]">
+            </div>
+            <div class="absolute z-0 top-[310px] left-2 select-none">
+                <img src="{{ asset('svg/arrow.svg') }}" alt="Arrow" draggable="false" class="h-[344px]">
+            </div>
+            <div
+                class="absolute w-20 h-20 top-[108px] left-[307px] rounded-full bg-zinc-800 flex items-center justify-center">
+                <img src="{{ asset('svg/inv-app-vb40.svg') }}" alt="Invoice App SVG" class="w-10 h-10">
+            </div>
+            <div
+                class="absolute w-20 h-20 top-[396px] left-[158px] rounded-full bg-zinc-800 flex items-center justify-center">
+                <img src="{{ asset('svg/inv-app-vb40.svg') }}" alt="Invoice App SVG" class="w-10 h-10">
+            </div>
+            <div
+                class="absolute w-20 h-20 top-[456px] right-[180px] rounded-full bg-zinc-800 flex items-center justify-center">
+                <img src="{{ asset('svg/inv-app-vb40.svg') }}" alt="Invoice App SVG" class="w-10 h-10">
+            </div>
+            <div class="absolute top-[620px] flex flex-col items-center justify-center inset-x-0">
+                <h1 class="mb-7 text-3xl font-bold text-zinc-100 text-center">Turn your ideas<br>into reality</h1>
+                <p class="text-zinc-300 font-medium text-center">Consistent quality and experience across<br>all
+                    platforms and devices.</p>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
