@@ -217,4 +217,13 @@
             </div>
         </div>
     </x-modal>
+
+    <div wire:loading wire:target="download,emailPDFToRecipient" class="fixed inset-0 z-50 w-screen h-screen dark:bg-black/40 bg-black/70">
+        <div class="flex flex-col items-center justify-center text-center h-full">
+            <span class="mb-2 text-zinc-100 text-lg font-semibold">
+                Processing
+            </span>
+            <span class="text-sm font-medium text-zinc-300">Please wait...</span>
+        </div>
+    </div>
 </li>
