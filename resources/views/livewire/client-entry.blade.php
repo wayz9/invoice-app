@@ -41,7 +41,7 @@
                     x-transition:leave-end="transform opacity-0 scale-95" aria-orientation="vertical"
                     aria-labelledby="menu-button" tabindex="-1">
                     <div class="py-1" role="none">
-                        <a href="{{ route('client.show', ['client' => 1]) }}"
+                        <a href="{{ route('client.show', ['client' => $client]) }}"
                             class="text-zinc-700 font-medium hover:bg-zinc-100 hover:text-zinc-900 block px-4 py-2 text-sm dark:hover:bg-zinc-700/25 dark:hover:text-zinc-100 dark:text-zinc-300"
                             role="menuitem" tabindex="-1">View Client</a>
                         <button type="button" x-on:click="options = false; editModal = true"
