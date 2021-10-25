@@ -39,7 +39,7 @@
         flex-shrink: 0;
         height: 1rem;
         width: 1rem;
-        color: #2563eb;
+        color: rgb(101 163 13);
         background-color: #fff;
         border: none;
     }
@@ -113,31 +113,31 @@
 span.flatpickr-day.today:not(.selected),
 span.flatpickr-day.prevMonthDay.today:not(.selected),
 span.flatpickr-day.nextMonthDay.today:not(.selected) {
-    border-bottom-color: #818cf8;
+    border-bottom-color: rgb(101 163 13);
 }
 
 span.flatpickr-day.today:not(.selected):hover,
 span.flatpickr-day.prevMonthDay.today:not(.selected):hover,
 span.flatpickr-day.nextMonthDay.today:not(.selected):hover {
-    @apply border border-solid border-indigo-500;
+    @apply border border-solid border-lime-600;
 }
 
 .flatpickr-day.today {
-    @apply border-indigo-500;
+    @apply border-lime-600;
 }
 
 .flatpickr-day.today:hover,
 .flatpickr-day.today:focus {
-    @apply border-indigo-500 bg-indigo-500;
+    @apply border-lime-600 bg-lime-600;
 }
 
 .flatpickr-months .flatpickr-prev-month:hover,
 .flatpickr-months .flatpickr-next-month:hover {
-    @apply text-indigo-400;
+    @apply text-lime-500;
 }
 .flatpickr-months .flatpickr-prev-month:hover svg,
 .flatpickr-months .flatpickr-next-month:hover svg {
-    fill: rgba(129, 140, 248, 1);
+    fill: rgba(132, 204, 22, 1);
 }
 
 .tippy-box {

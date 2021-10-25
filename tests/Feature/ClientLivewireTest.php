@@ -2,54 +2,102 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\AddClientForm;
-use App\Http\Livewire\ClientEntry;
-use App\Http\Livewire\IndexClient;
-use App\Http\Livewire\ShowClient;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class ClientLivewireTest extends TestCase
 {
     /** @test */
-    public function user_can_see_a_list_of_clients()
+    public function itListsClientsForAuthenticatedUser()
     {
         $user = User::factory()->create();
         Client::factory(5)->for($user)->create();
 
-        $this->actingAs($user);
+        Livewire::actingAs($user)
+            ->test('index-client')
+            ->assertCount('clients', 5);
 
-        Livewire::test(IndexClient::class)->assertCount('clients', 5);
+        $this->assertEquals(0, $user->clients()->first()->invoices_count);
     }
 
     /** @test */
-    public function user_can_view_only_their_clients()
+    public function itLoadsInvoicesWithClient()
     {
         $user = User::factory()->create();
-        $anotherUser = User::factory()->create();
+        $client = Client::factory()->for($user)->create();
 
-        $clients = Client::factory(5)->for($user)->create();
+        Invoice::factory(5)->for($client)->create();
 
-        $this->actingAs($anotherUser);
-        $this->get(route('client.show', $clients->first()))->assertForbidden();
+        Livewire::actingAs($user)
+            ->test('show-client', ['client' => $client])
+            ->assertSet('client', $client)
+            ->assertSet('client.invoices', $client->invoices)
+            ->assertCount('client.invoices', 5);
     }
 
     /** @test */
-    public function user_can_add_new_client()
+    public function itPreventsUserToSeeOtherUsersClients()
     {
         $user = User::factory()->create();
+        $clients = Client::factory(5)->for(User::factory()->create())->create();
 
-        $this->actingAs($user);
-        $this->get(route('client.index'))->assertSeeLivewire('add-client-form');
+        Livewire::actingAs($user);
+        $this->get(route('client.show', $clients->first()))
+            ->assertForbidden();
+    }
 
+    /** @test */
+    public function itFiltersClientsByInvoices()
+    {
+        $user = User::factory()->create();
+        $client = Client::factory()->for($user)->create();
+        Invoice::factory(5)->for($client)->create();
+        Invoice::factory(3)->paid()->for($client)->create();
+        Invoice::factory(3)->draft()->for($client)->create();
+
+        Livewire::actingAs($user)
+            ->test('show-client', ['client' => $client, 'heading' => $client->name])
+            ->set('filterBy', 'active')
+            ->assertViewHas('invoices');
+    }
+
+    /** @test */
+    public function itSearchesClientsByName()
+    {
+        $user = User::factory()->create();
+        $client = Client::factory(3)->for($user)->create();
+        Client::factory(['name' => 'Cool Guy'])->for($user)->create();
+        Invoice::factory(5)->for($client->first())->create();
+
+        Livewire::actingAs($user)
+            ->test('index-client')
+            ->set('search', 'Cool')
+            ->assertSet('search', 'Cool')
+            ->assertCount('clients', 1);
+    }
+
+    /** @test */
+    public function itChecksIfCreateClientModalIsLoaded()
+    {
+        $user = User::factory()->create();
+        Livewire::actingAs($user);
+
+        $this->get(route('client.index'))
+            ->assertSeeLivewire('add-client-form')
+            ->assertOk();
+    }
+
+    /** @test */
+    public function itCreatesNewClient()
+    {
+        $user = User::factory()->create();
         $client = Client::factory()->raw();
 
-        Livewire::test(AddClientForm::class)
+        Livewire::actingAs($user)
+            ->test('add-client-form')
             ->set('name', $client['name'])
             ->set('email', $client['email'])
             ->set('street_address', $client['street_address'])
@@ -60,41 +108,61 @@ class ClientLivewireTest extends TestCase
             ->set('company_identifier', "399735006")
             ->call('create')
             ->assertHasNoErrors()
+            ->assertEmitted('created')
+            ->assertEmitted('closeModal')
             ->assertDispatchedBrowserEvent('toast-success');
 
         $this->assertCount(1, $user->clients);
     }
 
     /** @test */
-    public function test_if_items_are_passed_with_invoice()
+    public function itChecksIfEditClientModalIsLoaded()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
+        Livewire::actingAs($user);
 
         $client = Client::factory()->for($user)->create();
-        Invoice::factory(5)->for($client)->create();
 
-        Livewire::test(ShowClient::class, ['client' => $client])
-            ->assertSet('client', $client)
-            ->assertSet('client.invoices', $client->invoices);
+        $this->get(route('client.index', $client))
+            ->assertSeeLivewire('client-entry')
+            ->assertSeeLivewire('edit-client-form')
+            ->assertOk();
     }
 
     /** @test */
-    public function delete_client_and_it_invoices()
+    public function itEditsTheClient()
     {
         $user = User::factory()->create();
+        $client = Client::factory()->for($user)->create();
 
-        $this->actingAs($user);
+        Livewire::actingAs($user)
+            ->test('edit-client-form', ['client' => $client])
+            ->set('client.name', 'New Name')
+            ->assertSet('client.name', 'New Name')
+            ->call('update')
+            ->assertHasNoErrors()
+            ->assertEmitted('updated')
+            ->assertEmitted('closeEditModal')
+            ->assertDispatchedBrowserEvent('toast-success');
 
+        $client->refresh();
+        $this->assertEquals('New Name', $client->name);
+    }
+
+    /** @test */
+    public function itDeletesClientAndItsInvoices()
+    {
+        $user = User::factory()->create();
         $client = Client::factory()->for($user)->create();
         Invoice::factory(5)->for($client)->create();
 
-        Livewire::test(ClientEntry::class, ['client' => $client])
+        Livewire::actingAs($user)
+            ->test('client-entry', ['client' => $client])
             ->call('delete')
             ->assertEmitted('deleted')
             ->assertDispatchedBrowserEvent('toast-success');
 
         $this->assertEmpty($client->fresh());
+        $this->assertDatabaseCount('invoices', 0);
     }
 }

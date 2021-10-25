@@ -31,4 +31,18 @@ class InvoiceFactory extends Factory
             'status' => Invoice::INVOICE_ACTIVE,
         ];
     }
+
+    public function paid(): Factory
+    {
+        return $this->state([
+            'status' => Invoice::INVOICE_PAID
+        ]);
+    }
+
+    public function draft(): Factory
+    {
+        return $this->state([
+            'status' => Invoice::INVOICE_DRAFT
+        ]);
+    }
 }

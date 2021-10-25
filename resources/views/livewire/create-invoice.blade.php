@@ -21,28 +21,28 @@
             <div>
                 <div class="flex flex-col gap-y-1.5">
                     <x-label>Invoice name</x-label>
-                    <x-input wire:model.defer="name" />
+                    <x-input wire:model.defer="name" required />
                 </div>
                 <x-validation-message name="name" />
             </div>
             <div>
                 <div class="flex flex-col gap-y-1.5">
                     <x-label>#- Invoice number</x-label>
-                    <x-input wire:model.defer="invoice_number" />
+                    <x-input wire:model.defer="invoice_number" required />
                 </div>
                 <x-validation-message name="invoice_number" />
             </div>
             <div>
                 <div class="flex flex-col gap-y-1.5">
                     <x-label>Issue Date</x-label>
-                    <x-date-picker wire:model.defer="issue_date" />
+                    <x-date-picker wire:model.defer="issue_date" required />
                 </div>
                 <x-validation-message name="issue_date" />
             </div>
             <div>
                 <div class="flex flex-col gap-y-1.5">
                     <x-label>Due Date</x-label>
-                    <x-date-picker wire:model.defer="due_date" />
+                    <x-date-picker wire:model.defer="due_date" required />
                 </div>
                 <x-validation-message name="due_date" />
             </div>

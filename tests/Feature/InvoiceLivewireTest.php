@@ -2,9 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\CreateInvoice;
-use App\Http\Livewire\InvoiceEditModal;
-use App\Http\Livewire\InvoiceEntry;
 use App\Mail\InvoicePDF;
 use App\Models\Client;
 use App\Models\Invoice;
@@ -14,35 +11,70 @@ use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Tests\TestCase;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use function PHPUnit\Framework\isEmpty;
 
 class InvoiceLivewireTest extends TestCase
 {
     /** @test */
-    public function check_if_create_invoice_modal_is_present()
+    public function itChecksIfCreateModalIsLoaded()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
+        Livewire::actingAs($user);
 
         $this->get(route('client.show', $client))
-            ->assertSeeLivewire('create-invoice')
-            ->assertOk();
+            ->assertOk()
+            ->assertSeeLivewire('create-invoice');
     }
 
-
     /** @test */
-    public function create_new_invoice_for_client()
+    public function itFiltersInvoices()
     {
         $user = User::factory()->create();
+        $client = Client::factory(3)->for($user)->create();
+        Invoice::factory(5)->for($client->first())->create();
 
-        $this->actingAs($user);
-        $client = Client::factory()->for($user)->create();
+        Livewire::actingAs($user)
+            ->test('index-client')
+            ->set('filterBy', 'with')
+            ->assertSet('filterBy', 'with')
+            ->assertCount('clients', 1);
+    }
 
-        Livewire::test(CreateInvoice::class, ['client' => $client])
+    /** @test */
+    public function itPreventsFromCreatingInvoiceWithDueDateGreaterThanIssueDate()
+    {
+        Livewire::actingAs($user = User::factory()->create())
+            ->test('create-invoice', ['client' => Client::factory()->for($user)->create()])
+            ->set('name', 'Bad Invoice')
+            ->set('invoice_number', "69291029")
+            ->set('issue_date', now()->subDays(4)->format('Y-m-d'))
+            ->set('due_date', now()->subDays(10)->format('Y-m-d'))
+            ->call('create')
+            ->assertHasErrors('due_date');
+
+        $this->assertDatabaseCount('invoices', 0);
+    }
+
+    /** @test */
+    public function itPreventsFromCreatingInvoiceWithIssueDateInPast()
+    {
+        Livewire::actingAs($user = User::factory()->create())
+            ->test('create-invoice', ['client' => Client::factory()->for($user)->create()])
+            ->set('name', 'Bad Invoice')
+            ->set('invoice_number', "69291029")
+            ->set('issue_date', now()->subDay()->format('Y-m-d'))
+            ->set('due_date', now()->addDay(5)->format('Y-m-d'))
+            ->call('create')
+            ->assertHasErrors('issue_date');
+
+        $this->assertDatabaseCount('invoices', 0);
+    }
+
+    /** @test */
+    public function itCreatesNewInvoiceForTheClient()
+    {
+        Livewire::actingAs($user = User::factory()->create())
+            ->test('create-invoice', ['client' => Client::factory()->for($user)->create()])
             ->set('name', 'Cool Invoice Name')
             ->set('invoice_number', '501029501')
             ->set('issue_date', now()->addDay()->format('Y-m-d'))
@@ -51,50 +83,46 @@ class InvoiceLivewireTest extends TestCase
             ->assertHasNoErrors()
             ->assertEmitted('created')
             ->assertEmitted('closeModal')
-            ->assertDispatchedBrowserEvent('toast-success');
-
-        $this->assertCount(1, $client->invoices);
+            ->assertDispatchedBrowserEvent('toast-success')
+            ->assertCount('client.invoices', 1);
     }
 
-
     /** @test */
-    public function check_if_edit_invoice_is_present_and_invoice_is_passed_to_it()
+    public function itChecksIfInvocieIsLoadedWithItemsAndItsPassedToEditSlideOver()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
-
         $invoice = Invoice::factory()->for($client)->create();
-        InvoiceItem::factory(5)->for($invoice)->create();
 
+        InvoiceItem::factory(5)->for($invoice)->create();
         $invoice->load('items');
 
-        Livewire::test(InvoiceEntry::class, ['invoice' => $invoice, 'email' => $client->email])
+        Livewire::actingAs($user)
+            ->test('invoice-entry', ['invoice' => $invoice, 'email' => $client->email])
             ->assertSet('email', $client->email)
             ->assertSet('invoice', $invoice)
-            ->assertSet('invoice.items', $invoice->items);
+            ->assertSet('invoice.items', $invoice->items)
+            ->assertCount('invoice.items', 5);
 
-        Livewire::test(InvoiceEditModal::class, ['invoice' => $invoice])
+        Livewire::actingAs($user)
+            ->test('invoice-edit-modal', ['invoice' => $invoice])
             ->assertSet('invoice', $invoice)
             ->assertSet('invoice.items', $invoice->items);
     }
 
     /** @test */
-    public function deletes_an_invoice()
+    public function itDeletesAnInvoiceWithItems()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
-
         $invoice = Invoice::factory()->for($client)->create();
-        InvoiceItem::factory(5)->for($invoice)->create();
 
+        InvoiceItem::factory(5)->for($invoice)->create();
         $client->load('invoices');
         $invoice->load('items');
 
-        Livewire::test(InvoiceEntry::class, ['invoice' => $invoice, 'email' => $client->email])
+        Livewire::actingAs($user)
+            ->test('invoice-entry', ['invoice' => $invoice, 'email' => $client->email])
             ->assertSet('email', $client->email)
             ->assertSet('invoice', $invoice)
             ->assertSet('invoice.items', $invoice->items)
@@ -102,35 +130,37 @@ class InvoiceLivewireTest extends TestCase
             ->assertEmitted('deleted')
             ->assertDispatchedBrowserEvent('toast-success');
 
-        $this->assertCount(0, $client->refresh()->invoices);
+        $client->refresh();
+
+        $this->assertCount(0, $client->invoices);
+        $this->assertDatabaseCount('invoice_items', 0);
     }
 
-
     /** @test */
-    public function marks_an_invoice_as_paid()
+    public function itMarksAnInvoiceAsPaid()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
 
         $invoice = Invoice::factory()->for($client)->create();
         InvoiceItem::factory(5)->for($invoice)->create();
 
-        Livewire::test(InvoiceEntry::class, ['invoice' => $invoice, 'email' => $client->email])
+        Livewire::actingAs($user)
+            ->test('invoice-entry', ['invoice' => $invoice, 'email' => $client->email])
             ->call('markAsPaid')
             ->assertEmitted('updated')
             ->assertDispatchedBrowserEvent('toast-success');
 
-        $this->assertTrue($invoice->refresh()->is_paid);
+        $invoice->refresh();
+        $this->assertTrue($invoice->is_paid);
     }
 
     /** @test */
-    public function email_a_classic_pdf_to_recipient()
+    public function itEmailsAnPdfToClient()
     {
+        Mail::fake();
         $user = User::factory()->create();
-
-        $this->actingAs($user);
+        Livewire::actingAs($user);
         $client = Client::factory()->for($user)->create();
 
         $invoice = Invoice::factory()->for($client)->create();
@@ -146,8 +176,6 @@ class InvoiceLivewireTest extends TestCase
         ->setPaper([0, 0, 720, 1440])
         ->output();
 
-        Mail::fake();
-
         Mail::send(new InvoicePDF($invoice, $pdf));
         Mail::assertSent(InvoicePDF::class, function($mail) {
             $mail->build();
@@ -156,85 +184,85 @@ class InvoiceLivewireTest extends TestCase
     }
 
     /** @test */
-    public function a_pdf_file_can_be_downloaded()
+    public function itDownloadsPdfFile()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
 
         $invoice = Invoice::factory()->for($client)->create();
         InvoiceItem::factory(5)->for($invoice)->create();
 
-        Livewire::test(InvoiceEntry::class, ['invoice' => $invoice, 'email' => $client->email])
+        Livewire::actingAs($user)
+            ->test('invoice-entry', ['invoice' => $invoice, 'email' => $client->email])
             ->call('download')
             ->assertFileDownloaded($invoice->file_name);
     }
 
     /** @test */
-    public function deletes_a_single_invoice_item()
+    public function itDeletesSingleInvoiceItem()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
 
         $invoice = Invoice::factory()->for($client)->create();
         InvoiceItem::factory(5)->for($invoice)->create();
         $invoice->load('items');
 
-        Livewire::test(InvoiceEditModal::class, ['invoice' => $invoice, 'email' => $client->email])
+        Livewire::actingAs($user)
+            ->test('invoice-edit-modal', ['invoice' => $invoice, 'email' => $client->email])
             ->assertSet('items', $invoice->items->toArray())
             ->call('removeInvoiceItem', 1)
             ->assertCount('items', 4);
 
-        $this->assertCount(4, $invoice->refresh()->items);
+        $invoice->refresh();
+        $this->assertCount(4, $invoice->items);
     }
 
     /** @test */
-    public function add_empty_fieldset_to_form()
+    public function itAddsEmptyRowToItemsArray()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
 
         $invoice = Invoice::factory()->for($client)->create();
         InvoiceItem::factory(5)->for($invoice)->create();
         $invoice->load('items');
 
-        Livewire::test(InvoiceEditModal::class, ['invoice' => $invoice, 'email' => $client->email])
+        Livewire::actingAs($user)
+            ->test('invoice-edit-modal', ['invoice' => $invoice, 'email' => $client->email])
             ->assertSet('items', $invoice->items->toArray())
             ->call('addInvoiceItem')
             ->assertCount('items', 6);
 
-        $this->assertCount(5, $invoice->refresh()->items);
+        $invoice->refresh();
+        $this->assertCount(5, $invoice->items);
     }
 
     /** @test */
-    public function add_a_new_item_to_invoice()
+    public function itAddsNewItemToInvoice()
     {
         $user = User::factory()->create();
-
-        $this->actingAs($user);
         $client = Client::factory()->for($user)->create();
 
         $invoice = Invoice::factory()->for($client)->create();
         InvoiceItem::factory(5)->for($invoice)->create();
         $invoice->load('items');
 
-        Livewire::test(InvoiceEditModal::class, ['invoice' => $invoice, 'email' => $client->email])
+        Livewire::actingAs($user)
+            ->test('invoice-edit-modal', ['invoice' => $invoice, 'email' => $client->email])
             ->assertSet('items', $invoice->items->toArray())
             ->set('items.5.id', null)
             ->set('items.5.title', 'New cool title added')
             ->set('items.5.qty', 6)
             ->set('items.5.price', 1000)
+            ->assertSet('items.5.title', 'New cool title added')
             ->call('update')
             ->assertHasNoErrors()
             ->assertEmitted('closeModal')
             ->assertEmitted('updated')
             ->assertDispatchedBrowserEvent('toast-success');
 
-        $this->assertCount(6, $invoice->refresh()->items);
+        $invoice->refresh();
+        $this->assertCount(6, $invoice->items);
     }
 }
