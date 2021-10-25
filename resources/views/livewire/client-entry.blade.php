@@ -71,7 +71,7 @@
             </button>
         </div>
     </div>
-    <div x-show="open" x-collapse class="flex flex-col">
+    <div x-show="open" x-collapse class="flex flex-col rounded-b-lg">
         <div class="grid grid-cols-2 py-6 gap-5 bg-white dark:bg-zinc-800/60">
             <div class="px-[4.5rem] flex flex-col gap-y-8">
                 <div>

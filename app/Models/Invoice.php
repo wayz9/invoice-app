@@ -40,26 +40,33 @@ class Invoice extends Model
 
     public function getIsPaidAttribute(): bool
     {
-        return $this->status == Invoice::INVOICE_PAID ? true : false;
+        return $this->status == self::INVOICE_PAID
+            ? true
+            : false;
     }
 
     public function getIsDraftAttribute(): bool
     {
-        return $this->status == Invoice::INVOICE_DRAFT ? true : false;
+        return $this->status == self::INVOICE_DRAFT
+            ? true
+            : false;
     }
 
     public function getIsOverdueAttribute(): bool
     {
-        return ($this->due_date->isPast() && $this->status != self::INVOICE_PAID) ? true : false;
+        return ($this->due_date->isPast() && $this->status != self::INVOICE_PAID)
+            ? true
+            : false;
     }
 
     public function subtotal(): string
     {
-        return $this->items->sum(fn($item) => $item->total);
+        return $this->items->sum(fn(InvoiceItem $item) => $item->total);
     }
 
     public function scopeActiveInvoice(Builder $builder): Builder
     {
-        return $builder->whereRaw('"'.now()->format('Y-m-d').'" between `issue_date` and `due_date`')->where('status', '!=', self::INVOICE_PAID);
+        return $builder->whereRaw('"'.now()->format('Y-m-d').'" between `issue_date` and `due_date`')
+            ->where('status', '!=', self::INVOICE_PAID);
     }
 }

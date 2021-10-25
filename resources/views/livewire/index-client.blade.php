@@ -21,7 +21,7 @@
         <div class="py-3.5 px-4 space-y-1.5 rounded-lg bg-white dark:ring-zinc-800/60 ring-1 ring-inset ring-zinc-50 dark:bg-zinc-800/60">
             <div class="text-sm font-medium text-zinc-600 dark:text-zinc-300">Clients</div>
             <div class="flex items-center gap-2.5">
-                <span class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">26</span>
+                <span class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{{ auth()->user()->clients()->count() }}</span>
                 <div class="pl-1 flex items-center bg-lime-50 dark:bg-zinc-700/25 text-lime-600 dark:text-lime-400 rounded">
                     <span class="text-xs font-semibold leading-5">
                         15

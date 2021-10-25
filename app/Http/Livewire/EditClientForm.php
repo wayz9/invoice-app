@@ -3,10 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Client;
+use App\Traits\ToastResponse;
 use Livewire\Component;
 
 class EditClientForm extends Component
 {
+    use ToastResponse;
+
     public Client $client;
 
     protected $rules = [
@@ -17,8 +20,8 @@ class EditClientForm extends Component
         'client.zip_code' => ['required', 'string'],
         'client.country' => ['required', 'string'],
         'client.contact_number' => ['nullable', 'string'],
-        'client.vat_in' => ['required', 'string', 'max:9'],
-        'client.company_identifier' => ['required', 'string'],
+        'client.vat_in' => ['nullable', 'string', 'max:9'],
+        'client.company_identifier' => ['nullable', 'string', 'max:8'],
     ];
 
     public function update()
@@ -29,7 +32,7 @@ class EditClientForm extends Component
         $this->emitUp('updated');
         $this->emitUp('closeEditModal');
 
-        return $this->dispatchBrowserEvent('toast-success', ['message' => 'Client has been edited successfully.']);
+        return $this->toast('success', 'Client has been edited successfully.');
     }
 
     public function render()

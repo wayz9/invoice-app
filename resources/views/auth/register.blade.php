@@ -35,7 +35,7 @@
             <x-validation-message name="password_confirmation" />
         </div>
         <x-button type="submit" class="mb-6 block w-full">
-            Login
+            Register
         </x-button>
         <p class="text-sm font-medium text-zinc-600">Already a member? <a href="{{ route('login') }}"
                 class="font-semibold text-lime-600 focus:outline-none">Login here</a></p>
