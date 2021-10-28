@@ -160,7 +160,7 @@
                                     </svg>
                                 </span>
                             </button>
-                            <div x-show="open" role="menu"
+                            <div x-show="open" role="menu" x-cloak
                                 class="absolute origin-bottom-right mb-4 right-0 bottom-full z-50 w-40 rounded-lg bg-zinc-800 focus:outline-none"
                                 x-on:click.away="open = false" x-transition:enter="transition ease-out duration-100"
                                 x-transition:enter-start="transform opacity-0 scale-95"
@@ -247,10 +247,13 @@
                 </div>
             </div>
         </nav>
-        <main class="bg-zinc-100 dark:bg-zinc-900 dark:border-l dark:border-zinc-800 flex-grow xl:rounded-l-3xl min-h-screen">
-            <div class="py-6 px-10 max-w-screen-xl mx-auto">
+        <main class="bg-zinc-100 dark:bg-zinc-900 dark:border-l dark:border-zinc-800 flex-grow flex flex-col justify-between xl:rounded-l-3xl min-h-screen">
+            <div class="pt-6 pb-28 px-10 max-w-screen-xl w-full mx-auto">
                 <h1 class="mb-9 text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-[0.01em]">{{ $heading }}</h1>
                 {{ $slot }}
+            </div>
+            <div class="py-4 text-sm text-center font-medium bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border-t border-zinc-100 dark:border-zinc-800 rounded-bl-3xl">
+                2021&copy; Invoice App - All rights reserved.
             </div>
         </main>
     </div>

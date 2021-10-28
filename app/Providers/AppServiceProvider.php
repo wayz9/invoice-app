@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
