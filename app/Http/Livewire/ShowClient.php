@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -33,14 +34,14 @@ class ShowClient extends Component
         $this->heading = $this->client->name;
     }
 
-    public function closeCreateInvoiceModal()
+    public function updatingSearch()
     {
-        $this->createInvoiceModal = false;
+        $this->resetPage();
     }
 
-    public function render()
+    public function getInvoicesProperty(): LengthAwarePaginator
     {
-        $invoices = $this->client
+        return $this->client
             ->invoices()
             ->with('items')
             ->when($this->filterBy == 'active', fn (Builder $query) => $query->activeInvoice())
@@ -49,8 +50,13 @@ class ShowClient extends Component
             ->when($this->filterBy == 'overdue', fn (Builder $query) => $query->whereDate('due_date', '<', now()->format('Y-m-d')))
             ->search('name', $this->search)
             ->paginate(10);
+    }
 
-        return view('livewire.show-client', compact('invoices'))
+    public function closeCreateInvoiceModal() { $this->createInvoiceModal = false; }
+
+    public function render()
+    {
+        return view('livewire.show-client')
             ->layout('layouts.admin', ['heading' => $this->heading]);
     }
 }

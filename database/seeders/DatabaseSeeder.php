@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         $user = User::factory(['email' => 'ventusblade1@gmail.com'])->create();
         $clients = Client::factory(5)->for($user)->create();
-        $invoices = Invoice::factory(4)->for($clients->first())->create();
+        $invoices = Invoice::factory(26)->for($clients->first())->create();
         $paidInvoice = Invoice::factory()->paid()->for($clients->first())->create();
         InvoiceItem::factory(3)->for($invoices->first())->create();
         InvoiceItem::factory(4)->for($paidInvoice)->create();
