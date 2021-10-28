@@ -1,13 +1,16 @@
 <div x-data="{createNewInvoice : @entangle('createInvoiceModal')}">
     <div class="mb-12 grid grid-cols-3 gap-6">
-        <div class="py-5 px-6 flex items-start gap-x-9 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
+        <div
+            class="py-5 px-6 flex items-start gap-x-9 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
             <div>
                 <div class="mb-2.5 text-xs font-medium uppercase text-zinc-600 dark:text-zinc-300">Total Received</div>
                 <div class="mb-5 flex items-center gap-1.5">
                     <span class="text-xl font-medium text-zinc-600 dark:text-zinc-400">$</span>
-                    <span class="text-4xl font-bold text-zinc-900 dark:text-zinc-50">{{ to_money($client->total_income) }}</span>
+                    <span class="text-4xl font-bold text-zinc-900 dark:text-zinc-50">{{ to_money($client->total_income)
+                        }}</span>
                 </div>
-                <span class="whitespace-nowrap px-2 py-0.5 text-sm font-medium bg-lime-50 dark:bg-zinc-700/50 text-lime-700 dark:text-lime-400 rounded-full">
+                <span
+                    class="whitespace-nowrap px-2 py-0.5 text-sm font-medium bg-lime-50 dark:bg-zinc-700/50 text-lime-700 dark:text-lime-400 rounded-full">
                     +10% from last month
                 </span>
             </div>
@@ -22,7 +25,8 @@
                 </dl>
             </div>
         </div>
-        <div class="py-5 px-6 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
+        <div
+            class="py-5 px-6 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
             <div class="mb-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <span class="inline-flex p-1 rounded-full bg-zinc-900 text-lime-400">
@@ -54,7 +58,8 @@
                 </div>
             </div>
             <div class="bg-lime-50/50 dark:bg-zinc-700/25 py-1.5 px-2.5 rounded">
-                <p class="mb-3 text-zinc-500 dark:text-zinc-300 text-sm font-medium">Quickpay let’s you receive payments on the
+                <p class="mb-3 text-zinc-500 dark:text-zinc-300 text-sm font-medium">Quickpay let’s you receive payments
+                    on the
                     fly,
                     generate a link and you are good to go!</p>
                 <a href="#" class="text-xs font-semibold uppercase text-lime-600 dark:text-lime-400">Learn More</a>
@@ -70,7 +75,8 @@
             <button x-on:click="createNewInvoice = true" type="button"
                 class="px-4 py-2.5 inline-flex items-center gap-2 bg-lime-700 dark:bg-zinc-800/50 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 focus:ring-lime-700">
                 <span class="inline-flex -ml-1">
-                    <svg class="w-4 h-4 text-lime-100 dark:text-lime-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+                    <svg class="w-4 h-4 text-lime-100 dark:text-lime-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 16 16">
                         <path fill="currentColor"
                             d="M8 3a.625.625 0 0 1 .625.625v3.75h3.75a.625.625 0 1 1 0 1.25h-3.75v3.75a.625.625 0 1 1-1.25 0v-3.75h-3.75a.625.625 0 0 1 0-1.25h3.75v-3.75A.625.625 0 0 1 8 3Z" />
                     </svg>
@@ -83,7 +89,8 @@
                 <input type="text" wire:model.debounce.500ms="search"
                     class="w-full block py-2.5 pl-[42px] pr-3.5 text-sm font-medium placeholder-zinc-500 dark:placeholder-zinc-400 text-zinc-900 dark:text-zinc-50 focus:outline-none focus:ring-zinc-200 dark:focus:ring-zinc-700 rounded-md ring-1 ring-inset ring-zinc-50 dark:ring-zinc-700/25 dark:bg-zinc-800/50"
                     placeholder="Search an Invoice" autocomplete="off">
-                <div class="absolute inset-y-0 left-3.5 flex items-center justify-center text-zinc-600 dark:text-zinc-500">
+                <div
+                    class="absolute inset-y-0 left-3.5 flex items-center justify-center text-zinc-600 dark:text-zinc-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                         viewBox="0 0 16 16">
                         <path
@@ -110,8 +117,9 @@
             </select>
         </div>
         <ul class="mb-8 grid gap-y-6">
-            @forelse ($invoices as $invoice)
-            @livewire('invoice-entry', ['invoice' => $invoice, 'email' => $client->email], key("invoice-key-{$invoice->id}"))
+            @forelse ($this->invoices as $invoice)
+            @livewire('invoice-entry', ['invoice' => $invoice, 'email' => $client->email],
+            key("invoice-key-{$invoice->id}"))
             @empty
             <div class="py-24 flex flex-col items-center justify-center text-center">
                 <div class="mb-14">
@@ -119,14 +127,15 @@
                         alt="Email Campaign Placeholder for Empty Search..." class="h-52">
                 </div>
                 <h3 class="mb-4 text-xl font-semibold text-zinc-800 dark:text-zinc-100">There is nothing here</h3>
-                <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Create an invoice by clicking the<br><span
-                        class="font-semibold text-zinc-900 dark:text-zinc-100">Create Invoice</span> button above
+                <p class="text-sm font-medium text-zinc-600 dark:text-zinc-400">Create an invoice by clicking
+                    the<br><span class="font-semibold text-zinc-900 dark:text-zinc-100">Create Invoice</span> button
+                    above
                 </p>
             </div>
             @endforelse
         </ul>
         <div>
-            {{ $invoices->links() }}
+            {{ $this->invoices->links() }}
         </div>
     </section>
 

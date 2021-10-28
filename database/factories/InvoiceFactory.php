@@ -45,4 +45,12 @@ class InvoiceFactory extends Factory
             'status' => Invoice::INVOICE_DRAFT
         ]);
     }
+
+    public function overdue(): Factory
+    {
+        return $this->state([
+            'issue_date' => now()->subDays(6)->format('Y-m-d'),
+            'due_date' => now()->subDay()->format('Y-m-d'),
+        ]);
+    }
 }

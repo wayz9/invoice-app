@@ -39,7 +39,7 @@ class ClientLivewireTest extends TestCase
     }
 
     /** @test */
-    public function itPreventsUserToSeeOtherUsersClients()
+    public function itPreventsUserFromSeeingOtherUsersClients()
     {
         $user = User::factory()->create();
         $clients = Client::factory(5)->for(User::factory()->create())->create();
@@ -47,21 +47,6 @@ class ClientLivewireTest extends TestCase
         Livewire::actingAs($user);
         $this->get(route('client.show', $clients->first()))
             ->assertForbidden();
-    }
-
-    /** @test */
-    public function itFiltersClientsByInvoices()
-    {
-        $user = User::factory()->create();
-        $client = Client::factory()->for($user)->create();
-        Invoice::factory(5)->for($client)->create();
-        Invoice::factory(3)->paid()->for($client)->create();
-        Invoice::factory(3)->draft()->for($client)->create();
-
-        Livewire::actingAs($user)
-            ->test('show-client', ['client' => $client, 'heading' => $client->name])
-            ->set('filterBy', 'active')
-            ->assertViewHas('invoices');
     }
 
     /** @test */
@@ -77,6 +62,34 @@ class ClientLivewireTest extends TestCase
             ->set('search', 'Cool')
             ->assertSet('search', 'Cool')
             ->assertCount('clients', 1);
+    }
+
+    /** @test */
+    public function itFiltersClientsWithInvoices()
+    {
+        $user = User::factory()->create();
+        $client = Client::factory(3)->for($user)->create();
+        Invoice::factory(5)->for($client->first())->create();
+
+        Livewire::actingAs($user)
+            ->test('index-client')
+            ->set('filterBy', 'with')
+            ->assertSet('filterBy', 'with')
+            ->assertCount('clients', 1);
+    }
+
+    /** @test */
+    public function itFiltersClientsWithoutInvoices()
+    {
+        $user = User::factory()->create();
+        $client = Client::factory(3)->for($user)->create();
+        Invoice::factory(5)->for($client->first())->create();
+
+        Livewire::actingAs($user)
+            ->test('index-client')
+            ->set('filterBy', 'without')
+            ->assertSet('filterBy', 'without')
+            ->assertCount('clients', 2);
     }
 
     /** @test */

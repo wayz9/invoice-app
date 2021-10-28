@@ -27,17 +27,63 @@ class InvoiceLivewireTest extends TestCase
     }
 
     /** @test */
-    public function itFiltersInvoices()
+    public function itFiltersPaidInvoices()
     {
         $user = User::factory()->create();
-        $client = Client::factory(3)->for($user)->create();
-        Invoice::factory(5)->for($client->first())->create();
+        $client = Client::factory()->for($user)->create();
+        Invoice::factory(5)->for($client)->create();
+        Invoice::factory()->paid()->for($client)->create();
 
         Livewire::actingAs($user)
-            ->test('index-client')
-            ->set('filterBy', 'with')
-            ->assertSet('filterBy', 'with')
-            ->assertCount('clients', 1);
+            ->test('show-client', ['client' => $client, 'heading' => $client->name])
+            ->set('filterBy', 'paid')
+            ->assertSet('filterBy', 'paid')
+            ->assertCount('invoices', 1);
+    }
+
+    /** @test */
+    public function itFiltersDraftInvoices()
+    {
+        $user = User::factory()->create();
+        $client = Client::factory()->for($user)->create();
+        Invoice::factory(5)->for($client)->create();
+        Invoice::factory()->draft()->for($client)->create();
+
+        Livewire::actingAs($user)
+            ->test('show-client', ['client' => $client, 'heading' => $client->name])
+            ->set('filterBy', 'draft')
+            ->assertSet('filterBy', 'draft')
+            ->assertCount('invoices', 1);
+    }
+
+    /** @test */
+    public function itFiltersOverdueInvoices()
+    {
+        $user = User::factory()->create();
+        $client = Client::factory()->for($user)->create();
+        Invoice::factory(5)->for($client)->create();
+        Invoice::factory()->overdue()->for($client)->create();
+
+        Livewire::actingAs($user)
+            ->test('show-client', ['client' => $client, 'heading' => $client->name])
+            ->set('filterBy', 'overdue')
+            ->assertSet('filterBy', 'overdue')
+            ->assertCount('invoices', 1);
+    }
+
+    /** @test */
+    public function itFiltersInvoicesByItsName()
+    {
+        $user = User::factory()->create();
+        $client = Client::factory()->for($user)->create();
+        Invoice::factory(2)->for($client)->create();
+        Invoice::factory(['name' => 'Cool Invoice'])->for($client)->create();
+
+        Livewire::actingAs($user)
+            ->test('show-client', ['client' => $client, 'heading' => $client->name])
+            ->set('search', 'Cool ')
+            ->assertSet('search', 'Cool ')
+            ->assertCount('invoices', 1);
     }
 
     /** @test */
@@ -173,11 +219,11 @@ class InvoiceLivewireTest extends TestCase
                 'client' => $client
             ]
         )
-        ->setPaper([0, 0, 720, 1440])
-        ->output();
+            ->setPaper([0, 0, 720, 1440])
+            ->output();
 
         Mail::send(new InvoicePDF($invoice, $pdf));
-        Mail::assertSent(InvoicePDF::class, function($mail) {
+        Mail::assertSent(InvoicePDF::class, function ($mail) {
             $mail->build();
             return count($mail->rawAttachments) == 1;
         });
