@@ -17,7 +17,7 @@
                 {{ $attributes->merge(['class' => 'relative w-screen max-w-[36rem]']) }}>
                 <div class="bg-white dark:bg-zinc-900">
                     <div
-                    class="h-screen py-6 px-8 flex flex-col bg-white dark:bg-zinc-800/50 border-l border-zinc-100 dark:border-zinc-800 overflow-y-auto">
+                    class="h-full py-6 px-8 flex flex-col bg-white dark:bg-zinc-800/50 border-l border-zinc-100 dark:border-zinc-800 overflow-y-auto">
                     {{ $slot }}
                     </div>
                 </div>

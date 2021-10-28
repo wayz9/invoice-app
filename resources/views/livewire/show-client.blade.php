@@ -116,7 +116,7 @@
                 <option value="draft">Draft</option>
             </select>
         </div>
-        <ul class="mb-8 grid gap-y-6">
+        <ul class="mb-12 grid gap-y-6">
             @forelse ($this->invoices as $invoice)
             @livewire('invoice-entry', ['invoice' => $invoice, 'email' => $client->email],
             key("invoice-key-{$invoice->id}"))

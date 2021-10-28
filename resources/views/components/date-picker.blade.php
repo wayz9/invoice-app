@@ -6,7 +6,7 @@
     'enableTime' => false,
     'altFormat' => 'j F Y',
     'altInput' => true,
-    'minDate' => 'today'
+    'minDate' => 'today',
     ], $options);
 @endphp
 
