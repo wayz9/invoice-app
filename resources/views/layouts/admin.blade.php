@@ -195,18 +195,7 @@
                                             </span>
                                             <span class="text-sm font-medium">Theme</span>
                                         </label>
-                                        <label for="theme_toggle" class="flex items-center cursor-pointer">
-                                            <div class="relative">
-                                                <input type="checkbox" id="theme_toggle" x-model="theme_toggle"
-                                                    class="sr-only peer">
-                                                <div
-                                                    class="h-3.5 w-9 bg-zinc-400 peer-disabled:bg-zinc-500 peer-disabled:cursor-not-allowed peer-checked:bg-lime-800 rounded-full">
-                                                </div>
-                                                <div
-                                                    class="absolute -left-px bottom-[-3px] w-5 h-5 rounded-full shadow-none bg-zinc-500 peer-checked:bg-lime-500 dark:peer-checked:bg-lime-400 peer-checked:translate-x-[18px] peer-disabled:bg-zinc-300 peer-disabled:cursor-not-allowed transition">
-                                                </div>
-                                            </div>
-                                        </label>
+                                        <x-toggle name="theme_toggle" x-model="theme_toggle"/>
                                     </div>
                                     <a href="#"
                                         class="py-2 px-3.5 flex items-center gap-2 hover:bg-zinc-700/25 transition-colors text-zinc-300">

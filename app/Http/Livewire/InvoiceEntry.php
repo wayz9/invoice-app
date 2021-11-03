@@ -18,8 +18,14 @@ class InvoiceEntry extends Component
     public string $email;
     public bool $deleteModalStatus = false;
     public bool $editModalStatus = false;
-
+    public bool $autoEmails;
+    
     protected $listeners = ['closeModal' => 'closeEditModal'];
+
+    public function mount()
+    {
+        $this->autoEmails = $this->invoice->auto_emails;
+    }
 
     public function emailPDFToRecipient()
     {
@@ -66,7 +72,17 @@ class InvoiceEntry extends Component
         ->setPaper([0, 0, 720, 1440])
         ->output();
 
-        return response()->streamDownload(fn () => print($pdf), $this->invoice->file_name, ['mime' => 'application/pdf']);
+        return response()
+            ->streamDownload(fn () => print($pdf), $this->invoice->file_name, ['mime' => 'application/pdf']);
+    }
+
+    public function toggleAutoEmails()
+    {
+        $this->invoice->update([
+            'auto_emails' => !$this->autoEmails
+        ]);
+
+        $this->emitUp('updated');
     }
 
     public function showDeleteModal(): void
