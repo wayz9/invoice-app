@@ -2,26 +2,26 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\UnpaidInvoice;
 use App\Models\Invoice;
+use App\Notifications\OverdueInvoiceNotification;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
-class SendEmailWhenInvoiceIsUnpaid extends Command
+class NotifyUserAboutOverdueInvoices extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'invoice:send-email-when-invoice-is-due-and-unpaid';
+    protected $signature = 'invoice:notify-user-about-overdue-invoices';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send an email when clients invoice is due.';
+    protected $description = 'Notifies the user about overdue invoices.';
 
     /**
      * Create a new command instance.
@@ -40,13 +40,9 @@ class SendEmailWhenInvoiceIsUnpaid extends Command
      */
     public function handle()
     {
-        Invoice::query()
-            ->with('client', 'items')
-            ->whereAutoEmails(true)
-            ->overdueInvoices()
-            ->each(function($invoice) {
-                Mail::to($invoice->client->email)->send(new UnpaidInvoice($invoice));
-            });
+        Invoice::query()->overdueInvoices()->with('client', 'client.user')->each(function($invoice) {
+            Notification::send($invoice->client->user, new OverdueInvoiceNotification($invoice));
+        });
 
         return 0;
     }

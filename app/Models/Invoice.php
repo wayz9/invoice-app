@@ -73,4 +73,10 @@ class Invoice extends Model
         return $builder->whereRaw('"'.now()->format('Y-m-d').'" between `issue_date` and `due_date`')
             ->where('status', '!=', self::INVOICE_PAID);
     }
+
+    public function scopeOverdueInvoices(Builder $builder): Builder
+    {
+        return $builder->whereDate('due_date', '<', now()->format('Y-m-d'))
+                    ->where('status', '!=', self::INVOICE_PAID);
+    }
 }
