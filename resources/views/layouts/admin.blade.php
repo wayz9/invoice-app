@@ -8,15 +8,16 @@
     <title>Invoice App - {{ $heading ?? '' }}</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-	<link rel="icon" type="image/png" sizes="36x36" href="{{ asset('favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="36x36" href="{{ asset('favicon.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     @livewireStyles
 </head>
 
 <body class="antialiased font-sans bg-zinc-900">
-    <div x-data="{nav : false, theme_toggle: $persist(false)}" class="relative flex" @toast-error="Toastr.error(event.detail.message);"
-    @toast-success="Toastr.success(event.detail.message);" x-init="$watch('theme_toggle', () => {
+    <div x-data="{nav : false, theme_toggle: $persist(false)}" class="relative flex"
+        @toast-error="Toastr.error(event.detail.message);" @toast-success="Toastr.success(event.detail.message);"
+        x-init="$watch('theme_toggle', () => {
         document.documentElement.classList.toggle('dark')}); if(theme_toggle){document.documentElement.classList.add('dark')};">
         <nav x-cloak
             class="z-30 fixed xl:sticky top-0 max-w-xs w-full h-screen flex flex-col flex-shrink-0 bg-zinc-900 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-zinc-800 overscroll-contain transform xl:transform-none xl:opacity-100 duration-200"
@@ -139,7 +140,7 @@
                     </div>
                 </div>
                 <div class="pb-8 px-6">
-                    <div class="flex items-center justify-between">
+                    <div x-data="{open : false}" class="flex items-center justify-between relative">
                         <div class="flex items-center gap-2.5">
                             <div class="flex-shrink-0">
                                 <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -150,7 +151,7 @@
                                 <div class="text-sm text-zinc-400">{{ auth()->user()->email }}</div>
                             </div>
                         </div>
-                        <div x-data="{open : false}" class="relative inline-block">
+                        <div class="relative inline-block">
                             <button x-on:click="open = !open" type="button" class="focus:outline-none">
                                 <span class="text-zinc-300">
                                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -170,16 +171,25 @@
                                 x-transition:leave-end="transform opacity-0 scale-95" aria-orientation="vertical"
                                 aria-labelledby="menu-button" tabindex="-1">
                                 <div class="flex flex-col py-1">
-                                    <a href="#"
-                                        class="py-2 px-3.5 flex items-center gap-2 hover:bg-zinc-700/25 transition-colors text-zinc-300">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18"
-                                                height="18" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
-                                            </svg>
+                                    <a href="{{ route('notifications') }}"
+                                        class="py-2 px-3.5 flex items-center justify-between hover:bg-zinc-700/25 transition-colors text-zinc-300">
+                                        <div class="flex items-center gap-2">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="18"
+                                                    height="18" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                                                </svg>
+                                            </span>
+                                            <span class="text-sm font-medium">Notifications</span>
+                                        </div>
+                                        @if (count(auth()->user()->notifications) >= 1)
+                                        <span class="relative inline-flex h-2 w-2">
+                                            <span
+                                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-300 opacity-75"></span>
+                                            <span class="relative inline-flex rounded-full h-2 w-2 bg-lime-400"></span>
                                         </span>
-                                        <span class="text-sm font-medium">Notifications</span>
+                                        @endif
                                     </a>
                                     <div
                                         class="py-2 px-3.5 flex items-center justify-between hover:bg-zinc-700/25 transition-colors text-zinc-300">
@@ -195,7 +205,7 @@
                                             </span>
                                             <span class="text-sm font-medium">Theme</span>
                                         </label>
-                                        <x-toggle name="theme_toggle" x-model="theme_toggle"/>
+                                        <x-toggle name="theme_toggle" x-model="theme_toggle" />
                                     </div>
                                     <a href="#"
                                         class="py-2 px-3.5 flex items-center gap-2 hover:bg-zinc-700/25 transition-colors text-zinc-300">
@@ -232,18 +242,27 @@
                                 </div>
                             </div>
                         </div>
+                        @if (count(auth()->user()->notifications) >= 1)
+                        <span x-show="!open" class="absolute -top-1 -right-1 inline-flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-300 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-lime-400"></span>
+                        </span>
+                        @endif
                     </div>
                 </div>
             </div>
         </nav>
-        <main class="bg-zinc-100 dark:bg-zinc-900 dark:border-l dark:border-zinc-800 flex-grow flex flex-col justify-between xl:rounded-l-3xl min-h-screen">
+        <main
+            class="bg-zinc-100 dark:bg-zinc-900 dark:border-l dark:border-zinc-800 flex-grow flex flex-col justify-between xl:rounded-l-3xl min-h-screen">
             <div class="pt-6 pb-28 px-10 max-w-screen-xl w-full mx-auto">
                 <h1 class="mb-9 text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-[0.01em]">{{ $heading }}</h1>
                 {{ $slot }}
             </div>
-            <div class="py-4 text-sm text-center font-medium bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border-t border-zinc-100 dark:border-zinc-800 rounded-bl-3xl">
-                2021&copy; Invoice App - All rights reserved.
-            </div>
+            <footer
+                class="py-4 text-sm text-center font-medium bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 border-t border-zinc-100 dark:border-zinc-800 rounded-bl-3xl">
+                &copy; 2021 Invoice App - All rights reserved.
+            </footer>
         </main>
     </div>
     @livewireScripts

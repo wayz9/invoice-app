@@ -91,8 +91,7 @@
                             <label for="{{ "auto_emails.$invoice->id" }}" class="flex items-center cursor-pointer">
                                 <div class="relative">
                                     <input wire.model="autoEmails" {{ $autoEmails ? 'checked' : '' }}
-                                        wire:change="toggleAutoEmails()" type="checkbox" id="{{ "
-                                        auto_emails.$invoice->id" }}" class="sr-only peer">
+                                        wire:change="toggleAutoEmails()" type="checkbox" id="{{ "auto_emails.$invoice->id" }}" class="sr-only peer">
                                     <div
                                         class="h-3.5 w-9 bg-zinc-400 peer-disabled:bg-zinc-500 peer-disabled:cursor-not-allowed peer-checked:bg-lime-800 rounded-full">
                                     </div>
