@@ -42,7 +42,7 @@
                     </span>
                 </button>
                 <div x-cloak
-                    class="absolute mt-1 w-44 origin-top-right right-0 bg-white dark:bg-zinc-800 z-40 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    class="absolute mt-1 w-52 origin-top-right right-0 bg-white dark:bg-zinc-800 z-40 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                     role="menu" x-show="options" x-on:click.away="options = false"
                     x-transition:enter="transition ease-out duration-100"
                     x-transition:enter-start="transform opacity-0 scale-95"
@@ -64,7 +64,7 @@
                         </div>
                         <ul class="flex flex-col" role="menuitem" tabindex="-1">
                             <li x-on:click="options = false" wire:click="download('modern')"
-                                class="flex items-center gap-2 text-sm py-1.5 pl-8 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
+                                class="flex items-center justify-between text-sm py-1.5 pl-8 pr-4 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
                                 <span>Modern PDF</span>
                                 <x-badge class="bg-lime-50 dark:bg-zinc-700/25 text-lime-700 dark:text-lime-400">New
                                 </x-badge>
@@ -80,6 +80,28 @@
                             role="menuitem" tabindex="-1">
                             <span>Mark as PAID</span>
                         </button>
+                        <label for="{{ "auto_emails.$invoice->id" }}"
+                            class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 px-4 py-2 text-sm flex items-center justify-between">
+                            <div class="flex items-center gap-1">
+                                <div>Auto Emails</div>
+                                <span x-data="{tooltip : 'When enabled a client will received email when invoice is overdue.'}" x-tooltip.max-width.256="tooltip">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                </span>
+                            </div>
+                            <label for="{{ "auto_emails.$invoice->id" }}" class="flex items-center cursor-pointer">
+                                <div class="relative">
+                                    <input wire.model="autoEmails" {{ $autoEmails ? 'checked' : '' }}
+                                        wire:change="toggleAutoEmails()" type="checkbox" id="{{ "
+                                        auto_emails.$invoice->id" }}" class="sr-only peer">
+                                    <div
+                                        class="h-3.5 w-9 bg-zinc-400 peer-disabled:bg-zinc-500 peer-disabled:cursor-not-allowed peer-checked:bg-lime-800 rounded-full">
+                                    </div>
+                                    <div
+                                        class="absolute -left-px bottom-[-3px] w-5 h-5 rounded-full shadow-none bg-zinc-500 peer-checked:bg-lime-500 dark:peer-checked:bg-lime-400 peer-checked:translate-x-[18px] peer-disabled:bg-zinc-300 peer-disabled:cursor-not-allowed transition">
+                                    </div>
+                                </div>
+                            </label>
+                        </label>
                         <button type="button" wire:click="emailPDFToRecipient()" x-on:click="options = false"
                             class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
@@ -171,7 +193,7 @@
     </div>
 
     @if (!$invoice->is_paid)
-        @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
+    @livewire('invoice-edit-modal', ['invoice' => $invoice, 'email' => $email])
     @endif
 
     <x-modal name="deleteModal" class="!max-w-md">
@@ -218,7 +240,8 @@
         </div>
     </x-modal>
 
-    <div wire:loading wire:target="download,emailPDFToRecipient" class="fixed inset-0 z-50 w-screen h-screen dark:bg-black/40 bg-black/70">
+    <div wire:loading wire:target="download,emailPDFToRecipient"
+        class="fixed inset-0 z-50 w-screen h-screen dark:bg-black/40 bg-black/70">
         <div class="flex flex-col items-center justify-center text-center h-full">
             <span class="mb-2 text-zinc-100 text-lg font-semibold">
                 Processing

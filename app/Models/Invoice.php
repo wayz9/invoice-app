@@ -18,6 +18,10 @@ class Invoice extends Model
 
     protected $dates = ['issue_date', 'due_date'];
 
+    protected $casts = [
+        'auto_emails' => 'boolean'
+    ];
+
     public function items(): HasMany
     {
         return $this->hasMany(InvoiceItem::class);
