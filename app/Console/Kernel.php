@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\NotifyUserAboutOverdueInvoices;
+use App\Console\Commands\NotifyUserToSendAnotherInvoice;
 use App\Console\Commands\SendEmailWhenInvoiceIsUnpaid;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(SendEmailWhenInvoiceIsUnpaid::class)->daily('00:00');
+        $schedule->command(NotifyUserToSendAnotherInvoice::class)->daily('00:00')->when(fn() => now()->endOfMonth()->isToday());
         $schedule->command(NotifyUserAboutOverdueInvoices::class)->daily('00:00');
     }
 
