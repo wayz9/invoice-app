@@ -134,7 +134,7 @@ class InvoiceLivewireTest extends TestCase
     }
 
     /** @test */
-    public function itChecksIfInvocieIsLoadedWithItemsAndItsPassedToEditSlideOver()
+    public function itChecksIfInvoiceIsLoadedWithItemsAndItsPassedToEditSlideOver()
     {
         $user = User::factory()->create();
         $client = Client::factory()->for($user)->create();
