@@ -29,6 +29,7 @@ class InvoiceFactory extends Factory
             'issue_date' => now()->addDay()->format('Y-m-d'),
             'due_date' => now()->addMonth()->format('Y-m-d'),
             'status' => Invoice::INVOICE_ACTIVE,
+            'auto_emails' => false
         ];
     }
 
