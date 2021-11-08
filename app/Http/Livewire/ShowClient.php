@@ -49,7 +49,7 @@ class ShowClient extends Component
             ->when($this->filterBy == 'draft', fn (Builder $query) => $query->where('status', Invoice::INVOICE_DRAFT))
             ->when($this->filterBy == 'overdue', fn (Builder $query) => $query->whereDate('due_date', '<', now()->format('Y-m-d')))
             ->search('name', $this->search)
-            ->paginate(10);
+            ->paginate(7);
     }
 
     public function closeCreateInvoiceModal() { $this->createInvoiceModal = false; }

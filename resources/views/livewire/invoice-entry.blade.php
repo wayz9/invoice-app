@@ -123,7 +123,7 @@
             </button>
         </div>
     </div>
-    <div x-show="open" x-collapse class="flex flex-col">
+    <div x-show="open" x-collapse class="flex flex-col divide-y divide-zinc-900">
         <div class="px-[4.5rem] bg-white dark:bg-zinc-800/60">
             <table class="min-w-full">
                 <thead>
