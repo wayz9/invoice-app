@@ -4,11 +4,11 @@
             <div class="text-sm font-medium text-zinc-600 dark:text-zinc-300">Total Received</div>
             <div class="flex items-center gap-2.5">
                 <span class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">$18,950.00</span>
-                <div class="pl-1 flex items-center bg-lime-50 dark:bg-zinc-700/25 rounded">
-                    <span class="text-xs font-semibold leading-5 text-lime-600 dark:text-lime-400">
+                <div class="pl-1 flex items-center bg-green-50 dark:bg-zinc-700/25 rounded">
+                    <span class="text-xs font-semibold leading-5 text-green-600 dark:text-green-400">
                         24K
                     </span>
-                    <span class="inline-flex text-lime-600 dark:text-lime-400 transform rotate-[-135deg]">
+                    <span class="inline-flex text-green-600 dark:text-green-400 transform rotate-[-135deg]">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
                                 d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z" />
@@ -22,7 +22,7 @@
             <div class="text-sm font-medium text-zinc-600 dark:text-zinc-300">Clients</div>
             <div class="flex items-center gap-2.5">
                 <span class="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{{ auth()->user()->clients()->count() }}</span>
-                <div class="pl-1 flex items-center bg-lime-50 dark:bg-zinc-700/25 text-lime-600 dark:text-lime-400 rounded">
+                <div class="pl-1 flex items-center bg-green-50 dark:bg-zinc-700/25 text-green-600 dark:text-green-400 rounded">
                     <span class="text-xs font-semibold leading-5">
                         15
                     </span>
@@ -62,12 +62,9 @@
                 <div class="text-sm font-medium text-zinc-600 dark:text-zinc-400">List of all of your clients </div>
             </div>
             <button x-on:click="addClientModal = true" type="button"
-                class="px-4 py-2.5 inline-flex items-center gap-2 bg-lime-700 dark:bg-zinc-800/50 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-700 text-lime-100 dark:focus:ring-offset-zinc-800 dark:text-lime-400">
+                class="px-4 py-2.5 inline-flex items-center gap-2 bg-primary-500 dark:bg-zinc-800/50 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-700 text-white dark:focus:ring-offset-zinc-800 dark:text-primary-400">
                 <span class="inline-flex -ml-1">
-                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
-                        <path fill="currentColor"
-                            d="M8 3a.625.625 0 0 1 .625.625v3.75h3.75a.625.625 0 1 1 0 1.25h-3.75v3.75a.625.625 0 1 1-1.25 0v-3.75h-3.75a.625.625 0 0 1 0-1.25h3.75v-3.75A.625.625 0 0 1 8 3Z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </span>
                 <span class="text-sm font-semibold">Add Client</span>
             </button>

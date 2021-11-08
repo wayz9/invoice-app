@@ -1,5 +1,5 @@
 <x-guest-layout heading="Login">
-    <a href="#" class="mb-12 inline-block text-lime-500 focus:outline-none">
+    <a href="#" class="mb-12 inline-block text-primary-500 focus:outline-none">
         <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                 d="M3.333 30.962A18.45 18.45 0 1 0 14.3 1.968" />
@@ -46,15 +46,15 @@
         <div class="mb-9 flex items-center justify-between">
             <div class="flex items-center gap-2.5">
                 <input type="checkbox" name="remember" id="remember_me"
-                    class="w-6 h-6 rounded focus:outline-none text-lime-600 checked:text-lime-600 ring-1 ring-inset ring-zinc-200 focus:ring-lime-600 checked:ring-lime-600">
+                    class="w-6 h-6 rounded focus:outline-none text-primary-600 checked:text-primary-600 ring-1 ring-inset ring-zinc-200 focus:ring-primary-600 checked:ring-primary-600">
                 <x-label for="remember_me">Remember me</x-label>
             </div>
-            <a href="#" class="text-sm font-semibold text-lime-600 focus:outline-none">Forgot password?</a>
+            <a href="#" class="text-sm font-semibold text-primary-600 focus:outline-none">Forgot password?</a>
         </div>
         <x-button type="submit" class="mb-6 block w-full">
             Login
         </x-button>
         <p class="text-sm font-medium text-zinc-600">Not registered yet? <a href="{{ route('register') }}"
-                class="font-semibold text-lime-600 focus:outline-none">Create an Account</a></p>
+                class="font-semibold text-primary-600 focus:outline-none">Create an Account</a></p>
     </form>
 </x-guest-layout>

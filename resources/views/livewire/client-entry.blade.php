@@ -3,19 +3,24 @@
         :class="{'rounded-t-lg' : open, 'rounded-lg' : !open}">
         <div class="flex items-center gap-5">
             <span class="text-zinc-500 dark:text-zinc-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-7 h-7" viewBox="0 0 16 16">
-                    <path
-                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-user">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
                 </svg>
             </span>
             <div>
                 <div class="flex items-center gap-x-2">
-                    <a href="{{ route('client.show', ['client' => $client]) }}" class="text-base font-semibold text-zinc-900 dark:text-zinc-100">{{ $client->name }}</a>
+                    <a href="{{ route('client.show', ['client' => $client]) }}"
+                        class="text-base font-semibold text-zinc-900 dark:text-zinc-100">{{ $client->name }}</a>
                     @if ($client->wasRecentlyCreated)
-                        <x-badge class="bg-lime-50 text-lime-700 dark:bg-zinc-700/25 dark:text-lime-400">Recently Added</x-badge>
+                    <x-badge class="bg-primary-50 text-primary-700 dark:bg-zinc-700/25 dark:text-primary-400">Recently
+                        Added</x-badge>
                     @endif
                 </div>
-                <div class="text-sm font-medium text-zinc-600 dark:text-zinc-400">{{ $client->street_address }}, {{ $client->city }}, {{ $client->country }}</div>
+                <div class="text-sm font-medium text-zinc-600 dark:text-zinc-400">{{ $client->street_address }}, {{
+                    $client->city }}, {{ $client->country }}</div>
             </div>
         </div>
         <div class="flex items-center gap-7">
@@ -61,7 +66,8 @@
                     </div>
                 </div>
             </div>
-            <button x-on:click="open = !open" type="button" class="inline-flex text-zinc-800 dark:text-zinc-100 focus:outline-none">
+            <button x-on:click="open = !open" type="button"
+                class="inline-flex text-zinc-800 dark:text-zinc-100 focus:outline-none">
                 <span class="inline-flex transform transition-all" :class="{'rotate-180' : open}">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -80,15 +86,19 @@
                 </div>
                 <div>
                     <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400">Address:</div>
-                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100 max-w-[16rem]">{{ $client->street_address }},{{ $client->city }} {{ $client->zip_code }}, {{ $client->country }}</div>
+                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100 max-w-[16rem]">{{
+                        $client->street_address }},{{ $client->city }} {{ $client->zip_code }}, {{ $client->country }}
+                    </div>
                 </div>
                 <div>
                     <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400">MB (matični broj):</div>
-                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->company_identifier ?? 'None found' }}</div>
+                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->company_identifier
+                        ?? 'None found' }}</div>
                 </div>
                 <div>
                     <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400">PIB:</div>
-                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->vat_in ?? 'None found' }}</div>
+                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->vat_in ?? 'None
+                        found' }}</div>
                 </div>
             </div>
             <div class="px-[4.5rem] flex flex-col gap-y-8">
@@ -98,11 +108,13 @@
                 </div>
                 <div>
                     <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400">Tel / Fax:</div>
-                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->contact_number ?? 'No contact phone found.' }}</div>
+                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->contact_number ??
+                        'No contact phone found.' }}</div>
                 </div>
                 <div>
                     <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400">Invoices:</div>
-                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->invoices_count }} @choice('invoice|invoices', $client->invoices_count) found</div>
+                    <div class="text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $client->invoices_count }}
+                        @choice('invoice|invoices', $client->invoices_count) found</div>
                 </div>
                 <div>
                     <div class="mb-1 text-sm text-zinc-600 dark:text-zinc-400">Web:</div>

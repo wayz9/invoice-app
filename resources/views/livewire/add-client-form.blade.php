@@ -3,7 +3,7 @@
         <div class="mb-9 flex items-center justify-between">
             <div class="relative">
                 <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Add Client</h2>
-                <span class="block w-12 h-0.5 bg-lime-600 dark:bg-lime-400"></span>
+                <span class="block w-12 h-0.5 bg-primary-600 dark:bg-primary-400"></span>
             </div>
             <button type="button" x-on:click="addClientModal = false">
                 <svg class="w-5 h-5 text-zinc-800 dark:text-zinc-200" xmlns="http://www.w3.org/2000/svg"

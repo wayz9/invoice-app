@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
     content: [
@@ -12,6 +13,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Raleway-v4020', ...defaultTheme.fontFamily.sans]
             },
+            colors: {
+                primary: colors.yellow
+            }
         },
     },
     plugins: [require('tailwind-scrollbar'), require('@tailwindcss/line-clamp')],
