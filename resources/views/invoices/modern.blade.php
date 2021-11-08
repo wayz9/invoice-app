@@ -144,7 +144,7 @@
         </div>
         <div class="inline-block" style="width: 29%; text-align: right; vertical-align:top">
             <div>
-                <div style="color: #27272A; font-weight: 500; margin-bottom: 4px">Billed To:</div>
+                <div style="color: #27272A; font-weight: 500; margin-bottom: 4px">Total:</div>
                 <div class="custom-numbers" style="font-weight: 600; color: #18181b; font-size: 28px; line-height: 36px;">
                     ${{ to_money($invoice->subtotal()) }}
                 </div>
@@ -188,12 +188,12 @@
     <div style="width: 100%; margin-top: 24px;">
         <div class="inline-block" style="width: 75%">
             <div class="text-right custom-numbers" style="font-weight: 500; color: #71717A">
-                Tax (6%)
+                Tax (0%)
             </div>
         </div>
         <div class="inline-block" style="width: 24%">
             <div class="text-right custom-numbers" style="font-weight: 600; color: #18181b">
-                330.00
+                0.00
             </div>
         </div>
     </div>
