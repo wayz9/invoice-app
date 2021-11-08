@@ -24,20 +24,15 @@
     <div class="mb-6 flex items-center justify-between">
         <span class="text-xl font-semibold text-zinc-700 dark:text-zinc-200">#{{ $invoice->invoice_number }}</span>
         <button type="button"
-            class="inline-flex items-center justify-center gap-2.5 text-xs font-medium uppercase text-lime-700 dark:text-lime-400 focus:outline-none">
+            class="inline-flex items-center justify-center gap-2.5 text-xs font-medium uppercase text-primary-700 dark:text-primary-400 focus:outline-none">
             <span class="inline-flex">
-                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path
-                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                    <path
-                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             </span>
             <span>Copy Payment Code</span>
         </button>
     </div>
     <div class="mb-2 flex items-center gap-3">
-        <span class="inline-flex p-1 rounded-full bg-zinc-900 text-lime-400">
+        <span class="inline-flex p-1 rounded-full bg-zinc-900 text-primary-400">
             <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                 <path
                     d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
@@ -47,7 +42,7 @@
             <span class="text-zinc-400">quickpay.me/</span>vukasin
         </span>
     </div>
-    <div class="mb-6 py-2.5 px-3.5 flex items-center justify-between rounded bg-lime-50/50 dark:bg-zinc-700/50 text-lime-600 dark:text-lime-400">
+    <div class="mb-6 py-2.5 px-3.5 flex items-center justify-between rounded bg-primary-50/50 dark:bg-zinc-700/50 text-primary-600 dark:text-primary-400">
         <p class="text-sm font-medium">QuickPay is enabled!</p>
         <span>
             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/><path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/></svg>
@@ -66,7 +61,7 @@
             </span>
         </div>
         <div class="mb-2.5 text-base font-medium text-zinc-900 dark:text-zinc-100">{{ $email }}</div>
-        <a href="#" class="block text-sm font-medium text-lime-700 dark:text-lime-400 text-right">How do I change recipient email?</a>
+        <a href="#" class="block text-sm font-medium text-primary-700 dark:text-primary-400 text-right">How do I change recipient email?</a>
     </div>
     <form wire:submit.prevent="update">
         <div class="mb-7 flex flex-col gap-y-1.5">
@@ -151,7 +146,7 @@
             </div>
         </div>
         <div class="mb-8 flex items-center justify-between">
-            <button wire:click="addInvoiceItem()" type="button" class="inline-flex gap-1 items-center text-lime-600 dark:text-lime-400">
+            <button wire:click="addInvoiceItem()" type="button" class="inline-flex gap-1 items-center text-primary-600 dark:text-primary-400">
                 <span class="inline-flex">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-4 h-4" viewBox="0 0 16 16">
                         <path fill="currentColor" fill-rule="evenodd"

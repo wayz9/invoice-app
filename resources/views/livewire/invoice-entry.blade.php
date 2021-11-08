@@ -3,12 +3,7 @@
         :class="{'rounded-t-lg' : open, 'rounded-lg' : !open}">
         <div class="flex items-center gap-5">
             <span class="text-zinc-500 dark:text-zinc-300">
-                <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path
-                        d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
-                    <path
-                        d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
             </span>
             <div>
                 <div class="flex items-center gap-x-2">
@@ -18,7 +13,7 @@
                     @endif
 
                     @if ($invoice->is_paid)
-                    <x-badge class="bg-lime-50 dark:bg-zinc-700/25 text-lime-700 dark:text-lime-400">Paid</x-badge>
+                    <x-badge class="bg-primary-50 dark:bg-zinc-700/25 text-primary-700 dark:text-primary-400">Paid</x-badge>
                     @endif
 
                     @if ($invoice->is_overdue)
@@ -66,7 +61,7 @@
                             <li x-on:click="options = false" wire:click="download('modern')"
                                 class="flex items-center justify-between text-sm py-1.5 pl-8 pr-4 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
                                 <span>Modern PDF</span>
-                                <x-badge class="bg-lime-50 dark:bg-zinc-700/25 text-lime-700 dark:text-lime-400">New
+                                <x-badge class="bg-primary-50 dark:bg-zinc-700/25 text-primary-700 dark:text-primary-400">New
                                 </x-badge>
                             </li>
                             <li x-on:click="options = false" wire:click="download('classic')"
@@ -93,10 +88,10 @@
                                     <input wire.model="autoEmails" {{ $autoEmails ? 'checked' : '' }}
                                         wire:change="toggleAutoEmails()" type="checkbox" id="{{ "auto_emails.$invoice->id" }}" class="sr-only peer">
                                     <div
-                                        class="h-3.5 w-9 bg-zinc-400 peer-disabled:bg-zinc-500 peer-disabled:cursor-not-allowed peer-checked:bg-lime-800 rounded-full">
+                                        class="h-3.5 w-9 bg-zinc-400 peer-disabled:bg-zinc-500 peer-disabled:cursor-not-allowed peer-checked:bg-primary-800 rounded-full">
                                     </div>
                                     <div
-                                        class="absolute -left-px bottom-[-3px] w-5 h-5 rounded-full shadow-none bg-zinc-500 peer-checked:bg-lime-500 dark:peer-checked:bg-lime-400 peer-checked:translate-x-[18px] peer-disabled:bg-zinc-300 peer-disabled:cursor-not-allowed transition">
+                                        class="absolute -left-px bottom-[-3px] w-5 h-5 rounded-full shadow-none bg-zinc-500 peer-checked:bg-primary-500 dark:peer-checked:bg-primary-400 peer-checked:translate-x-[18px] peer-disabled:bg-zinc-300 peer-disabled:cursor-not-allowed transition">
                                     </div>
                                 </div>
                             </label>
@@ -177,7 +172,7 @@
         </div>
         <div class="px-[4.5rem] py-3 flex items-center justify-between bg-white dark:bg-zinc-800/60 rounded-b-lg">
             <button type="button" wire:click="download()"
-                class="inline-flex items-center gap-1 text-sm font-medium text-lime-600 dark:text-lime-400">
+                class="inline-flex items-center gap-1 text-sm font-medium text-primary-600 dark:text-primary-400">
                 <span>Download as PDF</span>
                 <span class="inline-flex">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"

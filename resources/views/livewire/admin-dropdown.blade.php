@@ -44,8 +44,8 @@
                     @if (count(auth()->user()->notifications) >= 1)
                     <span class="relative inline-flex h-2 w-2">
                         <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-300 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-lime-400"></span>
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-300 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-400"></span>
                     </span>
                     @endif
                 </a>
@@ -103,8 +103,8 @@
     @if (count(auth()->user()->notifications) >= 1)
     <span x-show="!open" class="absolute -top-1 -right-1 inline-flex h-2 w-2">
         <span
-            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-300 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-lime-400"></span>
+            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-300 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-400"></span>
     </span>
     @endif
 </div>

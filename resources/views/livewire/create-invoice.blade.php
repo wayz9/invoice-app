@@ -3,7 +3,7 @@
         <div class="mb-9 flex items-center justify-between">
             <div class="relative">
                 <h2 class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Create Invoice</h2>
-                <span class="block w-12 h-0.5 bg-lime-600 dark:bg-lime-400"></span>
+                <span class="block w-12 h-0.5 bg-primary-600 dark:bg-primary-400"></span>
             </div>
             <button type="button" x-on:click="createNewInvoice = false">
                 <svg class="w-5 h-5 text-zinc-800 dark:text-zinc-200" xmlns="http://www.w3.org/2000/svg"
@@ -48,10 +48,9 @@
             </div>
         </div>
         <div class="flex justify-end">
-            <button type="submit"
-                class="px-4 py-2.5 bg-lime-700 dark:bg-zinc-700/60 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 focus:ring-lime-700">
-                <span class="text-sm font-semibold text-lime-100 dark:text-lime-400">Create Invoice</span>
-            </button>
+            <x-button type="submit">
+                Create Invoice
+            </x-button>
         </div>
     </form>
 </x-modal>

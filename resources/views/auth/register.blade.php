@@ -1,5 +1,5 @@
 <x-guest-layout heading="Register">
-    <a href="#" class="mb-12 inline-block text-lime-500 focus:outline-none">
+    <a href="#" class="mb-12 inline-block text-primary-500 focus:outline-none">
         <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                 d="M3.333 30.962A18.45 18.45 0 1 0 14.3 1.968" />
@@ -38,6 +38,6 @@
             Register
         </x-button>
         <p class="text-sm font-medium text-zinc-600">Already a member? <a href="{{ route('login') }}"
-                class="font-semibold text-lime-600 focus:outline-none">Login here</a></p>
+                class="font-semibold text-primary-600 focus:outline-none">Login here</a></p>
     </form>
 </x-guest-layout>

@@ -43,16 +43,37 @@
                 <img src="{{ asset('svg/arrow.svg') }}" alt="Arrow" draggable="false" class="h-[344px]">
             </div>
             <div
-                class="absolute w-20 h-20 top-[108px] left-[307px] rounded-full bg-zinc-800 flex items-center justify-center">
-                <img src="{{ asset('svg/inv-app-vb40.svg') }}" alt="Invoice App SVG" class="w-10 h-10">
+                class="absolute w-20 h-20 top-[108px] left-[307px] rounded-full bg-zinc-800 text-primary-400 flex items-center justify-center">
+                <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M3.333 30.962A18.45 18.45 0 1 0 14.3 1.968" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M8.57 27.597a12.3 12.3 0 1 0 7.311-19.329" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M24.415 17.837a6.15 6.15 0 1 0-4.703 9.2" />
+                </svg>
             </div>
             <div
-                class="absolute w-20 h-20 top-[396px] left-[158px] rounded-full bg-zinc-800 flex items-center justify-center">
-                <img src="{{ asset('svg/inv-app-vb40.svg') }}" alt="Invoice App SVG" class="w-10 h-10">
+                class="absolute w-20 h-20 top-[396px] left-[158px] rounded-full bg-zinc-800 text-primary-400 flex items-center justify-center">
+                <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M3.333 30.962A18.45 18.45 0 1 0 14.3 1.968" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M8.57 27.597a12.3 12.3 0 1 0 7.311-19.329" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M24.415 17.837a6.15 6.15 0 1 0-4.703 9.2" />
+                </svg>
             </div>
             <div
-                class="absolute w-20 h-20 top-[456px] right-[180px] rounded-full bg-zinc-800 flex items-center justify-center">
-                <img src="{{ asset('svg/inv-app-vb40.svg') }}" alt="Invoice App SVG" class="w-10 h-10">
+                class="absolute w-20 h-20 top-[456px] right-[180px] rounded-full bg-zinc-800 text-primary-400 flex items-center justify-center">
+                <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 40 40">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M3.333 30.962A18.45 18.45 0 1 0 14.3 1.968" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M8.57 27.597a12.3 12.3 0 1 0 7.311-19.329" />
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        d="M24.415 17.837a6.15 6.15 0 1 0-4.703 9.2" />
+                </svg>
             </div>
             <div class="absolute top-[620px] flex flex-col items-center justify-center inset-x-0">
                 <h1 class="mb-7 text-3xl font-bold text-zinc-100 text-center">Turn your ideas<br>into reality</h1>

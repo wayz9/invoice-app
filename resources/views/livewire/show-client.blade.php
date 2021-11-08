@@ -1,5 +1,5 @@
 <div x-data="{createNewInvoice : @entangle('createInvoiceModal')}">
-    <div class="mb-12 grid grid-cols-3 gap-6">
+    <div class="mb-12 grid lg:grid-cols-3 gap-6">
         <div
             class="py-5 px-6 flex items-start gap-x-9 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
             <div>
@@ -10,7 +10,7 @@
                         }}</span>
                 </div>
                 <span
-                    class="whitespace-nowrap px-2 py-0.5 text-sm font-medium bg-lime-50 dark:bg-zinc-700/50 text-lime-700 dark:text-lime-400 rounded-full">
+                    class="whitespace-nowrap px-2 py-0.5 text-sm font-medium bg-primary-50 dark:bg-zinc-700/50 text-primary-700 dark:text-primary-400 rounded-full">
                     +10% from last month
                 </span>
             </div>
@@ -29,7 +29,7 @@
             class="py-5 px-6 bg-white dark:bg-zinc-800/60 rounded-lg ring-1 ring-inset ring-zinc-50 dark:ring-zinc-800">
             <div class="mb-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <span class="inline-flex p-1 rounded-full bg-zinc-900 text-lime-400">
+                    <span class="inline-flex p-1 rounded-full bg-zinc-900 text-primary-400">
                         <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                             <path
                                 d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z" />
@@ -57,12 +57,12 @@
                     </button>
                 </div>
             </div>
-            <div class="bg-lime-50/50 dark:bg-zinc-700/25 py-1.5 px-2.5 rounded">
+            <div class="bg-primary-50/50 dark:bg-zinc-700/25 py-1.5 px-2.5 rounded">
                 <p class="mb-3 text-zinc-500 dark:text-zinc-300 text-sm font-medium">Quickpay let’s you receive payments
                     on the
                     fly,
                     generate a link and you are good to go!</p>
-                <a href="#" class="text-xs font-semibold uppercase text-lime-600 dark:text-lime-400">Learn More</a>
+                <a href="#" class="text-xs font-semibold uppercase text-primary-600 dark:text-primary-400">Learn More</a>
             </div>
         </div>
     </div>
@@ -73,15 +73,11 @@
                 <div class="text-sm font-medium text-zinc-600 dark:text-zinc-400">List of all of your invoices </div>
             </div>
             <button x-on:click="createNewInvoice = true" type="button"
-                class="px-4 py-2.5 inline-flex items-center gap-2 bg-lime-700 dark:bg-zinc-800/50 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 focus:ring-lime-700">
+                class="px-4 py-2.5 inline-flex items-center gap-2 bg-primary-500 text-white dark:text-primary-400 dark:bg-zinc-800/50 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-zinc-800 focus:ring-primary-700">
                 <span class="inline-flex -ml-1">
-                    <svg class="w-4 h-4 text-lime-100 dark:text-lime-400" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 16 16">
-                        <path fill="currentColor"
-                            d="M8 3a.625.625 0 0 1 .625.625v3.75h3.75a.625.625 0 1 1 0 1.25h-3.75v3.75a.625.625 0 1 1-1.25 0v-3.75h-3.75a.625.625 0 0 1 0-1.25h3.75v-3.75A.625.625 0 0 1 8 3Z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </span>
-                <span class="text-sm font-semibold text-lime-100 dark:text-lime-400">Create Invoice</span>
+                <span class="text-sm font-semibold">Create Invoice</span>
             </button>
         </div>
         <div class="mb-8 flex items-center justify-between">
