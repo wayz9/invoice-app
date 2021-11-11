@@ -78,7 +78,7 @@
                                     <span wire:key="paginator-{{ $paginator->getPageName() }}-{{ $this->numberOfPaginatorsRendered[$paginator->getPageName()] }}-page{{ $page }}">
                                         @if ($page == $paginator->currentPage())
                                             <span aria-current="page">
-                                                <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-white bg-primary-700 dark:bg-zinc-800 dark:text-primary-400 border border-zinc-300 dark:border-zinc-600/5 cursor-default leading-5">{{ $page }}</span>
+                                                <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-white bg-primary-500 dark:bg-zinc-800 dark:text-primary-400 border border-zinc-300 dark:border-zinc-600/5 cursor-default leading-5">{{ $page }}</span>
                                             </span>
                                         @else
                                             <button wire:click="gotoPage({{ $page }}, '{{ $paginator->getPageName() }}')" class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-zinc-700 bg-white dark:bg-zinc-800/50 dark:text-zinc-300 border border-zinc-300 dark:border-zinc-600/5 leading-5 hover:text-zinc-500 focus:z-10 focus:outline-none focus:border-primary-300 active:bg-primary-600 active:text-white transition ease-in-out duration-150" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
