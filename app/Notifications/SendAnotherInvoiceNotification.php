@@ -20,8 +20,8 @@ class SendAnotherInvoiceNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->client->id,
-            'name' => $this->client->name,
+            'title' => 'Send Another Invoice',
+            'message' => 'Reminder to send another Invoice to "<a href='. route('client.show', $this->client) .' class="font-semibold">'. $this->client->name .'</a>" based on previous records.'
         ];
     }
 }

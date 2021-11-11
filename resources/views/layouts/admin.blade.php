@@ -56,7 +56,14 @@
                             </x-nav-link>
                             <x-nav-link :href="route('client.index')">
                                 <x-slot name="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-users">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
                                 </x-slot>
                                 Clients
                             </x-nav-link>
@@ -93,7 +100,14 @@
                             </x-nav-link>
                             <x-nav-link href="#">
                                 <x-slot name="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-inbox">
+                                        <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+                                        <path
+                                            d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
+                                        </path>
+                                    </svg>
                                 </x-slot>
                                 Archive
                             </x-nav-link>
@@ -131,7 +145,7 @@
                                 <x-slot name="extra">
                                     <span
                                         class="px-1.5 text-xs leading-5 rounded bg-zinc-800 font-semibold text-primary-400">
-                                        v1.2.0
+                                        v1.3.5
                                     </span>
                                 </x-slot>
                             </x-nav-link>
@@ -155,7 +169,118 @@
                     </div>
                 </div>
                 <div class="pb-8 px-6">
-                    @livewire('admin-dropdown')
+                    <div x-data="{open : false, notifications: {{ auth()->user()->unreadNotifications()->count() }} }"
+                        class="flex items-center justify-between relative">
+                        <div class="flex items-center gap-2.5">
+                            <div class="flex-shrink-0">
+                                <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                    alt="Profile Picture" class="rounded-md w-10 h-10">
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold text-zinc-300">{{ auth()->user()->name }}</div>
+                                <div class="text-sm text-zinc-400">{{ auth()->user()->email }}</div>
+                            </div>
+                        </div>
+                        <div class="relative inline-block">
+                            <button x-on:click="open = !open" type="button" class="focus:outline-none">
+                                <span class="text-zinc-300">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                        viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z" />
+                                    </svg>
+                                </span>
+                            </button>
+                            <div x-show="open" role="menu" x-cloak
+                                class="absolute origin-bottom-right mb-4 right-0 bottom-full z-50 w-40 rounded-lg bg-zinc-800 focus:outline-none"
+                                x-on:click.away="open = false" x-transition:enter="transition ease-out duration-100"
+                                x-transition:enter-start="transform opacity-0 scale-95"
+                                x-transition:enter-end="transform opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-75"
+                                x-transition:leave-start="transform opacity-100 scale-100"
+                                x-transition:leave-end="transform opacity-0 scale-95" aria-orientation="vertical"
+                                aria-labelledby="menu-button" tabindex="-1">
+                                <div class="flex flex-col py-1">
+                                    <a href="{{ route('notifications') }}"
+                                        class="py-2 px-3.5 flex items-center justify-between hover:bg-zinc-700/25 transition-colors text-zinc-300">
+                                        <div class="flex items-center gap-2">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-bell">
+                                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                                </svg>
+                                            </span>
+                                            <span class="text-sm font-medium">Notifications</span>
+                                        </div>
+                                        <span x-show="notifications" class="relative inline-flex h-2 w-2">
+                                            <span
+                                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-300 opacity-75"></span>
+                                            <span
+                                                class="relative inline-flex rounded-full h-2 w-2 bg-primary-400"></span>
+                                        </span>
+                                    </a>
+                                    <div
+                                        class="py-2 px-3.5 flex items-center justify-between hover:bg-zinc-700/25 transition-colors text-zinc-300">
+                                        <label for="theme_toggle" class="flex items-center gap-2">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-moon">
+                                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                                </svg>
+                                            </span>
+                                            <span class="text-sm font-medium">Theme</span>
+                                        </label>
+                                        <x-toggle name="theme_toggle" x-model="theme_toggle" />
+                                    </div>
+                                    <a href="#"
+                                        class="py-2 px-3.5 flex items-center gap-2 hover:bg-zinc-700/25 transition-colors text-zinc-300">
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-settings">
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                                <path
+                                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                        <span class="text-sm font-medium">Settings</span>
+                                    </a>
+                                    <div x-data>
+                                        <a href="#" x-on:click.prevent="$refs.logout.submit()"
+                                            class="py-2 px-3.5 flex items-center gap-2 hover:bg-zinc-700/25 transition-colors text-zinc-300">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-log-out">
+                                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                                </svg>
+                                            </span>
+                                            <span class="text-sm font-medium">Sign Out</span>
+                                        </a>
+                                        <form x-ref="logout" action="{{ route('logout') }}" method="POST"
+                                            class="hidden">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span x-show="!open && notifications" class="absolute -top-1 -right-1 inline-flex h-2 w-2">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-300 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-400"></span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </nav>

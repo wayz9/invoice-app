@@ -22,7 +22,8 @@ class OverdueInvoiceNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'invoice_number' => $this->invoice->invoice_number,
+            'title' => 'Overdue Invoice',
+            'message' => "Invoice with ID of {$this->invoice->invoice_number} is now overdue, please resend the invoice to client or mark it as paid.",
         ];
     }
 }

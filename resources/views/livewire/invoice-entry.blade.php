@@ -3,7 +3,15 @@
         :class="{'rounded-t-lg' : open, 'rounded-lg' : !open}">
         <div class="flex items-center gap-5">
             <span class="text-zinc-500 dark:text-zinc-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-file-text">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
             </span>
             <div>
                 <div class="flex items-center gap-x-2">
@@ -13,7 +21,8 @@
                     @endif
 
                     @if ($invoice->is_paid)
-                    <x-badge class="bg-primary-50 dark:bg-zinc-700/25 text-primary-700 dark:text-primary-400">Paid</x-badge>
+                    <x-badge class="bg-primary-50 dark:bg-zinc-700/25 text-primary-700 dark:text-primary-400">Paid
+                    </x-badge>
                     @endif
 
                     @if ($invoice->is_overdue)
@@ -48,45 +57,60 @@
                     aria-labelledby="menu-button" tabindex="-1">
                     <div class="py-1" role="none">
                         @if (!$invoice->is_paid)
-                        <button type="button" x-on:click="edit = !edit" x-on:click="options = false"
+                        <button type="button" x-on:click="edit = !edit" wire:loading.attr="disabled"
                             class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>Edit Invoice</span>
                         </button>
                         @endif
-                        <div class="px-4 py-2 text-sm">
-                            <span class="text-zinc-700 dark:text-zinc-300">Download</span>
+                        <div class="px-4 py-2">
+                            <span class="text-zinc-600 text-sm font-medium dark:text-zinc-400">Download</span>
                         </div>
                         <ul class="flex flex-col" role="menuitem" tabindex="-1">
-                            <li x-on:click="options = false" wire:click="download('modern')"
-                                class="flex items-center justify-between text-sm py-1.5 pl-8 pr-4 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
-                                <span>Modern PDF</span>
-                                <x-badge class="bg-primary-50 dark:bg-zinc-700/25 text-primary-700 dark:text-primary-400">New
-                                </x-badge>
+                            <li>
+                                <button wire:click="download('modern')" wire:loading.attr="disabled"
+                                    class="flex items-center gap-2 text-sm py-1.5 pl-8 pr-4 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
+                                    <span>Modern PDF</span>
+                                    <x-badge
+                                        class="bg-primary-50 dark:bg-zinc-700/25 text-primary-700 dark:text-primary-400">
+                                        Updated
+                                    </x-badge>
+                                </button>
                             </li>
-                            <li x-on:click="options = false" wire:click="download('classic')"
-                                class="flex items-center gap-2 text-sm py-1.5 pl-8 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
-                                <span>Classic PDF</span>
+                            <li>
+                                <button wire:click="download('classic')" wire:loading.attr="disabled"
+                                    class="flex items-center gap-2 text-sm py-1.5 pl-8 hover:bg-zinc-100 dark:hover:bg-zinc-700/25 cursor-pointer text-zinc-700 dark:text-zinc-300 w-full font-medium hover:text-zinc-900 dark:hover:text-zinc-100">
+                                    <span>Classic PDF</span>
+                                </button>
                             </li>
                         </ul>
                         @if (!$invoice->is_paid)
-                        <button type="button" x-on:click="options = false" wire:click="markAsPaid()"
+                        <button type="button" wire:click="markAsPaid()" wire:loading.attr="disabled"
                             class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>Mark as PAID</span>
                         </button>
-                        <label for="{{ "auto_emails.$invoice->id" }}"
-                            class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 px-4 py-2 text-sm flex items-center justify-between">
+                        <label for="autoEmails{{ $invoice->id }}"
+                            class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100
+                            dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 px-4 py-2 text-sm
+                            flex items-center justify-between">
                             <div class="flex items-center gap-1">
                                 <div>Auto Emails</div>
-                                <span x-data="{tooltip : 'When enabled a client will received email when invoice is overdue.'}" x-tooltip.max-width.256="tooltip">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+                                <span
+                                    x-data="{tooltip : 'When enabled a client will received email when invoice is overdue.'}"
+                                    x-tooltip.max-width.256="tooltip">
+                                    <svg class="w-4 h-4 text-zinc-500 dark:text-zinc-400" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
                                 </span>
                             </div>
-                            <label for="{{ "auto_emails.$invoice->id" }}" class="flex items-center cursor-pointer">
+                            <label for="autoEmails{{ $invoice->id }}" class="flex items-center cursor-pointer">
                                 <div class="relative">
                                     <input wire.model="autoEmails" {{ $autoEmails ? 'checked' : '' }}
-                                        wire:change="toggleAutoEmails()" type="checkbox" id="{{ "auto_emails.$invoice->id" }}" class="sr-only peer">
+                                        wire:change="toggleAutoEmails()" type="checkbox" id="autoEmails{{ $invoice->id }}" class="sr-only peer">
                                     <div
                                         class="h-3.5 w-9 bg-zinc-400 peer-disabled:bg-zinc-500 peer-disabled:cursor-not-allowed peer-checked:bg-primary-800 rounded-full">
                                     </div>
@@ -96,13 +120,13 @@
                                 </div>
                             </label>
                         </label>
-                        <button type="button" wire:click="emailPDFToRecipient()" x-on:click="options = false"
+                        <button type="button" wire:click="emailPDFToRecipient()"
                             class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>1-click email</span>
                         </button>
                         @endif
-                        <button type="button" x-on:click="options = false" wire:click="showDeleteModal()"
+                        <button type="button" wire:click="showDeleteModal()"
                             class="text-zinc-700 dark:text-zinc-300 w-full font-medium hover:bg-zinc-100 dark:hover:bg-zinc-700/25 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center px-4 py-2 text-sm"
                             role="menuitem" tabindex="-1">
                             <span>
@@ -123,7 +147,7 @@
             </button>
         </div>
     </div>
-    <div x-show="open" x-collapse class="flex flex-col divide-y divide-zinc-900">
+    <div x-cloak x-show="open" x-collapse class="flex flex-col divide-y divide-zinc-900">
         <div class="px-[4.5rem] bg-white dark:bg-zinc-800/60">
             <table class="min-w-full">
                 <thead>
