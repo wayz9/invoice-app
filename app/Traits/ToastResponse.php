@@ -2,7 +2,8 @@
 
 namespace App\Traits;
 
-trait ToastResponse {
+trait ToastResponse 
+{
     public function toast($type, $message)
     {
         return $this->dispatchBrowserEvent(

@@ -14,7 +14,7 @@ module.exports = {
                 sans: ['Raleway-v4020', ...defaultTheme.fontFamily.sans]
             },
             colors: {
-                primary: colors.purple
+                primary: colors.lime,
             }
         },
     },
